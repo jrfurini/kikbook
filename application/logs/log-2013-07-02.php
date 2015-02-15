@@ -1,0 +1,65 @@
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
+
+ERROR - 2013-07-02 00:13:29 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 00:33:23 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 00:36:01 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 00:36:40 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 00:44:53 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 00:46:07 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 00:47:54 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 01:08:49 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 04:05:30 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 06:52:16 --> 404 Page Not Found --> regra/campeonato
+ERROR - 2013-07-02 06:52:17 --> 404 ERROR (início)
+ERROR - 2013-07-02 06:52:17 -->      Heading: 404 Page Not Found
+ERROR - 2013-07-02 06:52:17 -->          Msg: <p> The page 'regra/campeonato' was not found.</p>
+ERROR - 2013-07-02 06:52:17 --> 404 ERROR (fim)
+ERROR - 2013-07-02 07:50:44 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 09:25:46 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 09:59:46 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 10:06:48 --> 404 Page Not Found --> regra/campeonato
+ERROR - 2013-07-02 10:06:49 --> 404 ERROR (início)
+ERROR - 2013-07-02 10:06:49 -->      Heading: 404 Page Not Found
+ERROR - 2013-07-02 10:06:49 -->          Msg: <p> The page 'regra/campeonato' was not found.</p>
+ERROR - 2013-07-02 10:06:49 --> 404 ERROR (fim)
+ERROR - 2013-07-02 11:01:15 --> 404 Page Not Found --> regra/campeonato
+ERROR - 2013-07-02 11:01:15 --> 404 ERROR (início)
+ERROR - 2013-07-02 11:01:15 -->      Heading: 404 Page Not Found
+ERROR - 2013-07-02 11:01:15 -->          Msg: <p> The page 'regra/campeonato' was not found.</p>
+ERROR - 2013-07-02 11:01:15 --> 404 ERROR (fim)
+ERROR - 2013-07-02 11:02:42 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 12:17:34 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 12:19:19 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 13:17:13 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 13:27:16 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 14:25:29 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 15:10:58 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 15:25:46 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 15:45:12 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 15:45:53 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 16:11:27 --> 404 Page Not Found --> regra/campeonato
+ERROR - 2013-07-02 16:11:28 --> 404 ERROR (início)
+ERROR - 2013-07-02 16:11:28 -->      Heading: 404 Page Not Found
+ERROR - 2013-07-02 16:11:28 -->          Msg: <p> The page 'regra/campeonato' was not found.</p>
+ERROR - 2013-07-02 16:11:28 --> 404 ERROR (fim)
+ERROR - 2013-07-02 16:28:11 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 16:34:05 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 16:55:00 --> 404 Page Not Found --> regra/campeonato
+ERROR - 2013-07-02 16:55:00 --> 404 ERROR (início)
+ERROR - 2013-07-02 16:55:00 -->      Heading: 404 Page Not Found
+ERROR - 2013-07-02 16:55:00 -->          Msg: <p> The page 'regra/campeonato' was not found.</p>
+ERROR - 2013-07-02 16:55:00 --> 404 ERROR (fim)
+ERROR - 2013-07-02 17:23:40 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 17:59:09 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 19:59:29 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 20:06:06 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 20:47:44 --> 404 Page Not Found --> regra/campeonato
+ERROR - 2013-07-02 20:47:44 --> 404 ERROR (início)
+ERROR - 2013-07-02 20:47:44 -->      Heading: 404 Page Not Found
+ERROR - 2013-07-02 20:47:44 -->          Msg: <p> The page 'regra/campeonato' was not found.</p>
+ERROR - 2013-07-02 20:47:44 --> 404 ERROR (fim)
+ERROR - 2013-07-02 23:14:55 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 23:39:26 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 23:40:12 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 23:48:44 --> FACEBOOK UPDATE.
+ERROR - 2013-07-02 23:54:31 --> FACEBOOK UPDATE.

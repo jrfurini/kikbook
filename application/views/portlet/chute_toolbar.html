@@ -1,0 +1,91 @@
+<?php if ( !isset( $crono ) ) { $crono = FALSE; } ?>
+
+<?php if ( ( !isset( $dialog ) || $dialog == 'FALSE' )
+      &&   isset( $rodada_atual_open ) && $rodada_atual_open == 'TRUE' ) : ?>
+	<?php if ( $controller_atual->prg_controller == 'chute' ) : ?>
+		<div class="chute-power <?php if ( $crono ) { echo 'crono'; } ?>">
+			<table class="chute-power-objs">
+				<tr>
+					<td>
+						<div class="save-chute">
+							<?php if ( isset( $rodada_atual_open ) && $rodada_atual_open == 'TRUE' ) : ?>
+								<button class="btn action save-chute medium" title="<?= $this->lang->get_line( 'button_save' ); ?>">
+									<?= $this->lang->get_line( 'button_save' ); ?>
+								</button>
+								<img src="/assets/img/ajax_loader_3.gif"> 
+							<?php endif; ?>
+						</div>
+						<?php if ( count( $rows_rodada_jogo ) > 0 ) : ?>
+							<?php foreach( $rows_rodada_jogo as $rodada ) : ?>
+								<div class="chute-feitos" rod_id="<?php echo $rodada->rodada_fase_id; ?>" style="display: none;">
+									<span class="qtde_chutes_feitos badge badge-<?php if ( $rodada->qtde_chutes_feitos < $rodada->qtde_chutes ) { echo 'important'; } else { echo 'success'; } ?>"><?php echo $rodada->qtde_chutes_feitos; ?></span> <small><?= $this->lang->get_line( 'chutes_feitos', $master_table ); ?></small> <small><?= $this->lang->get_line( 'chutes_feitos_de', $master_table ); ?></small> <span class="qtde_total_chutes badge badge-<?php if ( $rodada->qtde_chutes_feitos < $rodada->qtde_chutes ) { echo 'important'; } else { echo 'success'; } ?>"><?php echo $rodada->qtde_chutes; ?></span>
+								</div>
+								<div class="rodada-title" rod_id="<?php echo $rodada->rodada_fase_id; ?>" style="display: none;">
+									<span class="rodada-title label">Rodada: <?php echo $rodada->cod_rodada_fase; ?></span>
+								</div>
+							<?php endforeach; ?>
+						<?php endif; ?>
+					</td>
+					<td>
+						<?php if ( count( $rows_rodada_jogo ) > 0 ) : ?>
+							<?php foreach( $rows_rodada_jogo as $rodada ) : ?>
+								<?php if ( count( $rodada->powers ) > 0 ) : ?>
+									<section class="sel-chute-power" rod_id="<?php echo $rodada->rodada_fase_id; ?>" style="display: none;">
+										<ol>
+											<li class="simbol">
+												<i class="power-sel power-simbol" title="Poderes disponíveis"></i>
+											</li>
+											<?php foreach( $rodada->powers as $power ) : ?>
+												<li>
+													<i class="power-sel <?php echo $power->css_class; if ( ( $power->qtde_liberado - $power->qtde_usada ) <= 0 ) { echo ' inativo'; } ?>" data-placement="bottom" title="<?php echo $this->lang->get_line( $power->cod. '_TITLE_SIMBOL', $master_table ); ?>" data-content="<?php echo $this->lang->get_line( $power->cod. '_EXPLANATION', $master_table ); ?>"></i>
+													<i class="power-qtde <?php echo $power->css_class; if ( ( $power->qtde_liberado - $power->qtde_usada ) <= 0 ) { echo ' inativo'; }?>" title="<?php echo $this->lang->get_line( $power->cod. '_QTDE', $master_table ); ?>" pessoa_rodada_fase_power_id="<?php echo $power->id; ?>" record_group="pessoa_rodada_fase_power"><?php echo ( $power->qtde_liberado - $power->qtde_usada ); ?></i>
+													<!--i class="power-qtde-sld <?php echo $power->css_class; if ( ( $power->qtde_liberado - $power->qtde_usada ) <= 0 ) { echo ' inativo'; }?>" title="<?php echo $this->lang->get_line( $power->cod. '_QTDE', $master_table ); ?>" pessoa_rodada_fase_power_id="<?php echo $power->id; ?>" record_group="pessoa_rodada_fase_power"><?php echo ( $power->qtde_liberado - $power->qtde_usada ); ?></i-->
+												</li>
+											<?php endforeach; ?>
+										</ol>
+									</section>
+								<?php endif; ?>
+							<?php endforeach; ?>
+						<?php endif; ?>
+					</td>
+					<td class="help">
+						<div class="dropdown">
+							<button class="btn dropdown-toggle top" data-toggle="dropdown" title="Video Ajuda" hover-text="Video Ajuda">
+								<i class="help"></i>
+							</button>
+							<ul class="dropdown-menu pull-right">
+								<li>
+									<a href="#videoajuda" class="videoajuda" video="http://www.powtoon.com/embed/bEX6jTfEqqm/" data-toggle="modal">
+										<i class="icon-camera"></i>
+										&nbsp;&nbsp;Entenda os poderes
+									</a>
+								</li>
+								<li>
+									<a href="#videoajuda" video="http://www.youtube.com/embed/Y203Rm1rgxE?rel=0" data-toggle="modal">
+										<i class="icon-camera"></i>
+										&nbsp;&nbsp;Use os poderes
+									</a>
+								</li>
+							</ul>
+						</div>							
+					</td>
+					<td>
+						<?php if ( $method_atual->prg_controller_method == 'crono'  ) : ?>
+							<label>Campeonatos</label>
+							<div class="radioset_ck btn-group campeonatos" autocomplete="off" data-toggle="buttons-radio">
+								<button class="radioset_ck btn btn-mini btn-info sel-tipo-camp <?php if ( $calendario_campeonatos == 'M' ) { echo 'active'; } ?>" value="M">Meus</button>
+								<button class="radioset_ck btn btn-mini btn-info sel-tipo-camp <?php if ( $calendario_campeonatos != 'M' ) { echo 'active'; } ?>" value="T">Todos</button>
+							</div>
+						<?php endif; ?>
+					</td>
+				</tr>
+			</table>
+			<div class="chute-msg alert alert-success" style="display: none;">
+			</div>
+			<div class="chute-msg alert alert-error" style="display: none;">
+			</div>
+			<div class="chute-msg alert alert-block" style="display: none;">
+			</div>
+		</div>
+	<?php endif; ?>
+<?php endif; ?>

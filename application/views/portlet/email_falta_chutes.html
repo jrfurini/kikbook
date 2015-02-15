@@ -1,0 +1,25 @@
+<?php  $this->load->view( 'portlet/email_open.html' ); ?>
+
+<tr>
+	<td style="padding: 3px 18px 5px 18px;">
+		<div style="margin: 5px auto 0px auto; line-height: 18px;">
+			<h1 style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;color:#332618;font-size:14px;margin-top:14px;margin-bottom:6px;">
+				Existe<?php if ( $qtde_jogos > 1 ) { echo 'm'; } ?> <?php echo $qtde_jogos; ?> jogo<?php echo $s; ?> entre hoje e depois amanhã que você ainda não fez o<?php echo $s; ?> chute<?php echo $s; ?>.
+			</h1>
+			<h1 style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;color:#332618;font-size:14px;margin-top:14px;margin-bottom:6px;">
+				Acesse a página de chutes e não deixe os seus amigos com vantagem. Veja:
+			</h1>
+			<ul>
+				<?php foreach ( $ar_rodadas as $rodada ) : ?>
+					<li>
+						<h1 style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;color:#332618;font-size:14px;margin-top:14px;margin-bottom:6px;">
+							<a href="http://kikbook.com/chute/rodada/<?php echo $rodada->id; ?>"  style="border:none;color:#0084b4;text-decoration:none;"><?php echo $rodada->rodada_nome; ?></a> com <?php echo $rodada->qtde_jogos; ?> jogo<?php if ( $rodada->qtde_jogos > 1 ) { echo 's'; } ?>.
+						</h1>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+	</td>
+</tr>
+
+<?php  $this->load->view( 'portlet/email_close.html' ); ?>

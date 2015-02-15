@@ -1,0 +1,38 @@
+<div class="chute-port">
+	<table class="chute-col">
+		<tbody>
+			<?php $primeiro = TRUE; ?>
+
+			<?php foreach( $rows_chutes as $row ): ?>
+
+				<?php if ( $primeiro ): ?>
+					<?php $primeiro = FALSE; ?>
+					<?php if ( isset( $dialog ) && $dialog == 'TRUE' ): ?>
+						<tr class="chute-pessoa">
+							<td class="name text left" colspan="9" title="<?php echo $this->lang->get_line( 'pessoa_id', $master_table );?>">
+								<img src="<?php echo $row->imagem_facebook; ?>"/>
+								<?php echo $row->nome_pessoa; ?>
+							</td>
+							<td class="space">
+							</td>
+							<td class="rodada text" colspan="5" title="<?php echo $this->lang->get_line( 'rodada_fase_id', $master_table );?>">
+								<?php echo ( $row->rodada_fase_title ); ?>
+							</td>
+						</tr>
+						<tr class="chute-space">
+							<td colspan="9">
+							</td>
+							<td class="space">
+							</td>
+							<td colspan="5">
+							</td>
+						</tr>
+					<?php endif; ?>
+				<?php endif; ?>
+
+				<?php $this->load->view( 'portlet/chute_row.html', array( "row" => $row, "sigla_nome" => 'sigla', 'jogo_aberto' => $row->open, 'power_rows' => $rows_rodada_jogo[ $row->rodada_fase_id ]->powers ) ); ?>
+				<?php $this->ads->show( 'AREA_468x60', array( 'colspan' => 14 ), 5, count( $rows_chutes ), 1 ); ?>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
+</div>

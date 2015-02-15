@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" lang="pt-br">
+	<head>
+		<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+		<meta http-equiv='Pragma' content='no-cache'>
+		<title>
+			<?php echo $subject; ?>subject
+		</title>	
+	</head>
+	<body style='color: #000000; background-color: #ddd; font-size: 12px;'>
+		<div class="wm_message_body_ltr">
+			<table class="inner frame" align="center" cellpadding="0" cellspacing="0" border="0" width="670" style="background:#fff;position:relative;border:0;border-left:1px solid #ccc;border-right:1px solid #ccc;">
+				<tbody>
+					<tr>
+						<td>
+							<a onclick="return checkLinkHref(this.href);" target="_blank" href="<?php if ( isset( $url ) ) { echo $url; } else { echo '#'; } ?>" style="border:none;color:#0084b4;text-decoration:none;">
+								<span class="media_logo_div">
+								</span>
+							</a>
+							<table cellpadding="0" cellspacing="0" border="0" width="670" class="header frame" style="background:#f2f2f2;table-layout:fixed;">
+								<tbody>
+									<tr>
+										<td class="header_left cut" style="width:9px;  height:77px;"> &nbsp; </td>
+										<td class="cut"             style="width:120px;height:77px;" valign="middle">
+											<a onclick="return checkLinkHref(this.href);" target="_blank" href="<?php if ( isset( $url ) ) { echo $url; } else { echo '#'; } ?>" style="border:none;color:#0084b4;text-decoration:none;">
+												<div>
+													<img style="display: block; margin: 0; padding: 0px; width: 60px; height: auto; float: left;" src="http://www.kikbook.com/assets/img/start_image_logo.png" border="0" alt="Kikbook" />
+													<img style="display: block; margin: 0; margin-top: 10px; padding: 0px; width: 60px; height: auto; float: left;" src="http://www.kikbook.com/assets/img/start_image_txt.png" border="0" alt="Kikbook" />
+												</div>
+											</a>
+										</td>
+										<td class="cut" width="9"> &nbsp; </td>
+										<td width="10" height="77" class="header_padding"> &nbsp; </td>
+										<td width="458" height="77" class="main_header media_header" style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;color:#333;">
+											<table border="0" cellpadding="0" cellspacing="0">
+												<tbody>
+													<tr>
+														<td class="main_name" style="font-size:14px;font-weight:bold;color:#000;">
+															<span dir="ltr"><?php if ( isset( $pessoa_nome ) ) { echo $pessoa_nome . ','; } else { echo 'Olá,'; } ?></span>
+														</td>
+													</tr>
+													<tr>
+														<td class="subtitle" style="font-size:14px;color:#666;">
+															<?php if ( isset( $subject ) ) { echo $subject; } ?>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</td>
+										<td width="10" height="77" class="header_padding"> &nbsp; </td>
+										<td class="main_avatar cut" width="32" style="text-align:right;">
+											<?php if ( isset( $pessoa_imagem ) ) : ?>
+												<a onclick="return checkLinkHref(this.href);" target="_blank" href="<?php if ( isset( $url ) ) { echo $url; } else { echo '#'; } ?>" style="border:none;color:#0084b4;text-decoration:none;">
+													<img class="cut" src="<?php if ( isset( $pessoa_imagem ) ) { echo $pessoa_imagem; } ?>" width="35" height="35" alt="<?php if ( isset( $pessoa_nome ) ) { echo $pessoa_nome . ','; } ?>" style="background:#fff;border-radius:5px;border:0;">
+												</a>
+											<?php endif; ?>
+										</td>
+										<td class="header_right cut" style="width:9px;  height:77px;"> &nbsp; </td>
+									</tr>
+									<tr>
+										<td class="main header_drop cut" style="background:#fff;border-top:1px solid #ddd;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;</td>
+										<td class="main header_drop cut" style="background:#fff;border-top:1px solid #ddd;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;</td>
+										<td class="main header_drop media_header" height="17" style="background:#fff;border-top:1px solid #ddd;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;</td>
+										<td class="main header_drop cut" height="17" colspan="5" style="background:#fff;border-top:1px solid #ddd;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;</td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+<!--  fim open -->

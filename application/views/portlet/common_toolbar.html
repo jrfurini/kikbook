@@ -1,0 +1,104 @@
+<?php if ( ( $facebook_login && isset( $user_info->nome_completo ) ) ) :?>
+	<div class="facetb">
+		<div class="face">
+			<div id='fb-root'></div>
+			<script src='http://connect.facebook.net/<?php if ( isset( $user_cfg->idioma ) ) { echo $user_cfg->idioma; } else { echo "pt_BR"; } ?>/all.js'></script>
+			<script> 
+				FB.init({
+					 appId      : '<?php echo $facebook_app_id ?>'
+					,cookie     : true
+					,xfbml      : true
+					,channelUrl : '<?php echo $this->config->item( "base_url" ); ?>home/channel'
+					,status     : true
+					,frictionlessRequests: true
+					});
+				function postToFeed()	{
+								var obj =	{
+											method: 'feed',
+										<?php if ( $controller_atual->prg_controller == 'ranking' ) : ?>
+											redirect_uri: '<?php echo $this->config->item( "base_url" ); ?>ranking',
+											link: '<?php echo $this->config->item( "base_url" ); ?>ranking',
+										<?php elseif ( $controller_atual->prg_controller == 'chute' ) : ?>
+											redirect_uri: '<?php echo $this->config->item( "base_url" ); ?>',
+											link: '<?php echo $this->config->item( "base_url" ); ?>chute',
+										<?php elseif ( $controller_atual->prg_controller == 'painel' ) : ?>
+											redirect_uri: '<?php echo $this->config->item( "base_url" ); ?>',
+											link: '<?php echo $this->config->item( "base_url" ); ?>chute',
+										<?php else : ?>
+											redirect_uri: '<?php echo $this->config->item( "base_url" ); ?>classificacao',
+											link: '<?php echo $this->config->item( "base_url" ); ?>classificacao',
+										<?php endif; ?>
+											picture: '<?php echo $this->config->item( "base_url" ); ?>assets/img/feed_icon.png',
+											name: '<?php echo $this->config->item( "system_title" ); ?>',
+										<?php if ( $controller_atual->prg_controller == 'ranking' ) : ?>
+											<?php if ( $rodada_atual ) : ?>
+												<?php if ( isset( $rodada_atual->nome ) && $rodada_atual->nome ) : ?>
+													caption: 'Eu fiz <?php echo ( $ranking_pessoa->pontos_kick + $ranking_pessoa->pontos_gols + $ranking_pessoa->pontos_power ); ?> pontos na rodada "<?php echo $rodada_atual->nome ?>" <?php if ( $campeonato_versao_atual->genero == "M" ) { echo "no"; } else { echo "na"; } ?> "<?php echo $campeonato_versao_atual->descr; ?>" <?php if ( $tipo_visual == 'grupos' && $grupo_selecionado && $grupo_fase_selecionada ) { echo 'pelo grupo "' . $grupo_selecionado . '"'; } ?>.',
+												<?php else: ?>
+													caption: 'Eu fiz <?php echo ( $ranking_pessoa->pontos_kick + $ranking_pessoa->pontos_gols + $ranking_pessoa->pontos_power ); ?> pontos <?php if ( $campeonato_versao_atual->genero == "M" ) { echo "no"; } else { echo "na"; } ?> "<?php echo $campeonato_versao_atual->descr; ?>" <?php if ( $tipo_visual == 'grupos' && $grupo_selecionado && $grupo_fase_selecionada ) { echo 'pelo grupo "' . $grupo_selecionado . '"'; } ?>.',
+												<?php endif; ?>
+												description: 'E você, consegue fazer mais? Entre e tente.'
+											<?php else: ?>
+												caption: '',
+												description: 'E você, consegue fazer mais? Entre e tente.'
+											<?php endif; ?>
+										<?php elseif ( $controller_atual->prg_controller == 'chute' ) : ?>
+											caption: 'Eu fiz os meus chutes para a rodada "<?php echo $rodada_atual->nome ?>" <?php if ( $campeonato_versao_atual->genero == "M" ) { echo "do"; } else { echo "da"; } ?> "<?php echo $campeonato_versao_atual->descr; ?>".',
+											description: 'Entre e tente fazer mais pontos que eu.'
+										<?php else : ?>
+											caption: 'Bolão de futebol mais fácil de ganhar prêmios. Acumule pontos e troque por brindes. Fácil e sem complicação.',
+											description: 'Divirta-se com seus amigos.'
+										<?php endif; ?>
+										};
+								function callback(response)	{
+												}
+								FB.ui(obj, callback);
+							}
+
+							function sendRequestViaMultiFriendSelector()	{
+													 FB.ui	(
+															{
+																 
+																 method: 'apprequests'
+																,message: 'Um bolão de futebol onde você acumula pontos e troca por brindes. Fácil e sem complicação.'
+																,filters: ['app_non_users']
+																,title: 'Convide seus amigos para jogarem com você.'
+															}, requestCallback
+														);
+													}
+
+							function requestCallback(response)	{
+													if ( response.request )
+													{
+														$user_id = [];
+														for ( i=0; i < response.to.length; i++ )
+														{
+															$user_id.push( response.to[i] );
+														}
+														$data = {
+																 reqId : response.request
+																,users : $user_id
+															};
+														$.ajax({
+															 url: '/user/invite'
+															,data: $data
+															,dataType: 'json'
+															,type: 'post'
+																});
+													}
+												}
+			</script>
+			<div>
+				<div class="btn btn-face-r" onclick='sendRequestViaMultiFriendSelector(); return false;' title="Convide os amigos.">
+					<i class="logo_small_facebook"></i>  Convidar
+				</div>
+				<div class="btn btn-face" onclick='postToFeed(); return false;' title="Publique no Facebook o que está achando do Kik.">
+					<i class="logo_small_facebook"></i>  Compartilhar
+				</div>
+				<div class="fb-like" data-href="http://kikbook.com/<?php echo $controller_atual->prg_controller; ?>" data-send="false" data-layout="button_count" data-width="250" data-show-faces="true" data-font="arial">
+				</div>
+				<p id='msg'></p>
+			</div>
+		</div>
+	</div>
+<?php endif; ?>

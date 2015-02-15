@@ -1,0 +1,17 @@
+<?php  $this->load->view( 'open.html' ); ?>
+<!--?php  $this->load->view('jx/index_button.html'); ?-->
+
+<section id="conteudo">
+	<div class="left-content">
+		<?php if ( !$this->singlepack->user_connected() ) : ?>
+			<?php $this->load->view('kikbook_show.html'); ?>
+		<?php endif; ?>
+	</div>
+</section>
+
+<?php $this->load->view( 'close.html' ); ?>
+
+<script src="/assets/js/d3.v3.min.js"></script>
+<script src="/assets/js/classificacao.js?v=1.7"></script>
+
+<?php  $this->load->view('footer.html');  ?>

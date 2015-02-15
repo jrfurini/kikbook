@@ -1,0 +1,145 @@
+<?php if ( !isset( $small_size ) ): ?>
+	<?php $small_size = FALSE; ?>
+<?php endif; ?>
+<thead>
+	<tr class="jx-table-header clas-header">
+		<?php if ( $jx_order_selection == "title" || $jx_order_selection == "clas" ):?>
+			<th colspan="4" id="clas" class="text order" title="Clique para ordenar.">
+				 <?php echo $this->lang->get_line( 'classificacao_sigla', $master_table );?> <?=$jx_order_direction?>
+			</th>
+		<?php else:?>
+			<th colspan="4" id="clas" class="text" title="Clique para ordenar.">
+				 <?php echo $this->lang->get_line( 'classificacao_sigla', $master_table );?>
+			</th>
+		<?php endif;?>
+
+	<?php if ( !$small_size ): ?>
+		<?php if ( $jx_order_selection == "avanco" ):?>
+			<th id="avanco" class="order number" title="Clique para ordenar.">
+				 <?php echo $this->lang->get_line( 'movimentacao_sigla', $master_table );?> <?=$jx_order_direction?>
+			</th>
+		<?php else:?>
+			<th id="avanco" class="number" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'movimentacao_sigla', $master_table );?>
+			</th>
+		<?php endif;?>
+	<?php endif;?>
+		
+		<?php if ( $jx_order_selection == "pontos" ):?>
+			<th id="pontos" class="number order" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'pontos_sigla', $master_table );?> <?=$jx_order_direction?>
+			</th>
+		<?php else:?>
+			<th id="pontos" class="number" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'pontos_sigla', $master_table );?>
+			</th>
+		<?php endif;?>
+
+		<?php if ( $jx_order_selection == "jogos" ):?>
+			<th id="jogos" class="number order" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'jogos_sigla', $master_table );?> <?=$jx_order_direction?>
+			</th>
+		<?php else:?>
+			<th id="jogos" class="number" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'jogos_sigla', $master_table );?>
+			</th>
+		<?php endif;?>
+
+		<?php if ( $jx_order_selection == "vitorias" ):?>
+			<th id="vitorias" class="number order" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'vitorias_sigla', $master_table );?> <?=$jx_order_direction?>
+			</th>
+		<?php else:?>
+			<th id="vitorias" class="number" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'vitorias_sigla', $master_table );?>
+			</th>
+		<?php endif;?>
+
+	<?php if ( !$small_size ): ?>
+		<?php if ( $jx_order_selection == "empates" ):?>
+			<th id="empates" class="number order" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'empates_sigla', $master_table );?> <?=$jx_order_direction?>
+			</th>
+		<?php else:?>
+			<th id="empates" class="number" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'empates_sigla', $master_table );?>
+			</th>
+		<?php endif;?>
+
+		<?php if ( $jx_order_selection == "derrotas" ):?>
+			<th id="derrotas" class="number order" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'derrotas_sigla', $master_table );?> <?=$jx_order_direction?>
+			</th>
+		<?php else:?>
+			<th id="derrotas" class="number" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'derrotas_sigla', $master_table );?>
+			</th>
+		<?php endif;?>
+	<?php endif;?>
+
+	<?php if ( !$small_size ): ?>
+		<?php if ( $jx_order_selection == "golpos" ):?>
+			<th id="golpos" class="number order" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'gol_positivo_sigla', $master_table );?> <?=$jx_order_direction?>
+			</th>
+		<?php else:?>
+			<th id="golpos" class="number" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'gol_positivo_sigla', $master_table );?>
+			</th>
+		<?php endif;?>
+
+		<?php if ( $jx_order_selection == "golneg" ):?>
+			<th id="golneg" class="number order" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'gol_contra_sigla', $master_table );?> <?=$jx_order_direction?>
+			</th>
+		<?php else:?>
+			<th id="golneg" class="number" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'gol_contra_sigla', $master_table );?>
+			</th>
+		<?php endif;?>
+	<?php endif; ?>
+
+		<?php if ( $jx_order_selection == "saldogol" ):?>
+			<th id="saldogol" class="number order" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'saldo_gol_sigla', $master_table );?> <?=$jx_order_direction?>
+			</th>
+		<?php else:?>
+			<th id="saldogol" class="number" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'saldo_gol_sigla', $master_table );?>
+			</th>
+		<?php endif;?>
+
+
+	<?php if ( !$small_size ): ?>
+		<?php if ( $jx_order_selection == "golcasa" ):?>
+			<th id="golcasa" class="number order" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'gol_casa_sigla', $master_table );?> <?=$jx_order_direction?>
+			</th>
+		<?php else:?>
+			<th id="golcasa" class="number" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'gol_casa_sigla', $master_table );?>
+			</th>
+		<?php endif;?>
+
+		<?php if ( $jx_order_selection == "golfora" ):?>
+			<th id="golfora" class="number order" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'gol_fora_casa_sigla', $master_table );?> <?=$jx_order_direction?>
+			</th>
+		<?php else:?>
+			<th id="golfora" class="number" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'gol_fora_casa_sigla', $master_table );?>
+			</th>
+		<?php endif;?>
+	<?php endif; ?>
+
+		<?php if ( $jx_order_selection == "aprov" ):?>
+			<th id="aprov" class="number order" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'aproveitamento_sigla', $master_table );?> <?=$jx_order_direction?>
+			</th>
+		<?php else:?>
+			<th id="aprov" class="number" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'aproveitamento_sigla', $master_table );?>
+			</th>
+		<?php endif;?>
+	</tr>
+<thead>

@@ -1,0 +1,225 @@
+<?php  $this->load->view('jx/open.html');  ?>
+<?php  $this->load->view('jx/aside.html');  ?>
+<?php  $this->load->view('jx/index_button.html');  ?>
+
+<section id="conteudo"> <!--  open section conteudo -->
+	<div class="left-content-full">
+		<?php if ( isset( $total_rows ) && $total_rows > 0 ) :?>
+		<table>
+			<thead>
+				<tr class="jx-table-header">
+					<th>
+					</th>
+					<?php if ( array_key_exists( 'imagem_id', $fields ) ) :?>
+						<th>
+						</th>
+					<?php endif;?>
+					<?php if ( $jx_order_selection == "title" ):?>
+						<th id="jx-title" class="jx-title order" title="Clique para ordenar.">
+							<?php echo $this->lang->get_line( 'title', $master_table );?> <?=$jx_order_direction?>
+						</th>
+					<?php else:?>
+						<th id="jx-title" class="jx-title" title="Clique para ordenar.">
+							<?php echo $this->lang->get_line( 'title', $master_table  ); ?>
+						</th>
+					<?php endif;?>
+					<?php foreach( $rows as $row ): ?>
+						<?php if ( isset( $row->parents ) && $row->parents ):?>
+							<?php $count_tipo = 0; ?>
+							<?php $tipo = ""; ?>
+							<?php foreach( $row->parents as $parent ): ?>
+								<th id="jx-title-fk" class="jx-title-fk">
+								<?php
+									$count_tipo = $count_tipo + 1;
+									if ( $count_tipo == 1 )
+									{
+										$tipo = "btn-primary";
+									}
+									elseif ( $count_tipo == 2 )
+									{
+										$tipo = "btn-success";
+									}
+									elseif ( $count_tipo == 3 )
+									{
+										$tipo = "btn-warning";
+									}
+									elseif ( $count_tipo == 4 )
+									{
+										$tipo = "btn-inverse";
+									}
+									elseif ( $count_tipo == 5 )
+									{
+										$tipo = "btn-danger";
+									}
+									elseif ( $count_tipo == 6 )
+									{
+										$tipo = "btn-info";
+									}
+									elseif ( $count_tipo == 7 )
+									{
+										$tipo = "";
+										$count_tipo = 0;
+									}
+								?>
+									<?php if ($parent->header != '') : ?>
+										<div class="btn-group">
+											<button class="btn btn-mini <?php echo $tipo; ?>" title="<?php echo $parent->header; ?>">
+												<?php echo $parent->header; ?>
+											</button>
+											<button class="btn btn-mini <?php echo $tipo; ?> dropdown-toggle" data-toggle="dropdown">
+												<span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu pull-left">
+												<?php	if ( is_array( $parents_info )
+													&&   key_exists( $parent->table, $parents_info )
+													   ) :
+														foreach( $parents_info[ $parent->table ]->rows as $table_name => $row_parent ) : ?>
+															<li>
+																<a href="#" class="action filter" title="<?= $this->lang->get_line( 'filter_fk' ); ?>" filter="<?=$parents_info[ $parent->table ]->column;?> = <?=$row_parent->id;?>">
+																	<i class="icon-search"></i>
+																	<?php echo $row_parent->title; ?>
+																</a>
+															</li>
+												<?php		endforeach;
+													endif; ?>
+												<!--li class="divider"></li>
+												<li>
+													<a href="#"><i class="icon-ban-circle"></i>&nbsp;&nbsp;Limpar Filtro</a>
+												</li-->
+											</ul>
+										</div>
+									<?php endif; ?>
+								</th>
+							<?php endforeach; ?>
+						<?php endif; ?>
+						<?php break; ?>
+					<?php endforeach; ?>
+					<?php if ( $jx_order_selection == "when" ):?>
+						<th id="jx-when" class="jx-when order" title="Clique para ordenar.">
+							<?php echo $this->lang->get_line( 'when_field', $master_table  ); ?> <?=$jx_order_direction?>
+						</th>
+					<?php else:?>
+						<th id="jx-when" class="jx-when" title="Clique para ordenar.">
+							<?php echo $this->lang->get_line( 'when_field', $master_table  ); ?>
+						</th>
+					<?php endif;?>
+				</tr>
+			</thead>
+			<tbody>
+			<?php foreach( $rows as $row ): ?>
+				<tr class="jx-index" id="<?php if ( isset( $row->id ) ) { echo $row->id; } ?>">
+					<td class="jx-select">
+						<input type="checkbox" class="jx-select" name="checkbox_id[]" value="<?php if ( isset( $row->id ) ) { echo $row->id; } ?>">
+					</td>
+					<?php if ( array_key_exists( 'imagem_id', $fields ) ) :?>
+						<td class="image-index">
+							<?php if ( isset( $row->imagem_id ) && $row->imagem_id ) :?>
+								<?php echo $fields[ 'imagem_id' ]->index->td_image( 'jx-edit-f', $row ); ?>
+							<?php endif; ?>
+						</td>
+					<?php endif; ?>
+					<td class="jx-index-line">
+						<a class="jx-acao-edit" href="/<?=$controller_atual->prg_controller;?>/<?php if ( isset( $row->id ) ) { echo 'edit/'.$row->id; } ?>">
+							<?php echo $fields[ 'title' ]->index->td_index_title( $row->title );?>
+						</a>
+					</td>
+					<?php if ( isset( $row->parents ) && $row->parents ):?>
+						<?php $count_tipo = 0; ?>
+						<?php $tipo = ""; ?>
+						<?php foreach( $row->parents as $parent ): ?>
+							<?php
+									$count_tipo = $count_tipo + 1;
+									if ( $count_tipo == 1 )
+									{
+										$tipo = "btn-primary";
+									}
+									elseif ( $count_tipo == 2 )
+									{
+										$tipo = "btn-success";
+									}
+									elseif ( $count_tipo == 3 )
+									{
+										$tipo = "btn-warning";
+									}
+									elseif ( $count_tipo == 4 )
+									{
+										$tipo = "btn-inverse";
+									}
+									elseif ( $count_tipo == 5 )
+									{
+										$tipo = "btn-danger";
+									}
+									elseif ( $count_tipo == 6 )
+									{
+										$tipo = "btn-info";
+									}
+									elseif ( $count_tipo == 7 )
+									{
+										$tipo = "";
+										$count_tipo = 0;
+									}
+								?>
+							<td>
+								<span class="jx-parent btn btn-mini <?php echo $tipo; ?>" title="<?php echo $parent->title; ?>" data-content="<?php echo $parent->header; ?>">
+									<?php if ($parent->title != ''):?>
+										<?=$parent->title;?>
+										<div class="popover"><div class="arrow"></div>
+											<div class="popover-inner">
+												<button class="btn btn-mini action close-popover" style="float: right">
+													<i class="icon-remove"></i>
+												</button>
+												<h3 class="popover-title"></h3>
+												<div class="popover-content"><p></p></div>
+												<div id="parent_<?=$parent->table;?>_<?=$parent->id;?>_for_<?=$row->id;?>" parent_controller="<?=$parent->table;?>" parent_id="<?=$parent->id;?>" style="display:block;">
+													<?php if (isset( $parent->image ) && $parent->image != "" ): ?>
+														<img src="data:<?= $user_info->mime_type; ?>;base64,<?php echo base64_encode( $parent->image ); ?>"/>
+													<?php endif; ?>
+													<div class="jx-parent-fly btn-group">
+														<?php if (isset( $parent->email ) && $parent->email != "" ): ?>
+															<button class="btn action mail" title="<?= $this->lang->get_line( 'send_mail' ); ?>">
+																<i class="icon-envelope"></i>
+																<?= $this->lang->get_line( 'send_mail' ); ?>
+															</button>
+														<?php endif; ?>
+														<?php if (isset( $parent->email ) && isset( $parent->id_facebook ) && $parent->id_facebook != "" ): ?>
+															<button class="btn action facebook" title="<?= $this->lang->get_line( 'button_facebook' ); ?>" id_facebook="<?php echo $parent->id_facebook; ?>">
+																<i class="button image icon_facebook"></i>
+																<?= $this->lang->get_line( 'button_facebook' ); ?>
+															</button>
+														<?php endif; ?>
+														<button class="btn action filter" title="<?= $this->lang->get_line( 'filter_fk' ); ?>" filter="<?=$parent->column;?> = <?=$parent->id;?>">
+															<i class="icon-search"></i>
+															<?= $this->lang->get_line( 'filter_fk' ); ?>
+														</button>
+														<button class="btn action edit" title="<?= $this->lang->get_line( 'button_edit' ); ?>" edit_url="/<?=$parent->table;?>/edit/<?=$parent->id;?>">
+															<i class="icon-edit"></i>
+															<?= $this->lang->get_line( 'button_edit' ); ?>
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									<?php endif; ?>
+								</span>
+							</td>
+						<?php endforeach;?>
+					<?php endif; ?>
+					<td>
+						<span class="jx-when">
+							<?php echo $this->singlepack->print_datetime_value( $row->when_field, 'timestamp', 'datatime' );?>
+						</span>
+					</td>
+				 </tr>
+			<?php endforeach; ?>
+			</tbody>
+		</table>
+		<?php else :?>
+			<div class="no-data-found">
+				<img src="/assets/<?=$theme;?>/img/warning.png">
+				<h4><?php echo $this->lang->get_line( 'no_data_found' );?></h4>
+			</div>
+		<?php endif; ?>
+	</div>
+</section> <!--  close section conteudo -->
+<?php $this->load->view('jx/close.html'); ?>
+<?php $this->load->view('jx/footer.html'); ?>

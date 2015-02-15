@@ -1,0 +1,93 @@
+<!doctype html>
+
+<!--[if lt IE 7 ]> <html class="ie ie6 no-js" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7 no-js" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8 no-js" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9 no-js" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!-- the "no-js" class is for Modernizr. -->
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+		<title><?php echo $this->config->item( 'system_title' ); ?></title>
+		<meta name="title" content="<?php echo $this->config->item( 'system_title' ); ?>"/>
+		<meta name="description" content="<?php echo $this->config->item( 'system_title' ); ?>, jogo de palpites em resultados de jogos de futebol."/>
+		<meta name="google-site-verification" content=""/>
+		<meta name="author" content="Single Solutions."/>
+		<meta name="Copyright" content="Copyright Single Solutions 2012. All Rights Reserved."/>
+		<meta name="DC.title" content="<?php echo $this->config->item( 'system_title' ); ?>"/>
+		<meta name="DC.subject" content="Jogo de palpites em resultados de jogos de futebol."/>
+		<meta name="DC.creator" content="Single Solutions."/>
+	
+		<!-- FACEBOOK -->
+		<meta property="og:url" content="http://www.kikbook.com" />
+		<meta property="og:type" content="website" />
+		<meta property="fb:app_id" content="<?php echo $this->config->item( 'facebook_appid' ); ?>" />
+		<meta property="og:title" content="<?php echo $this->config->item( 'system_title' ); ?>" />
+		<meta property="og:site_name" content="<?php echo $this->config->item( 'system_title' ); ?>" />
+		<meta property="og:image" content="http://www.kikbook.com/assets/img/apple-touch-icon.png" />
+		<meta property="og:description" content="Jogo de palpites em resultados de jogos de futebol." />
+		<meta property="og:updated_time" content="<?php echo now(); ?>" />
+	
+		<!--  Mobile Viewport Fix
+		j.mp/mobileviewport & davidbcalhoun.com/2010/viewport-metatag 
+		device-width : Occupy full width of the screen in its current orientation
+		initial-scale = 1.0 retains dimensions instead of zooming out if page height > device height
+		maximum-scale = 1.0 retains dimensions instead of zooming in if page width < device width
+		-->
+		<!-- Uncomment to use; use thoughtfully!
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+		-->
+		<link rel="shortcut icon" href="/assets/img/favicon.ico">
+		<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+		<link rel="stylesheet" href="/assets/css/reset.css">
+		<link rel="stylesheet" href="/assets/css/jquery-ui.css">
+		<link rel="stylesheet" href="/assets/css/bootstrap.css">
+		<link rel="stylesheet" href="/assets/css/styles.css">
+		<script src="/assets/js/modernizr.min.js"></script>
+	</head>
+	<body style="background-color: #333333;">
+		<?php echo form_open('/login'); ?>
+			<header>
+				<div class="main">
+					<a href="/">
+						<img src="/assets/img/bolao_book_img.png"  style="float: left; margin-top: 5px; width: 10%;" class="image" />
+						<img src="/assets/img/kik_book.png" style="margin-top: 37px; width: 10%;" />
+					</a>
+					<a href="#" class="button-new-account">
+						<div class="button-new-account" title="Criar uma conta">
+							Criar uma conta
+						</div>
+					</a>
+				</div>
+				<div class="login">
+					<div class="signin-in">
+						<div class="signin-box">
+							<h2>Entrar</h2>
+							<div class="email-div">
+								<label for="login"><strong class="email-label">Nome de usuário</strong></label>
+								<input type="email" spellcheck="false" name="login" id="login" value="<?php if (isset( $userid )) { echo $userid; } ?>">
+								<div class="input_message">
+									<span class="error"><?php echo form_error('login'); ?></span>
+								</div>
+							</div>
+							<div class="passwd-div">
+								<label for="Passwd"><strong class="passwd-label">Senha</strong></label>
+								<input type="password" name="password" id="password">
+								<div class="input_message">
+									<span class="error"><?php echo form_error('password'); ?></span>
+									<span class="error"><?php if (isset($message_error)) { echo $message_error; } ?></span>
+								</div>
+							</div>
+							<input type="submit" class="button-login" name="signIn" id="signIn" value="Acessar">
+							<a href="/esqueci_senha" target="_top">
+								Não consegue acessar a sua conta?
+							</a>
+						</div>
+					</div>
+				</div>
+			</header>
+
+<?php $this->load->view('jx/close.html'); ?>
+<?php $this->load->view('jx/footer.html'); ?>

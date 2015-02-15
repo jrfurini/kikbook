@@ -1,0 +1,16 @@
+<?php  $this->load->view( 'portlet/email_open.html' ); ?>
+
+<tr>
+	<td style='padding: 3px 18px 5px 18px;'>
+		<div style="margin: 5px auto 0px auto; line-height: 18px;">
+			<h1 style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;color:#332618;font-size:14px;margin-top:14px;margin-bottom:6px;">
+				Você foi o <?php echo $titulo_posicao; ?> colocado n<?php echo $a;?> <?php echo $nome_rodada; ?> entre todas as rodadas e conquistou <?php echo $qtde_kiks; ?> kiks.
+			</h1>
+			<h1 style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;color:#332618;font-size:14px;margin-top:14px;margin-bottom:6px;">
+				<a href="http://kikbook.com/<?php echo $aqui; ?>">Clique aqui</a> e confira o seu desempenho na página de ranking.
+			</h1>
+		</div>
+	</td>
+</tr>
+
+<?php  $this->load->view( 'portlet/email_close.html' ); ?>

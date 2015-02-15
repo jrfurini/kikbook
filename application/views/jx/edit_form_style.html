@@ -1,0 +1,8 @@
+<?php foreach( $rows as $row ): ?>
+	<div record_group="<?php echo $table_info->table_name; ?>">
+		<?php foreach( $table_info->fields as $field ): ?>
+			<?php echo $field->edit->li( 'jx-edit-f', $row ); ?>
+		<?php endforeach; ?>
+	</div>
+<?php endforeach; ?>
+	

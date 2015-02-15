@@ -1,0 +1,23 @@
+<div class="alert alert-info">
+	<button type="button" class="close" data-dismiss="alert">×</button>
+	<h4>Conecte-se via Facebook</h4>
+	<br>
+	<div style="margin: 5px auto 0px auto; line-height: 16px;">
+		Com o seu login do Facebook o Kik cria um ambiente personalizado só para você e seus amigos se divertirem.
+	</div>
+	<?php if ( $facebook_login ) :?>
+		<br/>
+		<br/>
+		<div class="btn btn-face" onclick='top.location.href="<?php echo $this->config->item( "base_url" ); ?>facebook_login";' title="Entrar via Facebook.">
+			<i class="logo_small_facebook"></i> Entrar com o Facebook
+		</div>
+		<br/>
+		<br/>
+	<?php else : ?>
+		<br/>
+		<br/>
+		<div class="btn btn-group">
+			<a class="btn btn-primary" href="/login"><i class="icon-user icon-white"></i> Entrar</a>
+		</div>
+	<?php endif; ?>
+</div>			

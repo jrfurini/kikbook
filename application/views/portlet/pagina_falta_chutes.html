@@ -1,0 +1,12 @@
+<h4>Olá <?php echo $pessoa_nome; ?>!</h4>
+<br>
+<div style="margin: 5px auto 0px auto; line-height: 16px;">
+	Existe<?php if ( $qtde_jogos > 1 ) { echo 'm'; } ?> <?php echo $qtde_jogos; ?> jogo<?php echo $s; ?> entre hoje e depois amanhã que você ainda não fez o<?php echo $s; ?> chute<?php echo $s; ?>. Veja:
+	<ul>
+		<?php foreach ( $ar_rodadas as $rodada ) : ?>
+			<li>
+				<a href="/chute/rodada/<?php echo $rodada->id; ?>"><?php echo $rodada->rodada_nome; ?></a> com <?php echo $rodada->qtde_jogos; ?> jogo<?php if ( $rodada->qtde_jogos > 1 ) { echo 's'; } ?>.
+			</li>
+		<?php endforeach; ?>
+	</ul>
+</div>

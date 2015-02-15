@@ -1,0 +1,264 @@
+<!doctype html>
+
+<!--[if lt IE 7 ]> <html class="ie ie6 no-js" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7 no-js" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8 no-js" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9 no-js" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!-- the "no-js" class is for Modernizr. -->
+
+<head>
+	<noscript><meta http-equiv="X-Frame-Options" content="deny"></noscript>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<title><?php echo $this->config->item( 'system_title' ); ?></title>
+	<meta name="title" content="<?php echo $this->config->item( 'system_title' ); ?>"/>
+	<meta name="description" content="<?php echo $this->config->item( 'system_title' ); ?>, jogo de palpites em resultados de jogos de futebol."/>
+	<meta name="google-site-verification" content=""/>
+	<meta name="author" content="Single Solutions."/>
+	<meta name="Copyright" content="Copyright Single Solutions 2012. All Rights Reserved."/>
+	<meta name="DC.title" content="<?php echo $this->config->item( 'system_title' ); ?>"/>
+	<meta name="DC.subject" content="Jogo de palpites em resultados de jogos de futebol."/>
+	<meta name="DC.creator" content="Single Solutions."/>
+
+	<!-- FACEBOOK -->
+	<meta property="og:url" content="http://www.kikbook.com" />
+	<meta property="og:type" content="website" />
+	<meta property="fb:app_id" content="<?php echo $this->config->item( 'facebook_appid' ); ?>" />
+	<meta property="og:title" content="<?php echo $this->config->item( 'system_title' ); ?>" />
+	<meta property="og:site_name" content="<?php echo $this->config->item( 'system_title' ); ?>" />
+	<meta property="og:image" content="http://www.kikbook.com/assets/img/start_image_logo.png" />
+	<meta property="og:description" content="Jogo de palpites em resultados de jogos de futebol." />
+	<meta property="og:updated_time" content="<?php echo now(); ?>" />
+	
+	<!--  Mobile Viewport Fix
+	j.mp/mobileviewport & davidbcalhoun.com/2010/viewport-metatag 
+	device-width : Occupy full width of the screen in its current orientation
+	initial-scale = 1.0 retains dimensions instead of zooming out if page height > device height
+	maximum-scale = 1.0 retains dimensions instead of zooming in if page width < device width
+	-->
+
+	<!-- Uncomment to use; use thoughtfully!
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+	-->
+
+	<link rel="shortcut icon" href="/assets/img/favicon.ico">
+	<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+	<link rel="stylesheet" href="/assets/css/reset.css">
+	<link rel="stylesheet" href="/assets/css/jquery-ui.css?v=1.2">
+	<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/assets/<?=$theme;?>/css/styles.css?v=1.24">
+	<script src="/assets/js/modernizr.min.js"></script>
+</head>
+<?php if ( $this->config->item( 'image_background' ) ) : ?>
+	<body style='background: #000 url("<?php echo $this->config->item( 'image_background' ); ?>") repeat-y; background-position: top center;'>
+<?php else : ?>
+	<body>
+<?php endif; ?>
+	<div id="fb-root"></div>
+	<?php if ( $facebook_login ) :?>
+	<script>
+		window.fbAsyncInit = function()	{
+							<?php if ( key_exists( "force_url", $_REQUEST ) ) : ?>
+								var force_redirect		=	'<?php echo $_REQUEST[ "force_url" ]; ?>';
+							<?php else :?>
+								var force_redirect		=	false;
+							<?php endif; ?>
+							FB.init(	{
+										 appId      : '<?php echo $facebook_app_id ?>'
+										,cookie     : true
+										,xfbml      : true
+										,channelUrl : '<?php echo $this->config->item( "base_url" ); ?>home/channel'
+										,status     : true
+									}
+							);
+							FB.getLoginStatus(function(response)	{
+													if (response.status === 'connected')
+													{
+														<?php	if ( !isset( $facebook_id ) /* Não temos um id do facebook no servidor. Forçamos o login via home.php. */
+															||   !$facebook_id
+															   )
+														: ?>
+															$( "section#conteudo" ).hide();
+															$( "div.whois" ).hide();
+															$( "div.working" ).show();
+
+															if ( !force_redirect )
+															{
+																top.location.href="<?php echo $this->config->item( 'base_url' ); ?>facebook_login/";
+															}
+															else
+															{
+																top.location.href="<?php echo $this->config->item( 'base_url' ); ?>facebook_login?force_url=" + force_redirect + "&getg=";
+															}
+														<?php else /* temos um ID do facebook, mas o ID é diferente do que o facebook está enviando. Forçamos o login novamente. */ : ?>
+															FB.api('/me', function(response) {
+																if ( response.id != '<?php echo $facebook_id; ?>' )
+															        {
+																	if ( !force_redirect )
+																	{
+																		top.location.href="<?php echo $this->config->item( 'base_url' ); ?>facebook_login/";
+																	}
+																	else
+																	{
+																		top.location.href="<?php echo $this->config->item( 'base_url' ); ?>facebook_login?force_url=" + force_redirect + "&getg=";
+																	}
+															        }
+															});
+														<?php endif; ?>
+													}
+													else if (response.status === 'not_authorized')
+													{
+														if ( !force_redirect )
+														{
+															top.location.href='<?php echo $this->config->item( "base_url" ); ?>facebook_login';
+														}
+														else
+														{
+															top.location.href='<?php echo $this->config->item( "base_url" ); ?>facebook_login?force_url=' + force_redirect + "&getg=";
+														}
+													}
+													else
+													{
+														<?php if ( isset( $user_info->nome_completo ) ) : ?>
+															top.location.href="<?php echo $this->config->item( "base_url" ); ?>logout";
+														<?php endif; ?>
+													}
+												}
+									);
+						};
+		(function(d){
+		     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+		     if (d.getElementById(id)) {return;}
+		     js = d.createElement('script'); js.id = id; js.async = true;
+		     js.src = "//connect.facebook.net/<?php if ( isset( $user_cfg->idioma ) ) { echo $user_cfg->idioma; } else { echo 'pt_BR'; } ?>/all.js";
+		     ref.parentNode.insertBefore(js, ref);
+		   }(document));
+	</script>
+	<?php endif; ?>
+	<?php if ( isset( $controller_atual->prg_controller ) ):?>
+		<?php if ( isset( $method_atual->prg_controller_method ) ):?>
+			<?php if ( !isset( $show_header ) || $show_header == 'TRUE' ): ?>
+				<?php echo form_open_multipart( '/'.$controller_atual->prg_controller.'/'.$method_atual->prg_controller_method ); ?>
+			<?php else: ?>
+				<?php echo form_open_multipart( '/'.$controller_atual->prg_controller.'/'.$method_atual->prg_controller_method.'/dialog' ); ?>
+			<?php endif; ?>
+		<?php else:?>
+			<?php echo form_open_multipart( '/'.$controller_atual->prg_controller ); ?>
+		<?php endif;?>
+	<?php else:?>
+		<?php echo form_open_multipart( '/home' ); ?>
+	<?php endif;?>
+		<input name="jx-order-selection" type="hidden" value="<?=$jx_order_selection;?>"/>
+		<input name="jx-order-direction" type="hidden" value="<?=$jx_order_direction;?>"/>
+		<input name="jx-filter-parent" type="hidden" value="<?=$jx_filter_parent;?>"/>
+		<input name="jx_pagina_atual" type="hidden" value="<?php if ( isset( $jx_pagina_atual ) ) { echo $jx_pagina_atual; }?>"/>
+	<?php if ( !isset( $show_header ) || $show_header == 'TRUE' ): ?>
+		<header>
+	<?php else :?>
+		<header style="display: none;">
+	<?php endif; ?>
+		<section class="busca">
+			<div class="campo-borda">
+				<input name="jx-search-what" type="text" value="<?=$jx_search_what;?>"/>
+				<a class="setting" title="Configurações" href="#">Configurações</a>
+			</div>
+			<button class="btn btn-primary action search" title="Buscar">
+				&nbsp;&nbsp;&nbsp;<i class="icon-search icon-white"></i>&nbsp;&nbsp;&nbsp;
+			</button>
+		</section>
+		<nav class="topmenu">
+			<ul>
+				<?php $first_system = 0;?>
+				<?php foreach($sistemas as $sist):?>
+					<?php if ($first_system == 0):?>
+						<?php $first_system = 1;?>
+						<?php if ($sist->id == $sistema_id_atual):?>
+							<li class="first ativo">
+						<?php else:?>
+							<li class="first">
+						<?php endif;?>
+					<?php else:?>
+						<?php if ($sist->id == $sistema_id_atual):?>
+							<li class="ativo">
+						<?php else:?>
+							<li>
+						<?php endif;?>
+					<?php endif;?>
+					<a href="/<?=$sist->prg_controller;?>" title="<?=$sist->descr;?>"><?=$sist->nome;?></a></li>
+				<?php endforeach;?>
+			</ul>
+		</nav>
+		<div class="whois">
+			<ul>
+				<?php if ( isset( $user_info->nome_completo ) ) : ?>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<?php echo $user_info->nome_completo; ?>
+							<?php if ( $facebook_login ) :?>
+									<img class="user-photo" src="<?php echo $user_info->imagem_facebook; ?>"/>
+							<?php else : ?>
+								<?php if ( isset( $user_info->image ) ) :?>
+									<img class="user-photo" src="data:<?= $user_info->mime_type; ?>;base64,<?php echo base64_encode( $user_info->image ); ?>"/>
+								<?php else : ?>
+									<i class="icon-user icon-white"></i>
+								<?php endif; ?>
+							<?php endif; ?>
+							<i class="icon-cog icon-white"></i>
+						</a>
+						<ul class="dropdown-menu pull-right">
+							<li>
+								<a href="/user_cfg/profile">
+									<?php if ( $facebook_login ) :?>
+											<img class="menu-photo" src="<?php echo $user_info->imagem_facebook; ?>"/>
+									<?php else : ?>
+										<?php if ( isset( $user_info->image ) ) :?>
+											<img class="menu-photo" src="data:<?= $user_info->mime_type; ?>;base64,<?php echo base64_encode( $user_info->image ); ?>"/>
+										<?php else : ?>
+											<i class="icon-wrench"></i>
+										<?php endif; ?>
+									<?php endif; ?>
+									&nbsp;&nbsp;Configurações
+								</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="/logout"><i class="icon-off"></i>&nbsp;&nbsp;Sair</a>
+							</li>
+						</ul>
+					</li>
+				<?php else : ?>
+					<li>
+						<?php if ( $facebook_login ) :?>
+							<div class="fb-login-button" data-show-faces="false" data-width="200" data-max-rows="1"></div>
+						<?php else : ?>
+							<div class="btn-group">
+								<a class="btn btn-primary" href="/login"><i class="icon-user icon-white"></i> Entrar</a>
+								<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu pull-right">
+							            <li><a href="#"><i class="icon-user"></i> Criar um conta</a></li>
+							            <li class="divider"></li>
+							            <li><a href="/login"><i class="icon-book"></i> Entrar</a></li>
+							        </ul>
+							</div>
+						<?php endif; ?>
+					</li>
+				<?php endif; ?>
+			</ul>
+		</div>
+		<div class="logo-cliente">
+			<a href="/"><h2><?php echo $this->config->item( 'system_title' ); ?></h2></a>
+		</div>
+	</header>
+	<span style="display: none;" class="show_header" show_header="<?php if ( isset( $show_header ) ) { echo $show_header; } ?>" ></span>
+	<div class="message_master"><div class="message" style="display:none;"><span></span></div></div>
+	<div class="working">
+ 		<img src="/assets/img/ajax_loader_3.gif" style="opacity: 0.3; width: 100px; heigth: 100px;" title="<?php echo $this->lang->get_line( 'working_message' ); ?>">
+ 		<p><?php echo $this->lang->get_line( 'working_message' ); ?></p>
+ 	</div>
+	<div class="conteudo" style="display: none;">
+		<?php $this->load->view( 'jx/alert_show.html' ); ?>
+		<!--div class="horizontal-ad">
+		</div-->

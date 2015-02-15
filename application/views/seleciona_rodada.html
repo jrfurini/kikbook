@@ -1,0 +1,241 @@
+<div class="kik-info">
+	<div class="selected-campeonato">
+		<dl>
+		<?php if ( $tipo_visual != 'grupos' || ( $tipo_visual == 'grupos' && $tipo_calculo != 'campeonato' ) ) : ?>
+			<dd class="camp">
+				<h4 title="Campeonato selecionado."><img src="<?php echo $campeonato_versao_atual->nome_arquivo_imagem; ?>"> <?php echo $campeonato_versao_atual->descr; ?></h4>
+			</dd>
+		<?php endif; ?>
+		<?php if ( $controller_atual->prg_controller == 'classificacao'
+		      &&   isset( $rodada_fase_inicial->nome )
+		      &&   isset( $rodada_fase_final->nome )
+		         ) : ?>
+			<dd>
+				<div>
+					<h5><small>Visualização Personalizada:</small> <?php echo $rodada_fase_inicial->nome . " à " . $rodada_fase_final->nome; ?><?php if ( $personalizada_meus_chutes == "true" ) { echo "<small>, usando meus chutes.</small>"; } else { echo "<small>.</small>"; }?></h5>
+				</div>
+			</dd>
+		<?php endif; ?>
+		</dl>
+		<?php if ( $controller_atual->prg_controller == 'ranking' ) : ?>
+			<?php  $this->load->view( 'jx/pagination_button.html', array( 'classe_paginacao' => 'paginacao_ranking' ) ); ?>
+		<?php endif; ?>
+	</div>
+	
+	<?php if ( $controller_atual->prg_controller == 'ranking' ) : ?>
+		<div class="pre-sel-grupo">
+			<section class="sel-tipo-visual">
+				<div class="btn-toolbar">
+					<div class="btn-group" data-toggle="buttons-radio">
+						<a href="/ranking/tipo_visual/amigos" class="btn btn-<?php if ( $tipo_visual == 'amigos' ) { echo 'primary'; } else { echo 'info'; } ?> button action sel-tipo-visual" title="<?php echo $this->lang->get_line( 'button_amigos_title', $master_table );?>" tipo_visual="amigos">
+							<?php echo $this->lang->get_line( 'button_amigos', $master_table );?>
+						</a>
+						<a href="/ranking/tipo_visual/geral" class="btn btn-<?php if ( $tipo_visual == 'geral' ) { echo 'primary'; } else { echo 'info'; } ?> button action sel-tipo-visual" title="<?php echo $this->lang->get_line( 'button_kikbook_title', $master_table );?>" tipo_visual="geral">
+							<?php echo $this->lang->get_line( 'button_kikbook', $master_table );?>
+						</a>
+						<?php if ( $grupos ) : ?>
+							<a href="/ranking/tipo_visual/grupos" class="btn btn-<?php if ( $tipo_visual == 'grupos' ) { echo 'primary'; } else { echo 'info'; } ?> button action sel-tipo-visual" title="<?php echo $this->lang->get_line( 'button_grupos_title', $master_table );?>" tipo_visual="grupos">
+								<?php echo $this->lang->get_line( 'button_grupos', $master_table );?>
+							</a>
+							<button class="btn btn-<?php if ( $tipo_visual == 'grupos' ) { echo 'primary'; } else { echo 'info'; } ?> dropdown-toggle" data-toggle="dropdown">
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu pull-right sel-grupo">
+								<?php foreach( $grupos as $grupo ) : ?>
+									<li>
+										<a href="/ranking/grupo/<?php echo $grupo->id; ?>">
+											<img class="grupo-imagem" src="<?php echo $grupo->icon; ?>">
+											&nbsp;&nbsp;<?php echo $grupo->title; ?>
+										</a>
+									</li>
+								<?php endforeach; ?>
+							</ul>
+						<?php endif; ?>
+					</div>
+
+					<div class="btn-group" data-toggle="buttons-radio">
+						<a href="/ranking/tipo_calculo/melhor-rodada" class="btn btn-<?php if ( $tipo_calculo == 'melhor-rodada' ) { echo 'primary'; } else { echo 'info'; } ?> button action sel-tipo-calculo" title="<?php echo $this->lang->get_line( 'button_melhor_rodada_title', $master_table );?>" tipo_calculo="melhor-rodada">
+							<?php echo $this->lang->get_line( 'button_melhor_rodada', $master_table );?>
+						</a>
+						<a href="/ranking/tipo_calculo/rodada" class="btn btn-<?php if ( $tipo_calculo == 'rodada' ) { echo 'primary'; } else { echo 'info'; } ?> button action sel-tipo-calculo" title="<?php echo $this->lang->get_line( 'button_rodada_title', $master_table );?>" tipo_calculo="rodada">
+							<?php echo $this->lang->get_line( 'button_rodada', $master_table );?>
+						</a>
+						<?php if ( $tipo_visual == 'grupos' && $grupo_fases ) : ?>
+							<a href="/ranking/tipo_calculo/campeonato" class="btn btn-<?php if ( $tipo_calculo == 'campeonato' ) { echo 'primary'; } else { echo 'info'; } ?> button action sel-tipo-calculo" title="<?php echo $this->lang->get_line( 'button_fase_grupo_amigos_title', $master_table );?>" tipo_calculo="campeonato">
+								<?php echo $this->lang->get_line( 'button_fase_grupo_amigos', $master_table );?>
+							</a>
+							<button class="btn btn-<?php if ( $tipo_calculo == 'campeonato' ) { echo 'primary'; } else { echo 'info'; } ?> dropdown-toggle" data-toggle="dropdown">
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu pull-right sel-grupo">
+								<?php foreach( $grupo_fases as $fase ) : ?>
+									<li><a href="/ranking/grupo/<?php echo $fase->grupo_amigos_id; ?>/<?php echo $fase->id; ?>"><?php echo $fase->title; ?></a></li>
+								<?php endforeach; ?>
+							</ul>
+						<?php else: ?>
+							<a href="/ranking/tipo_calculo/campeonato" class="btn btn-<?php if ( $tipo_calculo == 'campeonato' ) { echo 'primary'; } else { echo 'info'; } ?> button action sel-tipo-calculo" title="<?php echo $this->lang->get_line( 'button_campeonato_title', $master_table );?>" tipo_calculo="campeonato">
+								<?php echo $this->lang->get_line( 'button_campeonato', $master_table );?>
+							</a>
+						<?php endif; ?>
+					</div>
+				</div>
+				<?php if ( $tipo_visual == 'grupos' && $grupo_selecionado && $grupo_fase_selecionada ) : ?>
+					<h4 title="Grupo de Amigos"><?php echo $grupo_selecionado; ?> <small title="Fase do Grupo de Amigos"><?php echo $grupo_fase_selecionada; ?></small></h4>
+				<?php endif; ?>
+			</section>
+		</div>
+	<?php endif; ?>
+
+	<?php if ( ( ( $tipo_calculo != 'campeonato' 
+	      &&       $tipo_calculo != 'melhor-rodada' 
+	      &&       $controller_atual->prg_controller == 'ranking'
+	             )
+	      ||     $controller_atual->prg_controller != 'ranking'
+	           )
+	      &&   count( $rows_rodada ) > 0
+	         ) : ?>
+		<div class="pre-sel-rodada">
+			<?php if ( $controller_atual->prg_controller == 'classificacao' ) : ?>
+				<section class="sel-rodada sel-rodada-clas">
+			<?php else : ?>
+				<section class="sel-rodada">
+			<?php endif; ?>
+				<dl>
+					<?php if ( $rodada_anterior != 0 ) : ?>
+						<dd class="box-sel-rodada-button-left">
+							<a href="/<?php echo $controller_atual->prg_controller; ?>/rodada/<?php echo $rodada_anterior ?>" title="Anterior"></a>
+						</dd>
+					<?php else : ?>
+						<dd class="box-sel-rodada-button-left-disable">
+						</dd>
+					<?php endif; ?>
+					<?php foreach( $rows_rodada as $rodada ) :?>
+						<?php if ( $rodada->quem =='KICK' ) :?>
+							<?php if ( $rodada_atual->id == $rodada->id ) : ?>
+								<?php if ( $rodada->open ) :?>
+									<dd class="box-sel-rodada ativa-open">
+										<?php echo $rodada->nome ?><p class="rodada-data"><?php if ( $rodada->dd_mm_inicio == $rodada->dd_mm_fim ) { echo $rodada->dd_mm_inicio; } else { echo $rodada->dd_mm_inicio." " . $this->lang->get_line( 'rodada_ate', $master_table ) . " ".$rodada->dd_mm_fim; } ?></p>
+										<i class="rodada_peso-selected"></i><span class="rodada_peso-selected" data-content="Cada ponto que você fizer nesta rodada dará <?php echo $rodada->peso_kik_fmt; ?> kiks." title="<i class='rodada_peso-selected'></i>Kiks por pontos."><?php echo $rodada->peso_kik_fmt; ?></span>
+										<img class="open-img" src="/assets/kik/img/open-game.png" title="Rodada aberta para chutes."/>
+									</dd>
+								<?php else :?>
+									<dd class="box-sel-rodada ativa-close">
+										<?php echo $rodada->nome ?><p class="rodada-data"><?php if ( $rodada->dd_mm_inicio == $rodada->dd_mm_fim ) { echo $rodada->dd_mm_inicio; } else { echo $rodada->dd_mm_inicio." " . $this->lang->get_line( 'rodada_ate', $master_table ) . " ".$rodada->dd_mm_fim; } ?></p>
+										<i class="rodada_peso-selected"></i><span class="rodada_peso-selected" data-content="Cada ponto que você fizer nesta rodada dará <?php echo $rodada->peso_kik_fmt; ?> kiks." title="<i class='rodada_peso-selected'></i>Kiks por pontos."><?php echo $rodada->peso_kik_fmt; ?></span>
+										<img class="close-img" src="/assets/kik/img/close-game.png" title="Rodada fechada para chutes."/>
+									</dd>
+								<?php endif;?>
+							<?php else :?>
+								<?php if ( $rodada->open ) :?>
+									<dd class="box-sel-rodada <?php if ( $rodada_atual->id == $rodada->id ) { echo 'ativa'; } else { echo 'inativa'; } ?>-open">
+										<a href="/<?php echo $controller_atual->prg_controller; ?>/rodada/<?php echo $rodada->id ?>" id="rodada_<?php echo $rodada->id ?>"><?php echo $rodada->nome ?><p class="rodada-data"><?php if ( $rodada->dd_mm_inicio == $rodada->dd_mm_fim ) { echo $rodada->dd_mm_inicio; } else { echo $rodada->dd_mm_inicio." " . $this->lang->get_line( 'rodada_ate', $master_table ) . " ".$rodada->dd_mm_fim; } ?></p></a>
+										<i class="rodada_peso"></i><span class="rodada_peso" data-content="Cada ponto que você fizer nesta rodada dará <?php echo $rodada->peso_kik_fmt; ?> kiks." title="<i class='rodada_peso-selected'></i>Kiks por pontos."><?php echo $rodada->peso_kik_fmt; ?></span>
+										<img class="open-img" src="/assets/kik/img/open-game.png" title="Rodada aberta para chutes."/>
+									</dd>
+								<?php else :?>
+									<dd class="box-sel-rodada <?php if ( $rodada_atual->id == $rodada->id ) { echo 'ativa'; } else { echo 'inativa'; } ?>-close">
+										<a href="/<?php echo $controller_atual->prg_controller; ?>/rodada/<?php echo $rodada->id ?>" id="rodada_<?php echo $rodada->id ?>"><?php echo $rodada->nome ?><p class="rodada-data"><?php if ( $rodada->dd_mm_inicio == $rodada->dd_mm_fim ) { echo $rodada->dd_mm_inicio; } else { echo $rodada->dd_mm_inicio." " . $this->lang->get_line( 'rodada_ate', $master_table ) . " ".$rodada->dd_mm_fim; } ?></p></a>
+										<i class="rodada_peso"></i><span class="rodada_peso" data-content="Cada ponto que você fizer nesta rodada dará <?php echo $rodada->peso_kik_fmt; ?> kiks." title="<i class='rodada_peso-selected'></i>Kiks por pontos."><?php echo $rodada->peso_kik_fmt; ?></span>
+										<img class="close-img" src="/assets/kik/img/close-game.png" title="Rodada fechada para chutes."/>
+									</dd>
+								<?php endif;?>
+							<?php endif;?>
+						<?php else :?>
+							<?php if ( $rodada_atual->id == $rodada->id ) : ?>
+								<dd class="box-sel-rodada ativa-open">
+									<?php echo $rodada->nome ?><p class="rodada-data"><?php if ( $rodada->dd_mm_inicio == $rodada->dd_mm_fim ) { echo $rodada->dd_mm_inicio; } else { echo $rodada->dd_mm_inicio." " . $this->lang->get_line( 'rodada_ate', $master_table ) . " ".$rodada->dd_mm_fim; } ?></p>
+									<i class="rodada_peso-selected"></i><span class="rodada_peso-selected" data-content="Cada ponto que você fizer nesta rodada dará <?php echo $rodada->peso_kik_fmt; ?> kiks." title="<i class='rodada_peso-selected'></i>Kiks por pontos."><?php echo $rodada->peso_kik_fmt; ?></span>
+								</dd>
+							<?php else :?>
+								<dd class="box-sel-rodada inativa-open">
+									<a href="/<?php echo $controller_atual->prg_controller; ?>/rodada/<?php echo $rodada->id ?>" id="rodada_<?php echo $rodada->id ?>"><?php echo $rodada->nome ?><p class="rodada-data"><?php if ( $rodada->dd_mm_inicio == $rodada->dd_mm_fim ) { echo $rodada->dd_mm_inicio; } else { echo $rodada->dd_mm_inicio." " . $this->lang->get_line( 'rodada_ate', $master_table ) . " ".$rodada->dd_mm_fim; } ?></p></a>
+									<i class="rodada_peso"></i><span class="rodada_peso" data-content="Cada ponto que você fizer nesta rodada dará <?php echo $rodada->peso_kik_fmt; ?> kiks." title="<i class='rodada_peso-selected'></i>Kiks por pontos."><?php echo $rodada->peso_kik_fmt; ?></span>
+								</dd>
+							<?php endif;?>
+						<?php endif;?>
+					<?php endforeach; ?>
+					<?php if ( $rodada_posterior != 0 ) : ?>
+						<dd class="box-sel-rodada-button-right">
+							<a href="/<?php echo $controller_atual->prg_controller; ?>/rodada/<?php echo $rodada_posterior ?>" title="Próximo"></a>
+						</dd>
+					<?php else : ?>
+						<dd class="box-sel-rodada-button-right-disable">
+						</dd>
+					<?php endif; ?>
+					<?php if ( $controller_atual->prg_controller == 'classificacao' && isset( $user_info->nome_completo ) ) : ?>
+ 						<dd class="box-sel-rodada-pers">
+							<div class="btn-group">
+								<button role="button" class="btn btn-mini simule"  title="<?php echo $this->lang->get_line( 'button_simule_title', $master_table );?>"><?php echo $this->lang->get_line( 'button_simule', $master_table );?></button>
+								<button href="#persClas" role="button" class="btn btn-mini pers" data-toggle="modal" title="<?php echo $this->lang->get_line( 'button_personalize_title', $master_table );?>"><span class="icon-wrench"></span></button>
+							</div>
+							<div id="persClas" class="pers-clas modal hide fade" style="display: none;" tabindex="-1" role="dialog" aria-labelledby="<?php echo $this->lang->get_line( 'button_personalize_title', $master_table );?>" aria-hidden="true">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+									<h3 id="persClasLabel"><?php echo $this->lang->get_line( 'title_personalize_modal', $master_table );?></h3>
+								</div>
+								<div class="modal-body">
+									<dl class="">
+										<dt>
+											<?php echo $this->lang->get_line( 'personalize_modal_rod_inicial', $master_table );?>
+										</dt>
+										<dd>
+											<select id="pers-clas-rod-ini">
+												<option value="<?php echo $rodada_atual->id; ?>">Selecione a Rodada Inicial...</option>
+												<?php foreach ( $rows_rodada_all as $rodada ) : ?>
+													<?php if ( $rodada->id == $rodada_inicial->id ) : ?>
+														<option value="<?php echo $rodada->id; ?>" selected>
+													<?php else : ?>
+														<option value="<?php echo $rodada->id; ?>">
+													<?php endif; ?>
+															<?php echo $rodada->nome; ?>
+														</option>
+												<?php endforeach; ?>
+											</select>
+										</dd>
+										<dt>
+											<?php echo $this->lang->get_line( 'personalize_modal_rod_final', $master_table );?>
+										</dt>
+										<dd>
+											<select id="pers-clas-rod-fin">
+												<option>Selecione a Rodada Final...</option>
+												<?php foreach ( $rows_rodada_all as $rodada ) : ?>
+													<?php if ( $rodada->id == $rodada_atual->id ) :?>
+														<option value="<?php echo $rodada->id; ?>" selected>
+													<?php else : ?>
+														<option value="<?php echo $rodada->id; ?>">
+													<?php endif; ?>
+															<?php echo $rodada->nome; ?>
+														</option>
+												<?php endforeach; ?>
+											</select>
+										</dd>
+										<dt>
+											<?php echo $this->lang->get_line( 'personalize_modal_meus_chutes', $master_table );?>
+										</dt>
+										<dd id="">
+											<div id="pers-clas-meu-chute" class="btn-group" data-toggle="buttons-radio">
+												<button type="button" class="btn btn-primary active" value="true"><?php echo $this->lang->get_line( 'personalize_modal_meus_chutes_s', $master_table );?></button>
+												<button type="button" class="btn btn-primary" value="false"><?php echo $this->lang->get_line( 'personalize_modal_meus_chutes_n', $master_table );?></button>
+											</div>
+										</dd>
+									</dl>
+								</div>
+								<div class="modal-footer">
+									<button class="btn" data-dismiss="modal" aria-hidden="true"><?php echo $this->lang->get_line( 'personalize_modal_fechar', $master_table );?></button>
+									<button class="do-pers-clas btn btn-primary"><?php echo $this->lang->get_line( 'personalize_modal_visualizar', $master_table );?></button>
+								</div>
+							</div>
+						</dd>
+					<?php endif; ?>
+				</dl>
+			</section>
+		</div>
+	<?php endif; ?>
+</div>
+
+<div id="confirm-checkout-camp"  style="display:none;" title="<?= $this->lang->get_line( 'confirm_save_title' );?>">
+	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Seus dados permanecerão cadastrados e quando quiser entrar no campeonato novamente, basta entrar.</p>
+</div>
+
+<div id="common-area">
+</div>

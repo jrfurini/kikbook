@@ -1,0 +1,28 @@
+<?php if ( $show_day ) : ?>
+	<tr id="<?php echo $row->data_jogo_id; ?>">
+		<td colspan="11" class="day">
+			<span class="w"><?php echo $row->dia_da_semana_jogo; ?></span>
+			<?php if ( isset( $user_info->nome_completo ) ) : ?>
+				<a class="btn btn-mini btn-primary" href="/chute/crono/<?php echo $row->data_jogo_id . '/' . $calendario_campeonatos; ?>" title="Chutar"><img src="/assets/kik/img/chutes.png"> Chutar</a>
+			<?php endif; ?>
+			<span class="dt"><?php echo $row->data_jogo_extenso; ?></span>
+		</td>
+	</tr>
+<?php else : ?>
+	<tr>
+		<td colspan="11" class="gm"></td>
+	</tr>
+<?php endif; ?>
+<tr>
+	<td class="gm img camp" style="display: none;"><img class="camp" src="<?php echo $images_campeonato[ $row->campeonato_versao_id ]; ?>"></td>
+	<td class="gm clock <?php echo $row->css_hora_jogo; ?>"></td>
+	<td class="gm time"><?php echo $row->hora_jogo; ?></td>
+	<td class="gm sig l"><?php echo $row->sigla_equipe_casa; ?></td>
+	<td class="gm img eqp"><img class="eqp" src="<?php echo $images[ $row->equipe_id_casa ]; ?>"></td>
+	<td class="gm res"><span class="rs"><?php echo $row->resultado_casa; ?></span><span class="kk"><?php if ( $row->kick_casa != NULL ) { echo $row->kick_casa; } ?></span></td>
+	<td class="gm v">x</td>
+	<td class="gm res"><span class="rs"><?php echo $row->resultado_visitante; ?></span><span class="kk"><?php if ( $row->kick_visitante != NULL ) { echo $row->kick_visitante; } ?></span></td>
+	<td class="gm img eqp"><img class="eqp" src="<?php echo $images[ $row->equipe_id_visitante ]; ?>"></td>
+	<td class="gm sig r"><?php echo $row->sigla_equipe_visitante; ?></td>
+	<td class="gm sig ar" style="display: none;"><?php echo $row->nome_arena; ?></td>
+</tr>

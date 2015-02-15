@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="title" content="<?php echo $this->config->item( 'system_title' ); ?>"/>
+	</head>
+	<body>
+		<div id="fb-root"></div>
+		<script>
+			window.fbAsyncInit = function()	{
+								FB.init(	{
+											 appId      : '<?php echo $facebook_app_id ?>'
+											,cookie     : true
+											,xfbml      : true
+											,channelUrl : '//home/channel'
+											,status     : true
+										}
+								);
+								FB.getLoginStatus(function(response)	{
+														if (response.status === 'connected')
+														{
+															FB.logout(function(response) {
+																window.location.assign( "/home" );
+															});
+														}
+														else
+														{
+															window.location.assign( "/home" );
+														}
+													}
+										);
+							};
+			(function(d, s, id)		{
+								var js, fjs = d.getElementsByTagName(s)[0];
+								if (d.getElementById(id)) return;
+								js = d.createElement(s); js.id = id;
+								js.src = "//connect.facebook.net/<?php if ( isset( $user_cfg->idioma ) ) { echo $user_cfg->idioma; } else { echo "pt_BR"; } ?>/all.js#xfbml=1&appid=<?php echo $facebook_app_id ?>";
+								fjs.parentNode.insertBefore(js, fjs);
+							}(document, 'script', 'facebook-jssdk'));
+		</script>
+	</body>
+</html>

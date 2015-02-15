@@ -1,0 +1,45 @@
+<?php  $this->load->view( 'jx/open.html' );  ?>
+<?php  $this->load->view( 'jx/aside.html', array( 'hide_area' => 'criar' ) ); ?>
+<?php  $this->load->view( 'jx/edit_button.html' );  ?>
+
+<section id="edicao"> <!--  open section edicao -->
+	<input type="hidden" name="jx_action" value="<?php if ( isset( $jx_action ) ) { echo $jx_action; } else { echo 'update'; } ?>"/>
+	<ol>
+		<?php foreach( $table_fields as $table_name => $table_info ): ?>
+			<?php if ( $this->lang->get_line( $table_name.'.controller_title' ) != " " ) : ?>
+				<li class="jx-table-break">
+					<dl>
+						<dt>
+							<?php if ( $table_info->style == 'form' ) : ?>
+								<?php echo $this->lang->get_line( $table_name.'.controller_title' );?>
+								<!--?php echo $this->lang->get_line( $table_name.'.controller_subtitle' );?-->
+							<?php else : ?>
+								<?php echo $this->lang->get_line( $table_name.'.controller_title' );?>
+								<!--?php echo $this->lang->get_line( $table_name.'.controller_subtitle' );?-->
+							<?php endif; ?>
+						</dl>
+						<dd></dd>
+					</dl>
+				</li>
+			<?php endif; ?>
+			<?php
+				$row = $rows->$table_name;
+				if ( $table_info->style == 'form' )
+				{
+					$this->load->view( 'jx/edit_form_style.html', array( 'table_info' => $table_info, 'rows' => $row ) );
+				}
+				else
+				{
+					$this->load->view( 'jx/edit_button_grid.html' );
+					$this->load->view( 'jx/edit_grid_style.html', array( 'table_info' => $table_info, 'rows' => $row ) );
+				}
+			?>
+		<?php endforeach; ?>
+	</ol>
+</section> <!--  close section edicao -->
+
+<?php $this->load->view('jx/close.html'); ?> 
+
+<script src="/assets/js/rodada_fase.js"></script>
+
+<?php $this->load->view('jx/footer.html'); ?> 

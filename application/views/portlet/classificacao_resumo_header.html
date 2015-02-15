@@ -1,0 +1,44 @@
+<thead>
+	<tr class="jx-table-header clas-header" id="rod_title" eqp_id="null" rod_id="<?php echo $rodada_atual->id; ?>" show_chart="false">
+		<td colspan="6" class="lay">
+			<?php if ( $rodada_atual->id == $rodada_classif->id ) : ?>
+				<b class="label label-warning">Rodada Atual:</b>
+			<?php else : ?>
+				<b class="label label-info">Rodada Anterior:</b>
+			<?php endif; ?>
+			
+			<?php echo " " . $rodada_classif->title_short; ?>
+		</td>
+	</tr>
+	<tr class="jx-table-header clas-header">
+		<?php if ( $jx_order_selection == "title" || $jx_order_selection == "clas" ):?>
+			<th colspan="4" id="clas" class="text order" title="Clique para ordenar.">
+				 <?php echo $this->lang->get_line( 'classificacao_sigla', $master_table );?> <?=$jx_order_direction?>
+			</th>
+		<?php else:?>
+			<th colspan="4" id="clas" class="text" title="Clique para ordenar.">
+				 <?php echo $this->lang->get_line( 'classificacao_sigla', $master_table );?>
+			</th>
+		<?php endif;?>
+				
+		<?php if ( $jx_order_selection == "pontos" ):?>
+			<th id="pontos" class="number order" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'pontos_sigla', $master_table );?> <?=$jx_order_direction?>
+			</th>
+		<?php else:?>
+			<th id="pontos" class="number" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'pontos_sigla', $master_table );?>
+			</th>
+		<?php endif;?>
+
+		<?php if ( $jx_order_selection == "jogos" ):?>
+			<th id="jogos" class="number order" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'jogos_sigla', $master_table );?> <?=$jx_order_direction?>
+			</th>
+		<?php else:?>
+			<th id="jogos" class="number" title="Clique para ordenar.">
+				<?php echo $this->lang->get_line( 'jogos_sigla', $master_table );?>
+			</th>
+		<?php endif;?>
+	</tr>
+<thead>

@@ -1,0 +1,37 @@
+<?php if ( isset( $start_line )
+      &&   isset( $last_line )
+      &&   isset( $total_lines )
+      &&   $start_line != ''
+      &&   ( $start_line > 1
+      ||     $last_line  < $total_lines
+           )
+         ) : ?>
+	<?php if ( isset( $classe_paginacao ) ) : ?>
+		<div class="<?php echo $classe_paginacao; ?>">
+	<?php else : ?>
+		<div class="paginacao">
+	<?php endif; ?>
+			<span>
+				<?=$start_line; ?> - <?=$last_line;?> de <?=$total_lines?>
+			</span>
+
+			<div class="btn-toolbar page_buttons">
+				<div class="btn-group">
+					<button class="btn button action first_page small <?php if ( $jx_pagina_atual == 1 ) { echo 'inativo'; } ?>" title="<?= $this->lang->get_line( 'first_page' ); ?>">
+						<i class="icon-fast-backward"></i>
+					</button>
+					<button class="btn button action previous small <?php if ( $jx_pagina_atual == 1 ) { echo 'inativo'; } ?>" title="<?= $this->lang->get_line( 'prev_page' ); ?>">
+						<i class="icon-step-backward"></i>
+					</button>
+				</div>
+				<div class="btn-group">
+					<button class="btn button action next small <?php if ( $last_line == $total_lines ) { echo 'inativo'; } ?>" title="<?= $this->lang->get_line( 'next_page' ); ?>">
+						<i class="icon-step-forward"></i>
+					</button>
+					<button class="btn button action last_page small <?php if ( $last_line == $total_lines ) { echo 'inativo'; } ?>" title="<?= $this->lang->get_line( 'last_page' ); ?>">
+						<i class="icon-fast-forward"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+<?php endif; ?>

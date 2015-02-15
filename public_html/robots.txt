@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: 
+Disallow: /classificacao/rodada
+Disallow: /ranking/rodada
+Disallow: /chute/rodada

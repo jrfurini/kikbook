@@ -1,0 +1,82 @@
+<?php  $this->load->view( 'open.html' ); ?>
+
+<section id="conteudo"> <!--  open section conteudo -->
+	<div class="left-content">
+		<?php if ( !$this->singlepack->user_connected() ) : ?>
+			<?php $this->load->view('kikbook_show.html'); ?>
+		<?php endif; ?>
+
+		<div class="painel">
+			<div id="topo" class="btn-group sel-button">
+				<button class="btn clas-painel"><i class="icon-tasks"></i> Classificação</button>
+				<button class="btn news"><i class="icon-info-sign"></i> Notícias</button>
+				<button class="btn calendar"><i class="icon-calendar"></i> Calendário</button>
+				<!--button class="btn estatistica"><i class="icon-signal"></i> Estatísticas</button-->
+			</div>
+			<ol>
+				<li>
+					<div class="area a1 clas-painel contract">
+						<div class="area a1 clas-small">
+						 	<?php $this->load->view( 'portlet/classificacao_micro.html' ); ?>
+						</div>
+						<div class="area a1 clas-big clas-port-big" style="display:none;">
+							<?php $this->load->view('portlet/classificacao_detalhada.html', array( 'small_size' => TRUE, 'add_css' => '-painel' ) ); ?>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="area a3 news expand">
+						<a class="twitter-timeline" href="https://twitter.com/kikbookoficial/futebol-jornalismo" data-widget-id="311561714103619584">
+							Tweets de @kikbookoficial/futebol-jornalismo
+						</a>
+						<script>
+							!function(d,s,id)
+							{
+								var js,fjs=d.getElementsByTagName(s)[0];
+								if(!d.getElementById(id))
+								{
+									js=d.createElement(s);
+									js.id=id;
+									js.src="//platform.twitter.com/widgets.js";
+									fjs.parentNode.insertBefore(js,fjs);
+								}
+							}
+							(document,"script","twitter-wjs");
+						</script>
+					</div>
+				</li>
+				<li>
+					<div class="area a2 calendar contract">
+						<div class="area a1 calend">
+						 	<?php $this->load->view( 'portlet/calendar_jogo.html' ); ?>
+						</div>
+					</div>
+				</li>
+			</ol>
+			<div id="estatistica" class="ad">
+				<?php $this->ads->show( 'AREA_728x90', array( 'colspan' => 14 ), 1 ); ?>
+			</div>
+			<div class="area-horiz">
+			</div>
+			<div class="area-horiz">
+				<button class="btn topo btn-warning"><i class="icon-arrow-up icon-white"></i> Voltar ao topo</button>
+			</div>
+		</div>
+	</div>
+</section> <!--  close section conteudo -->
+
+<?php $this->load->view( 'close.html' ); ?>
+
+<script src="/assets/js/d3.v3.min.js"></script>
+<script src="/assets/js/classificacao.js?v=1.7"></script>
+<script src="/assets/js/painel.js?v=1.2"></script>
+
+<script>
+$(document).ready(function (){
+	expand( "<?php if ( isset( $painel_area ) ) { echo $painel_area; } ?>" );
+	document.location.href='#<?php if ( isset( $data_selecionada->data_jogo_id ) ) { echo $data_selecionada->data_jogo_id; } ?>';
+	$('html, body').animate({ scrollTop: $("body").offset().top }, 500);
+});
+</script>
+<?php  $this->load->view('footer.html');  ?>
+		

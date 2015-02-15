@@ -1,0 +1,38 @@
+<!-- jx_index_button:ini -->
+<div class="pre-acoes">
+	<section class="acoes">
+		<div class="btn-toolbar">
+			<button class="btn button action select-all" title="<?= $this->lang->get_line( 'button_select_all' ); ?>">
+				<i class="icon-check"></i>
+				<?= $this->lang->get_line( 'button_select_all' ); ?>
+			</button>
+			<button class="btn button action unselect-all" title="<?= $this->lang->get_line( 'button_unselect_all' ); ?>" style="display:none;">
+				<i class="icon-minus"></i>
+				<?= $this->lang->get_line( 'button_unselect_all' ); ?>
+			</button>
+			<button class="btn button action delete" title="<?= $this->lang->get_line( 'button_delete' ); ?>" style="display:none;">
+				<i class="icon-remove"></i>
+				<?= $this->lang->get_line( 'button_delete' ); ?>
+			</button>
+			<button class="btn button action edit" title="<?= $this->lang->get_line( 'button_edit' ); ?>" style="display:none;">
+				<i class="icon-edit"></i>
+				<?= $this->lang->get_line( 'button_edit' ); ?>
+			</button>
+			<button class="btn button action clear_filter" title="<?= $this->lang->get_line( 'button_clear_filter' ); ?>" style="display:none;">
+				<i class="icon-flag"></i>
+				<?= $this->lang->get_line( 'button_clear_filter' ); ?>
+			</button>
+			
+			<?php  $this->load->view('jx/pagination_button.html'); ?>
+		</div>
+
+<div class="message_master-ctrl-group" style="display:none;">
+	<div class="alert alert-success message_master-ctrl">
+		<button type="button" class="close" data-dismiss="alert">×</button>
+		<div class="text">
+		</div>
+	</div>			
+</div>
+	</section>
+</div>
+<!-- jx_index_button:fim -->

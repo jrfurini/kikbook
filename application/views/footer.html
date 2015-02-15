@@ -1,0 +1,73 @@
+	</div> <!-- main -->
+<?php if ( !isset( $show_header ) || $show_header == 'TRUE' ): ?>
+	<footer>
+<?php else: ?>
+	<footer style="display: none;">
+<?php endif; ?>
+		<nav class="footer-menu">
+			<!--?php if ( !in_array( 'system_menu', $hide_area ) ): ?-->
+				<ul>
+					<?php foreach( $sistemas as $sist ):?>
+						<?php if ($sist->show_menu_footer == 'S' && $sist->menus_count_show > 0 ): ?>
+							<li>
+								<?php if ( isset( $sist->nome_arquivo_imagem ) && $sist->nome_arquivo_imagem ) : ?>
+									<!-- img src="<?php echo $sist->nome_arquivo_imagem;?>"/-->
+								<?php endif; ?>
+								<a href="/<?=$sist->prg_controller;?>" title="<?=$sist->descr;?>">
+									<?php echo $sist->nome; ?>
+								</a>
+								<ul class="submenu">
+								<?php foreach( $sist->menus as $row ):?>
+									<?php if ( $row->method != 'edit'
+									      &&   ( $row->ctrl_show_menu_footer == 'S'
+									      ||     $row->meth_show_menu_footer == 'S'
+									           )
+									      &&   $this->singlepack->has_access_prg( $row->prg_controller.'.'.$row->prg_controller_method, 2 )
+									         ) : ?>
+											<li>
+										<?php if ( $row->method == 'index' ) : ?>
+											<a href="/<?=$row->prg_controller;?>/<?=$row->prg_controller_method;?>" title="<?=$row->descr_ctrl;?>"><?=$row->nome_ctrl;?></a></li>
+										<?php else:?>
+											<a href="/<?=$row->prg_controller;?>/<?=$row->prg_controller_method;?>" title="<?=$row->descr_meth;?>"><?=$row->nome_meth;?></a></li>
+										<?php endif;?>
+									<?php endif;?>
+								<?php endforeach;?>
+								</ul>
+							</li>
+						<?php endif;?>
+					<?php endforeach;?>
+				</ul>
+			<!--?php endif;?-->
+		</nav>
+		<div class="footer-bottom">
+			<ul>
+				<li>
+					<div class="copyright">
+						<a href="http://www.instantssl.com" title="SSL Certificate">
+							<img src="/assets/img/comodo_secure_100x85_transp.png" alt="SSL Certificate" width="100" height="85" style="border: 0px;">
+						</a>
+						<a href="http://singlesolutions.com.br">Single Solutions (c) 2012</a>
+					</div>
+				</li>
+				<li style="margin-left:350px;">
+					<div class="terms">
+						<ul>
+							<li>
+								<a href="https://facebook.com/kikbookoficial" title="Facebook"><i class="logo_small_facebook"></i></a>
+							</li>
+							<li>
+								<a href="https://twitter.com/kikbookoficial" title="Twitter" target="_blank"><img src="/assets/img/twitter.png?v=1.1" style="width:50px;height:50px;"></a>
+							</li>
+							<li>
+								<a href="https://plus.google.com/u/0/communities/104844933905152896970" title="Google+">G+</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+			<!--img class="jogador_bola" src="/assets/kik/img/rodape_jogador_bola.png"></img-->
+		</div>
+	</footer>
+</body>
+</html>
+	

@@ -1,0 +1,19 @@
+<?php if ( count( $notificacao_header ) > 0 ) :?>
+	<div class="notif-ctrl-group">
+		<div class="alert alert-success notif-ctrl notif-ctrl-btn-group" notif_pes_id="<?php echo $notificacao_header->id ?>" id="<?php echo $notificacao_header->id ?>">
+			<button class="notif-ctrl-btn-ok close alert">×</button>
+			<div class="time">
+				<?php echo $notificacao_header->data_hora_envio_format; ?>
+			</div>
+			<div class="text">
+				<?php echo $notificacao_header->texto_enviado ?>
+			</div>
+			<br/>
+			<br/>
+			<div class="btn-group notif-ctrl-btn-group" notif_pes_id="<?php echo $notificacao_header->id ?>">
+				<button class="btn btn-info notif-ctrl-btn-ok"><i class="icon-white icon-ok"></i>&nbsp;&nbsp;Ok</button>
+				<button class="btn btn-info notif-ctrl-btn-adiar"><i class="icon-white icon-time"></i>&nbsp;&nbsp;Ver depois</button>
+			</div>
+		</div>
+	</div>
+<?php endif; ?>

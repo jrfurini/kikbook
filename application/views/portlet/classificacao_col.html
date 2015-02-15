@@ -1,0 +1,158 @@
+<div class="clas-port">
+	<table class="clas">
+		<?php if ( count( $rows_classif ) > 0 ) : ?>
+			<?php $this->load->view( 'portlet/classificacao_resumo_header.html' ); ?>
+			<tbody>		
+				<?php $tr_ctrl = 'in'; ?>
+				<?php foreach( $rows_classif as $row ): ?>
+					<tr class="clas <?php if ( $tr_ctrl == 'in' ) { $tr_ctrl = 'out'; echo 'out'; } else { $tr_ctrl = 'in'; echo 'in'; } ?>" id="<?php if ( isset( $row->id ) ) { echo $row->id; } ?>" eqp_id="<?php echo $row->equipe_id;?>" rod_id="<?php echo $row->rodada_fase_id; ?>" show_chart="false">
+						<?php if ( $row->situacao == 'L' ) :?>
+							<td class="posicao number libertadores">
+								<span title="<?php echo $this->lang->get_line( 'libertadores', $master_table );?>"><?php echo $row->posicao; ?></span>
+							</td>
+						<?php elseif ( $row->situacao == 'P' ) :?>
+							<td class="posicao number prelibertadores">
+								<span title="<?php echo $this->lang->get_line( 'prelibertadores', $master_table );?>"><?php echo $row->posicao; ?></span>
+							</td>
+						<?php elseif ( $row->situacao == 'S' ) :?>
+							<td class="posicao number sulamericana">
+								<span title="<?php echo $this->lang->get_line( 'sulamericana', $master_table );?>"><?php echo $row->posicao; ?></span>
+							</td>
+						<?php elseif ( $row->situacao == 'R' ) :?>
+							<td class="posicao number rebaixado">
+								<span title="<?php echo $this->lang->get_line( 'rebaixado', $master_table );?>"><?php echo $row->posicao; ?></span>
+							</td>
+						<?php elseif ( $row->situacao == 'C' ) :?>
+							<td class="posicao number classificado">
+								<span title="<?php echo $this->lang->get_line( 'classificado', $master_table );?>"><?php echo $row->posicao; ?></span>
+							</td>
+						<?php elseif ( $row->situacao == 'E' ) :?>
+							<td class="posicao number eliminado">
+								<span title="<?php echo $this->lang->get_line( 'eliminado', $master_table );?>"><?php echo $row->posicao; ?></span>
+							</td>
+						<?php elseif ( $row->situacao == 'M' ) :?>
+							<td class="posicao number repescagem">
+								<span title="<?php echo $this->lang->get_line( 'repescagem', $master_table );?>"><?php echo $row->posicao; ?></span>
+							</td>
+						<?php else:?>
+							<td class="posicao number nor">
+								<span title=""><?php echo $row->posicao; ?></span>
+							</td>
+						<?php endif;?>
+						<td class="eqp-img img">
+							<?php if ( key_exists( $row->equipe_id, $images_classif ) ) : ?>
+								<img class="eqp-img" title="<?php echo $row->nome; ?>" src="<?php echo $images_classif[ $row->equipe_id ] ?>"/>
+							<?php endif; ?>
+						</td>
+						<td class="nome text" title="<?php echo $this->lang->get_line( 'equipe', $master_table );?>">
+							<?php if ( $row->id_facebook ) : ?>
+								<a href="http://www.facebook.com/<?php echo $row->id_facebook; ?>"><?php echo $row->nome; ?></a>
+							<?php else : ?>
+								<?php echo $row->nome; ?>
+							<?php endif; ?>
+						</td>
+						<td class="chart-btn">
+							<button class="show-chart btn btn-mini" title="Exibir Gráfico"><i class="icon-signal"></i></button>
+						</td>
+						<td class="ponto number-<?php if ( $row->total_ponto >= 0 ) { echo 'pos'; } else { echo 'neg'; }?>" title="<?php echo $this->lang->get_line( 'pontos', $master_table );?>">
+							<?php echo $row->total_ponto; ?>
+						</td>
+						<td class="jogo number-<?php if ( $row->total_jogo >= 0 ) { echo 'pos'; } else { echo 'neg'; }?>" title="<?php echo $this->lang->get_line( 'jogos', $master_table );?>">
+							<?php echo $row->total_jogo; ?>
+						</td>
+					</tr>
+					<tr style="display: none;" class="clas chart <?php echo $tr_ctrl; ?>" id="<?php if ( isset( $row->id ) ) { echo $row->id; } ?>" eqp_id="<?php echo $row->equipe_id;?>" rod_id="<?php echo $row->rodada_fase_id; ?>" show_chart="false">
+						<td colspan="6" class="lay">
+							<div id="chart_eqp_<?php echo $row->equipe_id; ?>">
+								<table class="clas col">
+									<thead>
+										<tr class="clas <?php echo $tr_ctrl; ?>" id="<?php if ( isset( $row->id ) ) { echo $row->id; } ?>" eqp_id="<?php echo $row->equipe_id;?>" rod_id="<?php echo $row->rodada_fase_id; ?>">
+											<th id="avanco" class="number" title="Clique para ordenar.">
+												<?php echo $this->lang->get_line( 'movimentacao_sigla', $master_table );?>
+											</th>
+											<th id="vitorias" class="number">
+												<?php echo $this->lang->get_line( 'vitorias_sigla', $master_table );?>
+											</th>
+											<th id="empates" class="number">
+												<?php echo $this->lang->get_line( 'empates_sigla', $master_table );?>
+											</th>
+											<th id="derrotas" class="number">
+												<?php echo $this->lang->get_line( 'derrotas_sigla', $master_table );?>
+											</th>
+											<th id="golpos" class="number">
+												<?php echo $this->lang->get_line( 'gol_positivo_sigla', $master_table );?>
+											</th>
+											<th id="golneg" class="number">
+												<?php echo $this->lang->get_line( 'gol_contra_sigla', $master_table );?>
+											</th>
+											<th id="saldogol" class="number">
+												<?php echo $this->lang->get_line( 'saldo_gol_sigla', $master_table );?>
+											</th>
+											<th id="golcasa" class="number">
+												<?php echo $this->lang->get_line( 'gol_casa_sigla', $master_table );?>
+											</th>
+											<th id="golfora" class="number">
+												<?php echo $this->lang->get_line( 'gol_fora_casa_sigla', $master_table );?>
+											</th>
+											<th id="aprov" class="number">
+												<?php echo $this->lang->get_line( 'aproveitamento_sigla', $master_table );?>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="clas <?php echo $tr_ctrl; ?>" id="<?php if ( isset( $row->id ) ) { echo $row->id; } ?>" eqp_id="<?php echo $row->equipe_id;?>" rod_id="<?php echo $row->rodada_fase_id; ?>">
+											<?php if ( $row->diff_posicao_anterior > 0 ) :?>
+												<td class="pos-ant number-pos" title="<?php echo $this->lang->get_line( 'movimentacao', $master_table );?>">
+													<img style="width: 12px;" src="/assets/<?=$theme;?>/img/clas_mov_pos.png">
+													<?php echo $row->diff_posicao_anterior;?>
+												</td>
+											<?php elseif ( $row->diff_posicao_anterior < 0 ) :?>
+												<td class="pos-ant number-neg" title="<?php echo $this->lang->get_line( 'movimentacao', $master_table );?>">
+													<img style="width: 12px;" src="/assets/<?=$theme;?>/img/clas_mov_neg.png">
+													<?php echo $row->diff_posicao_anterior;?>
+												</td>
+											<?php else:?>
+												<td class="pos-ant number">
+												</td>
+											<?php endif;?>
+											<td class="vitoria number-<?php if ( $row->total_vitoria >= 0 ) { echo 'pos'; } else { echo 'neg'; }?>" title="<?php echo $this->lang->get_line( 'vitorias', $master_table );?>">
+												<?php echo $row->total_vitoria; ?>
+											</td>
+											<td class="empate number-<?php if ( $row->total_empate >= 0 ) { echo 'pos'; } else { echo 'neg'; }?>" title="<?php echo $this->lang->get_line( 'empates', $master_table );?>">
+												<?php echo $row->total_empate; ?>
+											</td>
+											<td class="derrota number-<?php if ( $row->total_derrota >= 0 ) { echo 'pos'; } else { echo 'neg'; }?>" title="<?php echo $this->lang->get_line( 'derrotas', $master_table );?>">
+												<?php echo $row->total_derrota; ?>
+											</td>
+											<td class="gol-pos number-<?php if ( $row->gol_favor >= 0 ) { echo 'pos'; } else { echo 'neg'; }?>" title="<?php echo $this->lang->get_line( 'gol_positivo', $master_table );?>">
+												<?php echo $row->gol_favor; ?>
+											</td>
+											<td class="gol-neg number-<?php if ( $row->gol_contra >= 0 ) { echo 'pos'; } else { echo 'neg'; }?>" title="<?php echo $this->lang->get_line( 'gol_contra', $master_table );?>">
+												<?php echo $row->gol_contra; ?>
+											</td>
+											<td class="saldo-gol number-<?php if ( ( $row->gol_favor - $row->gol_contra ) >= 0 ) { echo 'pos'; } else { echo 'neg'; }?>" title="<?php echo $this->lang->get_line( 'saldo_gol', $master_table );?>">
+												<?php echo ( $row->gol_favor - $row->gol_contra ); ?>
+											</td>
+											<td class="gol-casa number-<?php if ( $row->gol_casa >= 0 ) { echo 'pos'; } else { echo 'neg'; }?>" title="<?php echo $this->lang->get_line( 'gol_casa', $master_table );?>">
+												<?php echo $row->gol_casa; ?>
+											</td>
+											<td class="gol-fora number-<?php if ( $row->gol_fora_casa >= 0 ) { echo 'pos'; } else { echo 'neg'; }?>" title="<?php echo $this->lang->get_line( 'gol_fora_casa', $master_table );?>">
+												<?php echo $row->gol_fora_casa; ?>
+											</td>
+											<td class="aprov number-<?php if ( $row->aproveitamento >= 0 ) { echo 'pos'; } else { echo 'neg'; }?>" title="<?php echo $this->lang->get_line( 'aproveitamento', $master_table );?>">
+												<?php if ( $row->aproveitamento ) { echo round( $row->aproveitamento, 1 ); } else { echo 0; } ?>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div id="chartcontainer<?php echo $row->equipe_id; ?>"></div>
+							</div>
+						</td>
+					</tr>
+				<?php endforeach; ?>
+			</tbody>
+		<?php else : ?>
+			<b class="label label-warning">Sem dados de classificação.</b>
+		<?php endif; ?>
+	</table>
+</div>

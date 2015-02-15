@@ -1,0 +1,75 @@
+<div class="clas-port-micro">
+	<table class="clas">
+		<?php if ( count( $rows_classif ) > 0 ) : ?>
+			<tbody>	
+				<?php $tr_ctrl = 'in'; ?>
+				<?php $grupo_id_ant = -1; ?>
+				<?php foreach( $rows_classif as $row ): ?>
+					<?php if ( $row->grupo_id != $grupo_id_ant ) : ?>
+						<?php $grupo_id_ant = $row->grupo_id; ?>
+						<?php if ( $row->nome_grupo ) : ?>
+							<tr class="jx-table-header clas-header">
+								<td colspan="4">
+									<h4 class="grupo_equipe_micro"><?php echo $row->nome_grupo; ?></h4>
+								</td>
+							</tr>
+						<?php endif; ?>
+					<?php endif; ?>
+
+					<tr class="clas <?php if ( $tr_ctrl == 'in' ) { $tr_ctrl = 'out'; echo 'out'; } else { $tr_ctrl = 'in'; echo 'in'; } ?>" id="<?php if ( isset( $row->id ) ) { echo $row->id; } ?>" eqp_id="<?php echo $row->equipe_id;?>" rod_id="<?php echo $row->rodada_fase_id; ?>" show_chart="false">
+						<?php if ( $row->situacao == 'L' ) :?>
+							<td class="posicao-micro number libertadores">
+								<span title="<?php echo $this->lang->get_line( 'libertadores', $master_table );?>"><?php echo $row->posicao; ?></span>
+							</td>
+						<?php elseif ( $row->situacao == 'P' ) :?>
+							<td class="posicao-micro number prelibertadores">
+								<span title="<?php echo $this->lang->get_line( 'prelibertadores', $master_table );?>"><?php echo $row->posicao; ?></span>
+							</td>
+						<?php elseif ( $row->situacao == 'S' ) :?>
+							<td class="posicao-micro number sulamericana">
+								<span title="<?php echo $this->lang->get_line( 'sulamericana', $master_table );?>"><?php echo $row->posicao; ?></span>
+							</td>
+						<?php elseif ( $row->situacao == 'R' ) :?>
+							<td class="posicao-micro number rebaixado">
+								<span title="<?php echo $this->lang->get_line( 'rebaixado', $master_table );?>"><?php echo $row->posicao; ?></span>
+							</td>
+						<?php elseif ( $row->situacao == 'C' ) :?>
+							<td class="posicao-micro number classificado">
+								<span title="<?php echo $this->lang->get_line( 'classificado', $master_table );?>"><?php echo $row->posicao; ?></span>
+							</td>
+						<?php elseif ( $row->situacao == 'E' ) :?>
+							<td class="posicao-micro number eliminado">
+								<span title="<?php echo $this->lang->get_line( 'eliminado', $master_table );?>"><?php echo $row->posicao; ?></span>
+							</td>
+						<?php elseif ( $row->situacao == 'M' ) :?>
+							<td class="posicao-micro number repescagem">
+								<span title="<?php echo $this->lang->get_line( 'repescagem', $master_table );?>"><?php echo $row->posicao; ?></span>
+							</td>
+						<?php else:?>
+							<td class="posicao-micro number nor">
+								<span title=""><?php echo $row->posicao; ?></span>
+							</td>
+						<?php endif;?>
+						<td class="eqp-img-micro img">
+							<?php if ( key_exists( $row->equipe_id, $images_classif ) ) : ?>
+								<img class="eqp-img" title="<?php echo $row->nome; ?>" src="<?php echo $images_classif[ $row->equipe_id ] ?>"/>
+							<?php endif; ?>
+						</td>
+						<td class="nome-micro text" title="<?php echo $this->lang->get_line( 'equipe', $master_table );?>">
+							<?php if ( $row->id_facebook ) : ?>
+								<a href="http://www.facebook.com/<?php echo $row->id_facebook; ?>"><?php echo $row->nome; ?></a>
+							<?php else : ?>
+								<?php echo $row->nome; ?>
+							<?php endif; ?>
+						</td>
+						<td class="ponto-micro number-<?php if ( $row->total_ponto >= 0 ) { echo 'pos'; } else { echo 'neg'; }?>" title="<?php echo $this->lang->get_line( 'pontos', $master_table );?>">
+							<?php echo $row->total_ponto; ?>
+						</td>
+					</tr>
+				<?php endforeach; ?>
+			</tbody>
+		<?php else : ?>
+			<b class="label label-warning">Sem dados de classificação.</b>
+		<?php endif; ?>
+	</table>
+</div>

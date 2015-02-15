@@ -1,0 +1,53 @@
+<?php  $this->load->view('jx/open.html');  ?>
+<?php  $this->load->view('jx/aside.html'); ?>
+<?php  $this->load->view('jx/edit_button.html');  ?>
+
+<section id="edicao"> <!--  open section edicao -->
+	<input type="hidden" name="jx_action" value="<?php if ( isset( $jx_action ) ) { echo $jx_action; } else { echo 'update'; } ?>"/>
+	<?php foreach( $table_fields as $table_name => $table_info ): ?>
+		<ol table_name="<?php echo $table_name; ?>">
+			<?php if ( $this->lang->get_line( $table_name.'.controller_title' ) != " " ) : ?>
+				<li class="jx-table-break">
+					<dl>
+						<dt>
+							<?php if ( $table_info->style == 'form' ) : ?>
+								<?php echo $this->lang->get_line( $table_name.'.controller_title' );?>
+								<!--?php echo $this->lang->get_line( $table_name.'.controller_subtitle' );?-->
+							<?php else : ?>
+								<?php echo $this->lang->get_line( $table_name.'.controller_title' );?>
+								<!--?php echo $this->lang->get_line( $table_name.'.controller_subtitle' );?-->
+							<?php endif; ?>
+						</dl>
+						<dd></dd>
+					</dl>
+				</li>
+			<?php endif; ?>
+			<button class="btn btn-primary action calcula_rodada" title='Atualizar "Classificação e Ranking"' rodada_fase_id="<?php echo $edit_id; ?>">
+				<i class="icon-play icon-white"></i>
+				Calcular "Classificação e Ranking"
+			</button>
+			<button class="btn btn-danger action atualiza_rodada" title='Robo de Atualização + Calcular "Classificação e Ranking"' rodada_fase_id="<?php echo $edit_id; ?>">
+				<i class="icon-play icon-white"></i>
+				Robo de Atualização + Calcular "Classificação e Ranking"
+			</button>
+			<?php
+				$row = $rows->$table_name;
+				if ( $table_info->style == 'form' )
+				{
+					$this->load->view( $edit_form_style, array( 'table_info' => $table_info, 'rows' => $row ) );
+				}
+				else
+				{
+					$this->load->view( $edit_grid_button, array( 'table_info' => $table_info ) );
+					$this->load->view( $edit_grid_style, array( 'table_info' => $table_info, 'rows' => $row ) );
+				}
+			?>
+		<?php endforeach; ?>
+	</ol>
+</section> <!--  close section edicao -->
+
+<?php $this->load->view('jx/close.html', array( 'table_fields' => $table_fields ) ); ?> 
+
+<script src="/assets/js/rodada_fase.js?v=1.4"></script>
+
+<?php $this->load->view('jx/footer.html'); ?> 

@@ -1,0 +1,16 @@
+<?php  $this->load->view( 'portlet/email_open.html' ); ?>
+
+<tr>
+	<td style='padding: 3px 18px 5px 18px;'>
+		<div style="margin: 5px auto 0px auto; line-height: 18px;">
+			<h1 style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;color:#332618;font-size:14px;margin-top:14px;margin-bottom:6px;">
+				Você possui <?php echo $qtde_kiks; ?> kik<?php echo $s; ?> que vence<?php if ( $qtde_kiks > 1 ) { echo 'm'; } ?> em menos de um mês.
+			</h1>
+			<h1 style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;color:#332618;font-size:14px;margin-top:14px;margin-bottom:6px;">
+				Acesse a <a href="http://kikbook.com/regra/kiks">página de brindes</a> e troque-os antes que vençam.
+			</h1>
+		</div>
+	</td>
+</tr>
+
+<?php  $this->load->view( 'portlet/email_close.html' ); ?>

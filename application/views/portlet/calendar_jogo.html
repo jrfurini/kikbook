@@ -1,0 +1,108 @@
+<table class="kik-micro-calend">
+	<tbody>
+		<tr>
+			<td class="kik-micro-calend-header">
+				<table>
+					<tbody>
+						<tr>
+							<td class="day-h" style="display: none;">
+								<span class="det"><?php echo $data_selecionada->dia_da_semana_curto ?>, </span><span class="day"><?php echo $data_selecionada->dia ?></span><span class="det"> <?php echo $data_selecionada->data_extenso_curto ?>.</span>
+							</td>
+						</tr>
+						<tr>
+							<td class="kik-micro-calend-ctrl">
+								<ol>
+									<li>
+										<dl>
+											<dt><label>Campeonatos</label></dt>
+											<dd>
+												<div class="radioset_ck btn-group campeonatos" autocomplete="off" data-toggle="buttons-radio">
+													<button class="radioset_ck btn btn-mini btn-info sel-tipo-camp <?php if ( $calendario_campeonatos == 'M' ) { echo 'active'; } ?>" value="M">Meus</button>
+													<button class="radioset_ck btn btn-mini btn-info sel-tipo-camp <?php if ( $calendario_campeonatos != 'M' ) { echo 'active'; } ?>" value="T">Todos</button>
+												</div>
+											</dd>
+											<dd>
+												<button class="btn btn-mini btn-info calendar-filtrar" last_url="/painel/calendario/<?php echo $data_selecionada->data_jogo_id; ?>/<?php echo $calendario_campeonatos; ?>" title="Filtrar"><i class="icon-filter icon-white"></i></button>
+												<button class="btn btn-mini btn-warning calendar-filtrar-limpar" last_url="/painel/calendario/<?php echo $data_selecionada->data_jogo_id; ?>/<?php echo $calendario_campeonatos; ?>" title="Eliminar Filtro"><i class="icon-share-alt icon-white"></i></button>
+											</dd>
+										</dl>
+									</li>
+									<li>
+										<dl>
+											<dt><label>Time</label></dt>
+											<dd>
+												<div class="campo-borda normal-border">
+													<input value="<?php echo $equipe_selecionada; ?>" t type="text" style="float:left;" name="equipe" id="equipe" class="input jx-autocomplete ui-autocomplete-input" jx_autocomplete_source="/painel/autocomplete_equipe/<?php echo $calendario_campeonatos; ?>" size="60" value="" datatype="text" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true">
+													<a class="show_all" href="#" data-original-title="Exibir tudo"><i class="icon-list"></i></a>
+												</div>
+											</dd>
+										</dl>
+									</li>
+									<li>
+										<dl>
+											<dt><label>Arena</label></dt>
+											<dd>
+												<div class="campo-borda normal-border">
+													<input value="<?php echo $arena_selecionada; ?>" type="text" style="float:left;" name="arena" id="arena" class="input jx-autocomplete ui-autocomplete-input" jx_autocomplete_source="/painel/autocomplete_arena/<?php echo $calendario_campeonatos; ?>" size="60" value="" datatype="text" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true">
+													<a class="show_all" href="#" data-original-title="Exibir tudo"><i class="icon-list"></i></a>
+												</div>
+											</dd>
+										</dl>
+									</li>
+								</ol>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+			<td class="kik-micro-calend-header detail">
+				<table>
+					<thead>
+						<tr>
+							<th>seg</th><th>ter</th><th>qua</th><th>qui</th><th>sex</th><th>sab</th><th>dom</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach( $calend as $semana ) : ?>
+							<tr>
+								<?php foreach( $semana as $dia ) : ?>
+									<?php if ( isset( $dia->css_td ) ) : ?>
+										<td class="<?php echo $dia->css_td; ?>"><a class="<?php echo $dia->css; ?>" href="<?php echo $dia->href; ?>"><?php echo $dia->dia; ?></a></td>
+									<?php else : ?>
+										<td ></td>
+									<?php endif; ?>
+								<?php endforeach; ?>
+							</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<div class="kik-micro-calend-jogos">
+					<table class="table table-striped table-hover">
+						<tbody>
+							<?php $data_extenso_ant = '***'; ?>
+							<?php foreach( $rows_chutes as $row ): ?>
+								<?php
+									$show_day = FALSE;
+									if ( $data_extenso_ant != $row->data_jogo_extenso )
+									{
+										$data_extenso_ant = $row->data_jogo_extenso;
+										$show_day = TRUE;
+									}
+								?>
+								<?php $this->load->view( 'portlet/calendar_jogo_row.html', array( 'row' => $row, 'show_day' => $show_day ) ); ?>
+							<?php endforeach; ?>
+							<tr>
+								<td colspan="11" class="gm"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<!--img src="/assets/img/calendario_fundo.png"/-->

@@ -1,0 +1,77 @@
+<!-- jx_aside:ini -->
+<?php if ( !isset( $hide_area ) ): ?>
+	<?php $hide_area = ''; ?>
+<?php endif; ?>
+<?php $hide_area = explode( ',', $hide_area );?>
+
+<?php if ( ( !isset( $show_header ) || $show_header == 'TRUE' ) && !in_array( 'all_aside', $hide_area ) ): ?>
+	<aside>
+<?php else :?>
+	<aside style="display: none;">
+<?php endif; ?>
+		<section id="subsistema">
+			<a class="closed" href="/<?php echo $sistema_atual->prg_controller; ?>">
+				<?php echo $sistema_atual->nome; ?>
+			</a>
+		</section>
+		<?php	$has_menu = false;
+			foreach( $sistema_atual->menus as $row )
+			{
+				if ( $row->method == 'edit'
+				&&   $this->singlepack->has_access_prg( $row->prg_controller.'.'.$row->prg_controller_method, 3 ) )
+				{
+					$has_menu	=	TRUE;
+				}
+			}
+		?>
+		<?php if ( !in_array( 'criar', $hide_area ) && $has_menu ): ?>
+			<section id="botao_criar">
+				<div class="btn-group">
+					<button class="btn btn-primary btn-large button action criar" controller_atual="<?php if ( isset( $controller_atual->prg_controller ) ) { echo $controller_atual->prg_controller; } ?>">
+							<i class="icon-plus-sign icon-white"></i>&nbsp;<?php echo $this->lang->get_line( 'button_create_new' ); ?>
+					</button>
+					<a class="btn btn-primary btn-large dropdown-toggle" data-toggle="dropdown" href="#">
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu pull-left">
+						<?php foreach( $sistemas[ $sistema_id_atual ]->menus as $row ):?>
+							<?php if ( $row->method == 'edit'
+						  	      &&   $this->singlepack->has_access_prg( $row->prg_controller.'.'.$row->prg_controller_method, 3 ) ) : ?>
+						        	<li><a href="/<?=$row->prg_controller;?>/edit" title="<?=$row->descr_ctrl;?>"><?=$row->nome_ctrl;?></a></li>
+							<?php endif; ?>
+						<?php endforeach;?>
+					</ul>
+				</div>
+			</section>
+		<?php endif; ?>
+		<nav class="criar">
+			<?php if ( !in_array( 'system_menu', $hide_area ) ): ?>
+				<ul id="submenu">
+					<?php foreach( $sistema_atual->menus as $row ):?>
+						<?php if ( $row->method != 'edit'
+						      &&   ( $row->ctrl_show_menu == 'S'
+						      ||     $row->meth_show_menu == 'S'
+						           )
+						      &&   $this->singlepack->has_access_prg( $row->prg_controller.'.'.$row->prg_controller_method, 3 )
+						         ) : ?>
+							<?php if ( $row->sistema_ctrl_id == $controller_id_atual 
+							      &&   ( $row->sistema_ctrl_meth_id == $method_id_atual
+							      ||     $method_atual->prg_controller_method == 'edit'
+								   )
+								 ):?>
+								<li class="ativo">
+							<?php else:?>
+								<li>
+							<?php endif;?>
+							<?php if ( $row->method == 'index' ) : ?>
+								<a href="/<?=$row->prg_controller;?>/<?=$row->prg_controller_method;?>" title="<?=$row->descr_ctrl;?>"><?=$row->nome_ctrl;?></a></li>
+							<?php else:?>
+								<a href="/<?=$row->prg_controller;?>/<?=$row->prg_controller_method;?>" title="<?=$row->descr_meth;?>"><?=$row->nome_meth;?></a></li>
+							<?php endif;?>
+						<?php endif;?>
+					<?php endforeach;?>
+				</ul>
+			<?php endif;?>
+		</nav>
+	</aside>
+	<!-- jx_aside:fim -->

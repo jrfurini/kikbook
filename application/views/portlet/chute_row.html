@@ -1,0 +1,212 @@
+<?php if ( !isset( $crono ) ) { $crono = FALSE; } ?>
+<?php if ( !isset( $show_day ) ) { $show_day = FALSE; } ?>
+
+<?php if ( $show_day ) : ?>
+	<tr class="chute">
+		<?php if ( $crono ) : ?>
+			<td colspan="17" class="day-game">
+		<?php else : ?>
+			<td colspan="15" class="day-game">
+		<?php endif; ?>
+			<span class="det"><?php echo $row->dia_da_semana_jogo ?>, </span><span class="day"><?php echo $row->dia_do_jogo ?></span><span class="det"> <?php echo $row->data_jogo_extenso_curto ?>.</span>
+		</td>
+	</tr>
+<?php endif; ?>
+
+<tr class="chute <?php if ( $jogo_aberto ) { echo 'open';} else { echo 'close'; } ?>-kick" id="<?php if ( isset( $row->id ) ) { echo $row->id; } ?>" eqp_id_casa="<?php echo $row->equipe_id_casa;?>" eqp_id_visitante="<?php echo $row->equipe_id_visitante;?>" jogo_id="<?php echo $row->jogo_id; ?>" rod_id="<?php echo $row->rodada_fase_id; ?>" record_group="kick">
+	<?php if ( $crono ) : ?>
+		<td class="camp-rod left-kick right-kick">
+			<img class="camp" src="<?php echo $images_campeonato[ $row->campeonato_versao_id ]; ?>" title="<?php echo $row->campeonato_descr; ?>" data-content="<?php echo $row->campeonato_content; ?>">
+		</td>
+		<td class="space">
+		</td>
+	<?php endif; ?>
+	<td class="eqp-img left-kick <?php if ( $jogo_aberto ) { echo 'open';} else { echo 'close'; } ?>-kick">
+		<img class="eqp-img" src="<?php echo $images[ $row->equipe_id_casa ]; ?>" data-content="<?php echo $row->nome_completo_equipe_casa;?>" title="<img src='<?php echo $images[ $row->equipe_id_casa ]; ?>'/><?php echo $row->sigla_equipe_casa . ' - ' . $row->nome_equipe_casa; ?>"/>
+	</td>
+	<?php if ( isset( $sigla_nome ) && $sigla_nome == "sigla" ) : ?>
+		<td class="sigla text <?php if ( $jogo_aberto ) { echo 'open';} else { echo 'close'; } ?>-kick" data-content="<?php echo $row->nome_completo_equipe_casa;?>" title="<img src='<?php echo $images[ $row->equipe_id_casa ]; ?>'/><?php echo $row->sigla_equipe_casa . ' - ' . $row->nome_equipe_casa; ?>">
+			<?php echo $row->sigla_equipe_casa; ?>
+		</td>
+	<?php else : ?>
+		<td class="nome text <?php if ( $jogo_aberto ) { echo 'open';} else { echo 'close'; } ?>-kick" data-content="<?php echo $row->nome_completo_equipe_casa;?>" title="<img src='<?php echo $images[ $row->equipe_id_casa ]; ?>'/><?php echo $row->sigla_equipe_casa . ' - ' . $row->nome_equipe_casa; ?>">
+			<?php echo $row->nome_equipe_casa; ?>
+		</td>
+	<?php endif; ?>
+	<td class="zebra <?php if ( $jogo_aberto ) { echo 'open';} else { echo 'close'; } ?>-kick">
+		<?php if ( isset( $rows_rodada_jogo[$row->rodada_fase_id]->zebras ) && key_exists( $row->equipe_id_casa, $rows_rodada_jogo[$row->rodada_fase_id]->zebras ) ) : ?>
+			<span class="power zebra info" title="<?php echo $this->lang->get_line( 'ZEBRA_TITLE_TEAM', $master_table ); ?>" data-content="<?php echo $this->lang->get_line( 'ZEBRA_EXPLANATION_TEAM', $master_table ); ?>"></span>
+		<?php endif; ?>
+	</td>
+	<td class="kick casa text <?php if ( $jogo_aberto ) { echo 'open';} else { echo 'close'; } ?>-kick">
+		<?php if ( $jogo_aberto ) : ?>
+			<input type="hidden" value="{'STATUS':'<?php if ( !$row->id ) { echo 'NEW'; }else{ echo 'QUERY'; } ?>','VALID':'TRUE'}" name="kick[jx_record_control][]" id="imagem_jx_record_control_<?php echo $row->equipe_id_casa; ?>" database_control="{'STATUS':'<?php if ( !$row->id ) { echo 'NEW'; }else{ echo 'QUERY'; } ?>','VALID':'TRUE'}">
+			<input type="hidden" name="kick[id][]" id="id_<?php echo $row->equipe_id_casa; ?>" value="<?php echo $row->id; ?>">
+			<input type="hidden" name="kick[jogo_id][]" id="mandante_<?php echo $row->equipe_id_casa; ?>" value="<?php echo $row->jogo_id; ?>">
+			<input type="hidden" name="kick[pessoa_id][]" id="mandante_<?php echo $row->equipe_id_casa; ?>" value="<?php echo $row->pessoa_id; ?>">
+			<input class="kick" name="kick[kick_casa][]" id="mandante_<?php echo $row->equipe_id_casa; ?>" tabIndex="0" eqp_id="<?php echo $row->equipe_id_casa; ?>" type="number" min="0" max="9" maxlength="1" value="<?php echo $row->kick_casa; ?>" db_value="<?php echo $row->kick_casa; ?>" size="1" title="<?php echo $this->lang->get_line( 'kick_casa', $master_table );?>">
+		<?php else : ?>
+			<p class="kick <?php if ( $row->pontos_kick > 0 ) { echo 'acerto'; } else { echo 'erro'; } if ( is_null( $row->kick_casa ) ) { echo ' nfez'; } ?>" title="<?php echo $this->lang->get_line( 'kick_casa', $master_table );?>"><?php if ( $row->kick_casa != NULL ) { echo $row->kick_casa; } ?></p>
+		<?php endif; ?>
+		<p class="resultado" title="<?php echo $this->lang->get_line( 'resultado_real_casa', $master_table );?>"><?php echo $row->resultado_casa; ?></p>
+	</td>
+	<td class="versos <?php if ( $jogo_aberto ) { echo 'open';} else { echo 'close'; } ?>-kick">
+		X
+	</td>
+	<td class="kick visitante text-right <?php if ( $jogo_aberto ) { echo 'open';} else { echo 'close'; } ?>-kick">
+		<?php if ( $jogo_aberto ) : ?>
+			<input class="kick" name="kick[kick_visitante][]" id="visitante_<?php echo $row->equipe_id_visitante; ?>" tabIndex="0"  eqp_id="<?php echo $row->equipe_id_visitante; ?>" type="number" min="0" max="9" maxlength="1" value="<?php echo $row->kick_visitante; ?>" db_value="<?php echo $row->kick_visitante; ?>" size="1" title="<?php echo $this->lang->get_line( 'kick_visitante', $master_table );?>">
+		<?php else : ?>
+			<p class="kick <?php if ( $row->pontos_kick > 0 ) { echo 'acerto'; } else { echo 'erro'; } if ( is_null( $row->kick_visitante ) ) { echo ' nfez'; } ?>" title="<?php echo $this->lang->get_line( 'kick_visitante', $master_table );?>"><?php if ( $row->kick_visitante !== NULL ) { echo $row->kick_visitante; } ?></p>
+		<?php endif; ?>
+		<p class="resultado" title="<?php echo $this->lang->get_line( 'resultado_real_visitante', $master_table );?>"><?php echo $row->resultado_visitante; ?></p>
+	</td>
+	<td class="zebra <?php if ( $jogo_aberto ) { echo 'open';} else { echo 'close'; } ?>-kick">
+		<?php if ( isset( $rows_rodada_jogo[$row->rodada_fase_id]->zebras ) && key_exists( $row->equipe_id_visitante, $rows_rodada_jogo[$row->rodada_fase_id]->zebras ) ) : ?>
+			<span class="power zebra" title="<?php echo $this->lang->get_line( 'ZEBRA_TITLE_TEAM', $master_table ); ?>" data-content="<?php echo $this->lang->get_line( 'ZEBRA_EXPLANATION_TEAM', $master_table ); ?>"></span>
+		<?php endif; ?>
+	</td>
+	<?php if ( isset( $sigla_nome ) && $sigla_nome == "sigla" ) : ?>
+		<td class="sigla text-right <?php if ( $jogo_aberto ) { echo 'open';} else { echo 'close'; } ?>-kick" data-content="<?php echo $row->nome_completo_equipe_visitante;?>" title="<img src='<?php echo $images[ $row->equipe_id_visitante ]; ?>'/><?php echo  $row->sigla_equipe_visitante . ' - ' . $row->nome_equipe_visitante; ?>">
+			<?php echo $row->sigla_equipe_visitante;?>
+		</td>
+	<?php else : ?>
+		<td class="nome text-right <?php if ( $jogo_aberto ) { echo 'open';} else { echo 'close'; } ?>-kick" data-content="<?php echo $row->nome_completo_equipe_visitante;?>" title="<img src='<?php echo $images[ $row->equipe_id_visitante ]; ?>'/><?php echo  $row->sigla_equipe_visitante . ' - ' . $row->nome_equipe_visitante; ?>">
+			<?php echo $row->nome_equipe_visitante;?>
+		</td>
+	<?php endif; ?>
+	<td class="eqp-img right-kick <?php if ( $jogo_aberto ) { echo 'open';} else { echo 'close'; } ?>-kick">
+		<img class="eqp-img" src="<?php echo $images[ $row->equipe_id_visitante ]; ?>"data-content="<?php echo $row->nome_completo_equipe_visitante;?>" title="<img src='<?php echo $images[ $row->equipe_id_visitante ]; ?>'/><?php echo  $row->sigla_equipe_visitante . ' - ' . $row->nome_equipe_visitante; ?>"/>
+	</td>
+	<td class="space">
+	</td>
+	<td class="status-img left-kick <?php if ( $jogo_aberto ) { echo 'open';} else { echo 'close'; } ?>-kick">
+		<?php if ( $jogo_aberto ) :?>
+			<img class="open-img" src="/assets/kik/img/open-game.png" title="<?php echo $this->lang->get_line( 'jogo_aberto', $master_table );?>"/><br>
+			<p class="db_status db_ok"></p>
+		<?php else :?>
+			<img class="close-img" src="/assets/kik/img/close-game.png" title="<?php echo $this->lang->get_line( 'jogo_fechado', $master_table );?>"/>
+		<?php endif;?>
+	</td>
+<?php if ( !$jogo_aberto ) :?>
+	<td class="chute-det">
+		<div class="pontos">
+			<p class="large" title="<?php echo $this->lang->get_line( 'pontos_total', $master_table );?>"><?php echo ( $row->pontos_kick + $row->pontos_gols + $row->pontos_power ); ?></p>
+			<p class="small small-left" title="<?php echo $this->lang->get_line( 'pontos_kick', $master_table );?>"><?php echo ( $row->pontos_kick ); ?></p>
+			<p class="small" title="<?php echo $this->lang->get_line( 'pontos_gols', $master_table );?>"><?php echo ( $row->pontos_gols ); ?></p>
+			<p class="small" title="<?php echo $this->lang->get_line( 'pontos_power', $master_table );?>"><?php echo ( $row->pontos_power ); ?></p>
+		</div>
+	</td>
+	<td class="kiks-gols">
+		<?php
+			if ( $row->pontos_gols > 0 )
+			{
+				for ( $i = 1; $i <= ( $row->pontos_gols );  $i++ )
+				{
+					echo '<p class="smallball" title="'.$this->lang->get_line( 'gol_acerto', $master_table ).'"></p>';
+				}
+			}
+		?>
+	</td>
+<?php else : ?>
+	<td class="chute-det">
+	</td>
+	<td class="kiks-gols">
+	</td>
+<?php endif; ?>
+	<td class="powers <?php if ( $jogo_aberto ) { echo 'open';} else { echo 'close'; } ?>-kick" style="<?php if ( isset( $row->powers ) && count( $row->powers ) > 0 ) { echo 'width:' . ( 4 + ( count( $row->powers ) * 6 ) ) . '%'; } ?>">
+		<?php if ( $jogo_aberto ) :?>
+			<?php if ( is_array( $row->powers ) && count( $row->powers ) > 0 ) : ?>
+				<div class="power-selected">
+					<?php foreach( $row->powers as $power ): ?>
+						<button class="btn btn-mini btn-danger del-power" rod_id="<?php echo $row->rodada_fase_id; ?>"><i class="power del-power <?php echo $power->css_class;?>" title="Excluir o poder do jogo. <?php echo $this->lang->get_line( $power->power_cod . '_TITLE_SIMBOL', $master_table ); ?>" data-placement="left" data-content="<?php echo $this->lang->get_line( $power->power_cod . '_EXPLANATION', $master_table ); ?>"></i></button>
+						<div id="kick_power" style="display: none;">
+							<div id="kick_power_<?php echo $power->kick_id; ?>_<?php echo $power->power_id; ?>" record_group="kick_power">
+								<input name="kick_power[jx_record_control][]" type="hidden" value="{'STATUS':'QUERY','VALID':'TRUE'}" id="kick_power_jx_record_control_<?php echo $row->id; ?>" database_control="{'STATUS':'QUERY','VALID':'TRUE'}">
+								<input name="kick_power[id][]" type="hidden" value="<?php echo $power->id; ?>">
+								<input name="kick_power[kick_id][]" type="hidden" value="<?php echo $power->kick_id; ?>">
+								<input name="kick_power[power_id][]" type="hidden" value="<?php echo $power->power_id; ?>">
+							</div>
+						</div>
+					<?php endforeach; ?>
+				</div>
+				<div class="btn-toolbar" style="display: none;">
+			<?php else : ?>
+				<div class="power-selected" style="display: none;">
+					<button class="btn btn-danger del-power" rod_id="<?php echo $row->rodada_fase_id; ?>"><i class="power-sel del-power"></i></button>
+					<div id="kick_power" style="display: none;">
+						<div id="kick_power_<?php echo $row->id; ?>_none" record_group="kick_power">
+							<input name="kick_power[jx_record_control][]" type="hidden" value="{'STATUS':'NEW','VALID':'TRUE'}" id="kick_power_jx_record_control_<?php echo $row->id; ?>" database_control="{'STATUS':'NEW','VALID':'TRUE'}">
+							<input name="kick_power[id][]" type="hidden" value="">
+							<input name="kick_power[kick_id][]" type="hidden" value="<?php echo $row->id; ?>">
+							<input name="kick_power[power_id][]" type="hidden" value="">
+						</div>
+					</div>
+				</div>
+				<div class="btn-toolbar">
+			<?php endif; ?>
+					<div class="btn-group">
+					<?php if ( isset( $power_rows ) && is_array( $power_rows ) ) : ?>
+						<?php foreach( $power_rows as $power ) : ?>
+							<?php if ( $power->qtde_liberado > 0
+						      &&   ( $power->power_id != 1 // QQI
+						      &&     $power->power_id != 7 // ZEBRA
+							   )
+							 ) : ?>
+								<?php if ( $power->qtde_liberado > $power->qtde_usada ) : ?>
+									<button class="btn sel-power radio-power" power="<?php echo $power->css_class;?>" power_id="<?php echo $power->power_id;?>" kick="<?php echo $row->id; ?>" rod_id="<?php echo $row->rodada_fase_id; ?>" data-placement="bottom" title="<?php echo $this->lang->get_line( $power->cod. '_TITLE_SIMBOL', $master_table ); ?>" data-content="<?php echo $this->lang->get_line( $power->cod. '_EXPLANATION', $master_table ); ?>"><i class="power <?php echo $power->css_class;?>"></i></button>
+								<?php else : ?>
+									<button style="display: none;" class="btn sel-power radio-power" power="<?php echo $power->css_class;?>" power_id="<?php echo $power->power_id;?>" kick="<?php echo $row->id; ?>" rod_id="<?php echo $row->rodada_fase_id; ?>" data-placement="bottom" title="<?php echo $this->lang->get_line( $power->cod. '_TITLE_SIMBOL', $master_table ); ?>" data-content="<?php echo $this->lang->get_line( $power->cod. '_EXPLANATION', $master_table ); ?>"><i class="power <?php echo $power->css_class;?>"></i></button>
+								<?php endif; ?>
+							<?php endif; ?>
+						<?php endforeach; ?>
+					<?php endif; ?>
+					</div>
+				</div>
+		<?php else : ?>
+			<?php if ( isset( $row->powers ) && count( $row->powers ) > 0 ) : ?>
+				<?php foreach( $row->powers as $power ): ?>
+					<p class="power <?php echo $power->css_class; if ( $power->anulado == 'S' ) { echo ' inativo'; } ?>" title="<?php echo $this->lang->get_line( $power->power_cod . '_TITLE_SIMBOL', $master_table ); ?>" data-placement="left" data-content="<?php if ( $power->anulado == 'S' ) { echo $this->lang->get_line( $power->power_cod . '_EXPLANATION_AFTER_ANULADO', $master_table ); } else { if ( $power->pontos < 0 ) { echo $this->lang->get_line( $power->power_cod . '_EXPLANATION_AFTER_NEG', $master_table ); } else { echo $this->lang->get_line( $power->power_cod . '_EXPLANATION_AFTER', $master_table ); } }?> / <?php echo $power->pontos; ?> pontos"></p>
+				<?php endforeach; ?>
+			<?php endif; ?>
+		<?php endif; ?>
+	</td>
+	<td class="right-kick <?php if ( $jogo_aberto ) { echo 'open';} else { echo 'close'; } ?>-kick">
+		<button class="chart_chute btn" title="Exibir Gráfico"><i class="icon-signal"></i></button>
+	</td>
+</tr>
+<tr class="chute-detalhe">
+	<?php if ( $crono ) : ?>
+		<td colspan="2">
+		</td>
+	<?php endif; ?>
+	<td class="jogo" colspan="11">
+		<?php echo $row->dd_mm_jogo.' - '. $row->nome_arena; ?>
+	</td>
+	<td colspan="4">
+	</td>
+</tr>
+<tr style="display: none;" class="chute-chart" id="chart-<?php echo $row->jogo_id; ?>">
+	<?php if ( $crono ) : ?>
+		<td colspan="2">
+		</td>
+	<?php endif; ?>
+	<td colspan="15">
+		<div id="container_1-<?php echo $row->jogo_id; ?>" class="jogo-chart">
+	 		<img src="/assets/img/ajax_loader_3.gif" style="opacity: 0.3; width: 50px; heigth: 50px;" title="<?php echo $this->lang->get_line( 'working_message' ); ?>">
+	 		<p><?php echo $this->lang->get_line( 'working_message' ); ?></p>
+ 		</div>
+		<div id="container_2-<?php echo $row->jogo_id; ?>" class="kiker-chart-1"></div>
+		<div id="container_3-<?php echo $row->jogo_id; ?>" class="kiker-chart-2"></div>
+	</td>
+</tr>
+<tr class="chute-msg-db" jogo_id="<?php echo $row->jogo_id; ?>" style="display: none;">
+	<?php if ( $crono ) : ?>
+		<td colspan="2">
+		</td>
+	<?php endif; ?>
+	<td class="jogo alert-error" colspan="11">
+	</td>
+	<td colspan="4">
+	</td>
+</tr>

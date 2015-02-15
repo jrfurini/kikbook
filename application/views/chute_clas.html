@@ -1,0 +1,49 @@
+<?php  $this->load->view( 'open.html' ); ?>
+
+<section id="conteudo">
+	<div class="left-content">
+		<?php if ( !isset( $dialog ) || $dialog == 'FALSE' ): ?>
+			<?php  $this->load->view( 'seleciona_rodada.html' ); ?>
+			<?php $this->load->view( 'portlet/chute_toolbar.html' ); ?>
+		<?php endif; ?>
+
+		<?php if ( isset( $total_rows ) && $total_rows > 0 ) :?>
+			<div class="chute-clas-cols">
+				<div class="pre_grupo_equipe">
+					<?php foreach( $rows_grupos as $key => $grupo ): ?>
+						<div class="grupo_equipe">
+							<?php if ( $grupo->nome_grupo ) : ?>
+								<h4><?php echo $grupo->nome_grupo; ?></h4>
+							<?php endif; ?>
+							<table>
+								<tr class="chute-clas-col">
+									<td>
+									 	<?php $this->load->view( 'portlet/classificacao_col.html', array( "rows_classif" => $grupo->rows_classif ) ); ?>
+									</td>
+									<td>
+										<?php $this->load->view( 'portlet/chute_col.html', array( "rows_chutes" => $grupo->rows_chutes ) ); ?>
+									</td>
+								</tr>
+							</table>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			</div>
+			<?php $this->ads->show( 'AREA_728x90', array( 'colspan' => 14 ), 1 ); ?>
+		<?php else :?>
+			<div class="no-data-found">
+				<img src="/assets/<?=$theme;?>/img/warning.png">
+				<h4><?php echo $this->lang->get_line( 'no_data_found' );?></h4>
+			</div>
+		<?php endif; ?>
+	</div>
+</section>
+
+<?php $this->load->view( 'close.html' ); ?>
+
+<script type="text/javascript" src="/assets/js/d3.v3.min.js"></script>
+<script type="text/javascript" src="/assets/js/chute.js?v=1.14.1"></script>
+<script type="text/javascript" src="/assets/js/classificacao.js?v=1.7"></script>
+<script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+
+<?php  $this->load->view('footer.html');  ?>

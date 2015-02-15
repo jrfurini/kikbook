@@ -1,0 +1,600 @@
+<?php  $this->load->view('open.html'); ?>
+
+<section id="conteudo"> <!--  open section conteudo -->
+	<div class="left-content-full text-content">
+		<div style="width: 90%; margin: 0px auto 0px auto; line-height: 16px;">
+			<div class="mvm uiP fsm" style="text-align: left;">
+				<br>
+				Data da Última Revisão: 28 de março de 2013.
+				<br>
+				<br>
+				O Kikbook está sendo desenvolvido tentando possibilitar que todos os jogadores possam entrar a qualquer momento em um campeonato e ainda sim ter chances de ganhar brindes e até superar seus amigos.
+				Neste documento explicamos como nossos cálculos de pontos funcionam.
+				<br>
+				<br>
+				<h1>
+					Regras Gerais
+				</h1>
+				<br>
+				 "Regras Gerais" contém todas as nossas regras que regem os nossos cálculos de pontos, desempates e exibições das informações geradas. Leia e entenda como tirar o melhor proveito do nosso jogo. Se tiver alguma sugestão, fique a vontade para entrar em contato conosco através da <span class="destaque"><a href="http://www.facebook.com/kikbookoficial">Nossa Comunidade no Facebook</a></span>.
+			</div>
+			<br />
+			<br/>
+			<div class="accordion" id="accordion_rules">
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion_rules" href="#data0">
+							<b>1. Campeonatos</b>
+						</a>
+					</div>
+					<div id="data0" class="accordion-body collapse" style="height: 0px;">
+						<div class="accordion-inner">
+							<p>O <span class="destaque">Kikbook</span> disponibiliza os campeonatos mais populares para que você possa se cadastrar e chutar seus palpites.
+							</p>
+							<br/>
+							<p>Para se cadastrar em um campeonato basta fazer o primeiro chute que faremos o cadastro para você. Se preferir você pode usar a janela de seleção de campeonatos para se cadastrar, basta pressionar o botão verde logo abaixo do logo do campeonato escolhido.
+							</p>
+							<br/>
+							<p>Para SAIR de um campeonato vá a janela de seleção de campeonatos e pressionar o botão vermelho logo abaixo do logo do campeonato. Não apagamos os seus chutes do campeonato que você sair, apenas paramos de avisar sobre falta de chutes para este campeonato. Se você fizer novos chutes para o campeonato, ativaremos novamente o seu cadastro para ele.
+							</p>
+							<br/>
+							<p>O <span class="destaque">Kikbook</span> possui um sistema de avisos de "Falta de Chutes" que começa avisar 3 dias antes do início do jogo caso você não tenha feito os chutes para o jogo. Este sistema só avisa para campeonatos que você esteja cadastrado e se você mantiver a configuração para avisos ativa.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion_rules" href="#data1">
+							<b>2. Pontos</b>
+						</a>
+					</div>
+					<div id="data1" class="accordion-body collapse" style="height: 0px;">
+						<div class="accordion-inner">
+							<ol type="a">
+								<li> Sobre os "Chutes" nos resultados dos jogos
+									<br>
+									<br>
+									<ul>
+										<li><strong>6 pontos</strong> ao acertar a vitória;</li>
+										<li><strong>6 pontos</strong> ao acertar o empate;</li>
+										<li><strong>+4 pontos</strong> ao acertar a vitória ou o empate com a quantidade de gols exata;</li>
+										<li><strong>0 ponto</strong> quando não acertar nada;</li>
+									</ul>
+								</li>
+								<br>
+								<li> Sobre os gols
+									<br>
+									<br>
+									<ul>
+										<li><strong>1 ponto</strong> - Para cada gol que você acertar;</li>
+										<br>
+										<li>Se você chutar 0 (zero) no resultado de uma equipe e o resultado real for zero você receberá 1 (um) ponto.</li>
+										<br>
+										<li>Exemplos:
+											<ol>
+												<li>Se o resultado do jogo for 5 x 2 e você chutar 2 x 1. Você receberá 3 pontos pelos gols que chutou e acertou.</li>
+												<li>Se o resultado do jogo for 5 x 2 e você chutar 5 x 2 exatos. Você receberá 7 pontos pelo total de gols do jogo.</li>
+												<li>Se o resultado do jogo for 5 x 2 e você chutar 0 x 2. Você receberá 2 pontos por ter acertado os gols de uma das equipes.</li>
+												<li>Num outro caso onde o resultado for 2 x 1 e você chutou 5 x 2. Você receberá apenas 3 pontos, pois este foi o total de gols do jogo.</li>
+											</ol>
+										</li>
+									</ul>
+								</li>
+								<br>
+								<li> Sobre os poderes usados 
+									<br>
+									<br>
+									Falamos sobre cada poder abaixo na Seção 4 deste documento.
+								</li>
+							</ol>
+							<br>
+							Os pontos são exibidos nas páginas de Ranking de forma detalhada para facilitar o seu entendimento.
+							<br>
+							Os pontos são armazenados sem decimais e quando o cálculo chegar em algum resultado decimal estes serão arredondados para cima.
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion_rules" href="#data2">
+							<b>3. Chutes</b>
+						</a>
+					</div>
+					<div id="data2" class="accordion-body collapse" style="height: 0px;">
+						<div class="accordion-inner">
+							<ol type="a">
+								<li>Um o jogo ficará aberto para chutes até o seu horário de início.
+								</li>
+								<li>Estarão abertas sempre 2 (duas) rodadas por vez.
+								</li>
+								<li>A página que recebe os chutes salva automaticamente os chutes após 1.5 segundo da última alteração. É importante que você certifique que os chutes estejam salvos antes de sair da página. Um texto "Chutes Salvos" ou "Consultado" será exibido em um botão na cor verde no topo da página indicando que tudo que está na página está salvo.
+								</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion_rules" href="#data3">
+							<b>4. Ranking</b>
+						</a>
+					</div>
+					<div id="data3" class="accordion-body collapse" style="height: 0px;">
+						<div class="accordion-inner">
+							<ol type="a">
+								<li>
+									Cálculos de Ranking:
+									<br>
+									<ol type="i">
+										<li><strong>Melhor Rodada</strong> é formada pela melhor pontuação entre todas as rodadas de cada <span class="destaque">Kiker</span>. Neste conceito você pode jogar apenas uma rodada e ainda assim ser o primeiro colocado no ranking.
+										</li>
+										<li><strong>Rodada</strong> é formada pela pontuação de cada rodada.
+										</li>
+										<li><strong>Campeonato</strong> é formada pela somatória dos pontos das rodadas do campeonato.
+										</li>
+										<li><strong>Fase do Grupo</strong> é formada conforme a configuração do grupo, mas sempre com a somatória de seus pontos. Um grupo pode juntar mais de um campeonato para compor o seu ranking.
+										</li>
+									</ol>
+								</li>
+								<br>
+								<li>
+									Visualizações:
+									<br>
+									<ol type="i">
+										<li><strong>Amigos</strong> onde a sua posição será dada em relação aos seus amigos do Facebook;
+										</li>
+										<li><strong>Todos os Kikers</strong> você será posicionado entre todos os <span class="destaque">kikers</span>;
+										</li>
+										<li><strong>Grupo</strong> você será posicionado dentro do Grupo de Amigos que você faça parte e esteja cadastrado no <span class="destaque">Kikbook</span>;
+										</li>
+									</ol>
+								</li>
+								<br>
+								<li>
+									Desempates dos <span class="destaque">Kikers</span> serão feitos pelos critérios :
+									<br>
+									<ol type="1">
+										<li>Pontos Total
+										</li>
+										<li>Pontos de Chutes
+										</li>
+										<li>Pontos de Gols
+										</li>
+										<li>Pontos de Poderes
+										</li>
+										<li>Vitória em cheio
+										</li>
+										<li>Empate em cheio
+										</li>
+										<li>Acertou Vitória e 1 Gol
+										</li>
+										<li>Acertou Vitória
+										</li>
+										<li>Empate
+										</li>
+										<li>Acertou 1 Gol
+										</li>
+										<li>Quantidade de Jogos com chutes
+										</li>
+										<li>Ordem alfabética por nome
+										</li>
+									</ol>
+								</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion_rules" href="#data4">
+							<b>5. Poderes</b>
+						</a>
+					</div>
+					<div id="data4" class="accordion-body collapse" style="height: 0px;">
+						<div class="accordion-inner">
+							Os <p class="power power-simbol"></p>&nbsp;Poderes foram criados para você conseguir mais Pontos nos seus chutes. Basicamente eles te ajudam a advinhar resultados, espionar amigos, desafiar amigos e multiplicar os seus pontos. Quase isso.
+							Veja abaixo como usar cada poder, <i class="power power-simbol"></i>, e o que eles podem fazer a favor e contra você.
+							<br>
+							<br>
+							<h3>Regras Gerais dos Poderes:</h3>
+							<ol type="a">
+								<li>A página de chutes oferece indicadores de quantidade de cada <i class="power power-simbol"></i> e um botão com o símbolo <i class="power-sel power-simbol"></i> que permite selecionar o <i class="power power-simbol"></i> para cada jogo.</li>
+								<li>Nas páginas de Ranking será indicado que o <span class="destaque">Kiker</span> usou um <i class="power power-simbol"></i> para obter os pontos;</li>
+								<li>Nem todos os poderes podem ser combinados entre si no mesmo jogo, veja em cada <i class="power power-simbol"></i> com qual ele pode combinar;</li>
+								Exemplo: "Guru" e "Café com leite" não podem ser usados para ganhar o dobro dos pontos de um jogo, já o "Zebra" e o "Mamão com Açucar" podem;
+								<li>O <i class="power power-simbol"></i> que você não usar em uma rodada pode se acumular para a rodada seguinte, mas todo acumulo some se você deixar de jogar uma rodada. Veja a regra de cada <i class="power power-simbol"></i>.</li>
+								<li>Alguns <i class="power power-simbol"></i> tem penalidades para quando você usar na hora errada. Veja os detalhes em cada <i class="power power-simbol"></i> da lista abaixo.</li>
+								<li>Alguns <i class="power power-simbol"></i> são colocados automaticamente pelo <span class="destaque">Kikbook</span>, então fique atento para a regra de todos para não dexiar de usá-los.
+							</ol>
+							<br>
+							<h3>Resumo de Poderes:</h3>
+							<br>
+							<table class="table">
+								<thead>
+									<tr>
+										<th>
+											Poder
+										</th>
+										<th>
+											Descrição / Regras
+										</th>
+										<th>
+											Automático?
+										</th>
+										<th>
+											Acumula?
+										</th>
+										<th>
+											Penaliza?
+										</th>
+										<th>
+											Pode combinar com
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<p class="power-sel qqi"></p>
+										</td>
+										<td>
+											<h3>Bola Murcha</h3>
+											<p>Se você conseguir errar todos os chutes que fizer receberá o equivalente a 50% dos pontos possíveis nos chutes realizados;</p>
+											<br/>
+											<ol>
+												<li>Basta você errar tudo para usá-lo. Fácil, não é?
+												<li>Os pontos resultantes dos "gols" não afetam este poder e não serão usados no cálculo de pontos recebidos.</li>
+											</ol>
+										</td>
+										<td>
+											Sim
+										</td>
+										<td>
+											Não
+										</td>
+										<td>
+											Não
+										</td>
+										<td>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p class="power-sel guru"></p>
+										</td>
+										<td>
+											<h3>Guru</h3>
+											<p>Corrige o chute do jogo para você. Ele lhe dará os pontos de uma vitória simples mais os pontos dos gols feitos pelas equipes quando você errar tudo, mas se você acertou parcialmente o resultado ele corrigirá o seu chute para um acerto cheio.</p>
+											<br/>
+											<ol>
+												<li>Use este poder naquele jogo em que você não tem idéia do resultado.</li>
+												<li>Você receberá 1 (um) <p class="power guru"></p> assim que começar a jogar;</li>
+											</ol>
+										</td>
+										<td>
+											Não
+										</td>
+										<td>
+											Sim:
+											<ol>
+												<li>No máximo de 2 (dois) <p class="power guru"></p>;</li>
+												<li>Zera se você deixar de chutar na rodada seguinte;</li>
+											</ol>
+										</td>
+										<td>
+											Não
+										</td>
+										<td>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p class="power-sel barbada"></p>
+										</td>
+										<td>
+											<h3>Café com leite</h3>
+											<p>Dobra a quantidade de pontos obtida por você no jogo escolhido.</p>
+											<br/>
+											<ol>
+												<li>Use quando você estiver confiante no resultado do jogo;</li>
+												<li>Você receberá um <p class="power barbada"></p> assim que começar a jogar;</li>
+											</ol>
+										</td>
+										<td>
+											Não
+										</td>
+										<td>
+											Sim:
+											<ol>
+												<li>Ele se acumula até o máximo de 2 (dois) <p class="power barbada"></p>;</li>
+												<li>O acumulo zera se você deixar de chutar na rodada seguinte;</li>
+											</ol>
+										</td>
+										<td>
+											Não
+										</td>
+										<td>
+											<p class="power-sel zebra"></p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p class="power-sel zebra"></p>
+										</td>
+										<td>
+											<h3>Zebra</h3>
+											<p>Você chuta que um dos 2 (dois) piores times da rodada anterior vai ganhar e se ele ganhar o jogo você recebe o dobro dos pontos;</p>
+											<br>
+											<ol>
+												<li>Para ativar o poder bastar chutar que o time <p class="power zebra"></p> ganhará o jogo;</li>
+												<li>Os 2 piores times estarão assinalados na página de chutes com o <p class="power zebra"></p> para facilitar a identificação dos times;</li>
+												<li>Ele pode ser combinado com o <p class="power barbada"></p> para ganhar mais pontos ainda.</li>
+												<li>Quando a rodada anterior ainda não estiver finalizada a informação com o simbolo <p class="power zebra"></p> pode mudar. Fique atento.</li>
+											</ol>
+										</td>
+										<td>
+											Sim
+										</td>
+										<td>
+											Não
+										</td>
+										<td>
+											O risco de se apostar em um dos piores times do campeonato. A chance de não fazer nenhum ponto é grande.
+										</td>
+										<td>
+											<p class="power-sel barbada"></p>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<!--br>
+							<br>
+							<h3>Lista de Poderes:</h3>
+							<br>
+							<ol>
+								<li><p class="power-sel qqi"></p>&nbsp;<b>"Bola Murcha"</b>
+									<br>
+									<br>
+									<p>Se você conseguir errar todos os chutes que fizer receberá o equivalente a 50% dos pontos possíveis nos chutes realizados;</p>
+									<br>
+									<p>Acumulo:</p>
+									<ol>
+										<li>Não há acumulo para este poder;</li>
+									</ol>
+									<br>
+									<p>Regra:</p>
+									<ol>
+										<li>Os pontos resultantes dos "gols" não afetam este poder e não serão usados no cálculo de pontos recebidos.</li>
+										<li>Este poder é gerado automaticamente pelo aplicativo, bastando você errar tudo para usá-lo. Fácil, não acha?</li>
+									</ol>
+									<br>
+									<p>Exemplos:</p>
+									<ol>
+										<li>O Campeonato Brasileiro tem 10 jogos por rodada valendo 5 pontos por jogo para quem acertar a vitória ou o empate. Se você errar os resultados de todos os 10 jogos recebrá 25 pontos o que equivale a 50% dos 50 pontos possíveis.</li>
+									</ol>
+								</li>
+								<br>
+								<br>
+								<li><p class="power-sel guru"></p>&nbsp;<b>"Guru"</b>
+									<br>
+									<br>
+									<p>Este poder assinala sozinho o resultado final do jogo para você dando o máximo de pontos do jogo escolhido.</p>
+									<br>
+									<p>Regra:</p>
+									<ol>
+										<li>Use naquele jogo em que você não tem a menor idéia do resultado;</li>
+										<li>Ele poderá ser usado 1 (uma) vez a cada 3 (três) rodadas;</li>
+										<li>Você receberá um "Guru" assim que começar a jogar;</li>
+									</ol>
+									<br>
+									<p>Acumulo:</p>
+									<ol>
+										<li>Ele se acumula até o máximo de 2 (dois) "Gurus";</li>
+										<li>O acumulo zera se você deixar de chutar na rodada seguinte;</li>
+									</ol>
+									<br>
+									<p>Penalidade:</p>
+									<ol>
+										<li>Este poder não contém penalidade;</li>
+									</ol>
+								</li>
+								<br>
+								<br>
+								<li><p class="power-sel barbada"></p>&nbsp;<b>"Café com leite"</b>
+									<br>
+									<br>
+									<p>O "Café com leite" dobra a quantidade de pontos obtida por você no jogo escolhido.</p>
+									<br>
+									<p>Regra:</p>
+									<ol>
+										<li>Use quando você estiver confiante no resultado do jogo;</li>
+										<li>Ele poderá ser usado 1 (uma) vez por rodada;</li>
+										<li>Você receberá um "Café com leite" assim que começar a jogar;</li>
+									</ol>
+									<br>
+									<p>Acumulo:</p>
+									<ol>
+										<li>Ele se acumula até o máximo de 2 (dois) "Mamões com Açucar";</li>
+										<li>O acumulo zera se você deixar de chutar na rodada seguinte;</li>
+									</ol>
+									<br>
+									<p>Penalidade:</p>
+									<ol>
+										<li>Se você errar o resultado do jogo, o "Café com leite" retirará todos os pontos que você conseguir, zerando totalmente o jogo.</li>
+									</ol>
+									<br>
+									<p>Exemplos:</p>
+									<ol>
+										<li>Você escolhe um jogo e diz que o time da casa ganhará o jogo. O time da casa ganhou com um placar diferente do que você indicou, ou seja, 5 pontos. O "Mamão com Açucar" lhe dará mais 5 pontos.</li>
+										<li>Você escolhe um jogo e diz que o time visitante ganhará o jogo. O time visitante perde o jogo. O "Mamão com Açucar" retira todos os pontos deixando o jogo com zero ponto para você.</li>
+									</ol>
+								</li>
+								<br>
+								<br>
+								<li><p class="power-sel zebra"></p>&nbsp;<b>"Zebra"</b>
+									<br>
+									<br>
+									<p>Você chuta que um dos 2 (dois) piores times da rodada anterior vai ganhar, e se ele ganhar, você recebe o dobro dos pontos do jogo;</p>
+									<br>
+									<p>Regras:</p>
+									<ol>
+										<li>Os 2 piores times estarão assinalados na página de chutes com o símbolo do poder Zebra para facilitar a identificação dos times.;</li>
+										<li>Para ativar o poder bastar chutar que o time Zebra ganhará a partida;</li>
+									</ol>
+									<br>
+									<p>Acumulo:</p>
+									<ol>
+										<li>Por ser um poder automático não há acumulo para ele;</li>
+									</ol>
+									<br>
+									<p>Penalidade:</p>
+									<ol>
+										<li>A penalidade deste poder é o risco de se apostar em um dos piores times do campeonato. As chances de não fazer nenhum ponto são grandes.</li>
+									</ol>
+									<br>
+								</li>
+								<br>
+								<br>
+								<li><p class="power-sel duelo"></p>&nbsp;<b>"Duelo"</b>
+									<br>
+									<br>
+									<p>Você desafia um amigo apostando os pontos de um jogo com ela.</p>
+									<br>
+									<p>Regra:</p>
+									<ol>
+										<li>Quem fizer mais pontos ganha;</li>
+										<li>Quem perder a aposta passará seus pontos do jogo para quem ganhou;</li>
+										<li>Quem ganhar leva os pontos que fez e os pontos do amigo "sofredor";</li>
+										<li>Caso o "sofredor" não acerte nada, o ganhador leva 10 (dez) pontos a mais deixando o "sofredor" negativo em 10 (dez) pontos no jogo;</li>
+										<li>Se ocorrer empate no número de pontos dos dois, nenhum dos 2 (dois) perde;</li>
+										<li>A dupla não poderá se desafiar em outro jogo na mesma rodada.</li>
+									</ol>
+									<br>
+									<p>Acumulo:</p>
+									<ol>
+										<li>;</li>
+									</ol>
+									<br>
+									<p>Penalidade:</p>
+									<ol>
+										<li>Se os dois fizerem 0 (zero) ponto, os dois perdem 10 (dez) pontos;</li>
+									</ol>
+								</li>
+								<br>
+								<br>
+								<li><p class="power-sel tjunto"></p>&nbsp;<b>"Tamo junto"</b>
+									<br>
+									<br>
+									<ol>
+										<li>Você convida um de seus amigos para juntarem forças no resultado de um jogo;</li>
+										<p>&nbsp;</p>
+										<li>Regras:
+											<ol>
+												<li>Será dado para as duas kikers a maior quantidade de pontos obtida entre elas;</li>
+												<li>Exemplo: Uma das kikers fez 20 pontos e a outra 10 pontos. Ambas ganham 20 pontos no jogo;</li>
+												<li>A dupla não poderá se juntar para outro jogo na mesma rodada.</li>
+											</ol>
+										<p>&nbsp;</p>
+										<li>Quando usar: Não está com aquela certeza toda no jogo e tem um amigo na mesma situação. Cada um joga um resultado diferente e ambos levam os pontos de quem fizer mais.</li>
+										<li>Repetição: Pode ser usado quantas vezes a kiker quiser dentro da mesma rodada desde que use amigos diferentes em cada jogo;</li>
+										<li>Acumula: Não;</li>
+									</ol>
+								</li>
+								<br>
+								<br>
+								<li><p class="power-sel espiao"></p>&nbsp;<b>"Espião"</b>
+									<br>
+									<br>
+									<ol>
+										<li>Você escolhe um de seus amigos para "copiar" o resultado de um jogo;</li>
+										<p>&nbsp;</p>
+										<li>Regras:
+											<ol>
+												<li>Caso a kiker copiada esteja usando este poder a regra será propagada até chegar em uma kiker que não esteja usando e, caso todas estejam usando, todas errarão o resultado do jogo;</li>
+												<li>Os poderes usados não são copiados e se o poder for o "Guru" o "espião" errará o resultado do jogo;
+												<li>O kiker copiada não saberá que está sendo copiada até o final da rodada;</li>
+												<li>O kiker que copiou ficará indicada no ranking o uso do poder, mas sem dizer de quem copiou até o final da rodada;</li>
+											</ol>
+										</li>
+										<p>&nbsp;</p>
+										<li>Quando usar: Quando estiver sem idéia e tiver um amigo que sabe tudo, mas é um mala que não dá dica nenhuma. Cuidado, pois se seu amigo usar algum poder do <span class="destaque">Kikbook</span> no jogo copiado, isso pode te complicar.</li>
+										<li>Repetição: 3 (três) jogos por rodada;</li>
+										<li>Acumula: Sim. O kiker acumula 1 (um) jogo por rodada até o limite de 5 (cinco) jogos, mas zera tudo se deixar de apostar 2 (duas) rodadas seguidas;</li>
+									</ol>
+								</li-->
+								<br>
+								<br>
+								Em breve teremos mais novidades.
+								<br>
+								<br>
+								<br>
+							<!--
+								<li>
+									<p>&nbsp;</p>
+									<p>&nbsp;</p>
+									<h3>Gerador de chutes:</h3>
+									<p>&nbsp;</p>
+									<ol>
+										<li>O kiker pode usar em 25% dos jogos do "Campeonato". </li>
+										<li>O kiker deve configurar o gerador para que ele gere os chutes por ela.</li>
+										<li>Esta configuração pode ser refeita sempre que a kiker quiser.</li>
+										<li>Chutes que permanecerem gerados automaticamente só receberão 50% dos pontos devidos.</li>
+										<li>Acumula: Não;</li>
+									</ol>
+								</li>
+								<li><p class="power-sel tfiel"></p> <b>Torcedor Fiel</b>
+									<br>
+									<br>
+									<p>Se você acertar o resultado do jogo a favor do seu time isso lhe dará 50% a mais dos pontos que você conquistar.</p>
+									<p>Configure o seu time aqui no Facebook <a href="https://www.facebook.com/< ? php echo $user_info->username; ? >/favorites">clicando aqui</a>.</p>
+								</li>
+							</ol>
+-->						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion_rules" href="#data5">
+							<b>6. Premiação / Brindes</b>
+						</a>
+					</div>
+					<div id="data5" class="accordion-body collapse" style="height: 0px;">
+						<div class="accordion-inner">
+							O <span class="destaque">Kikbook</span> criou um sistema de Kiks semelhante aos sistemas de milhagem de cartões e companhias aéreas.
+							<br/>
+							<br/>
+							Para entender como funciona e usar os benefícios deste sistema, leia as do <a href="/regra/kiks">Programa de Kiks</a>.
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion_rules" href="#data6">
+							<b>7. Grupos</b>
+						</a>
+					</div>
+					<div id="data6" class="accordion-body collapse" style="height: 0px;">
+						<div class="accordion-inner">
+							Em breve teremos novidades.
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion_rules" href="#data7">
+							<b>8. Classificação</b>
+						</a>
+					</div>
+					<div id="data7" class="accordion-body collapse" style="height: 0px;">
+						<div class="accordion-inner">
+							Em breve teremos novidades.
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section> <!--  close section conteudo -->
+<?php $this->load->view('close.html'); ?>
+<?php $this->load->view('footer.html'); ?>

@@ -1,0 +1,52 @@
+<?php  $this->load->view('jx/open.html');  ?>
+<?php  $this->load->view('jx/aside.html', array( 'hide_area' => 'criar,system_menu' ) );  ?>
+<?php  $this->load->view('jx/edit_button.html', array( 'hide_button' => 'create_new,delete-edit' ) );  ?>
+
+<section id="edicao"> <!--  open section edicao -->
+	<input type="hidden" name="jx_action" value="<?php if ( isset( $jx_action ) ) { echo $jx_action; } else { echo 'update'; } ?>"/>
+	<ol>
+		<?php foreach( $table_fields as $table_name => $table_info ): ?>
+			<?php if ( $this->lang->get_line( $table_name.'.controller_title' ) != " " ) : ?>
+				<?php if ( $table_name == 'pessoa' ) : ?>
+					<li class="jx-table-break">
+						<dl>
+							<dt>
+								<?php echo $this->lang->get_line( 'facebook_data', 'user_cfg' );?>
+							</dt>
+							<dd>
+								<?php echo $this->lang->get_line( 'facebook_data_warning', 'user_cfg' );?>
+							</dd>
+						</dl>
+					</li>
+				<?php elseif ( $table_name == 'user_cfg' ) : ?>
+					<li class="jx-table-break">
+						<dl>
+							<dt>
+								<?php echo $this->lang->get_line( 'controller_title', $table_name );?>
+								
+							</dt>
+							<dd>
+								<?php echo $this->lang->get_line( 'controller_subtitle', $table_name );?>
+							</dd>
+						</dl>
+					</li>
+				<?php endif; ?>
+			<?php endif; ?>
+			<?php
+				$row = $rows->$table_name;
+				if ( $table_info->style == 'form' )
+				{
+					$this->load->view( 'jx/edit_form_style.html', array( 'table_info' => $table_info, 'rows' => $row ) );
+				}
+				else
+				{
+					$this->load->view('jx/edit_button_grid.html' );
+					$this->load->view( 'jx/edit_grid_style.html', array( 'table_info' => $table_info, 'rows' => $row ) );
+				}
+			?>
+		<?php endforeach; ?>
+	</ol>
+</section> <!--  close section edicao -->
+
+<?php $this->load->view('jx/close.html'); ?> 
+<?php $this->load->view('jx/footer.html'); ?> 

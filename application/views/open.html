@@ -1,0 +1,397 @@
+<!doctype html>
+
+<!--[if lt IE 7 ]> <html class="ie ie6 no-js" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7 no-js" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8 no-js" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9 no-js" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!-- the "no-js" class is for Modernizr. -->
+
+<head>
+	<noscript><meta http-equiv="X-Frame-Options" content="deny"></noscript>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<title><?php echo $this->config->item( 'system_title' ); ?></title>
+	<meta name="title" content="<?php echo $this->config->item( 'system_title' ); ?>"/>
+	<meta name="description" content="<?php echo $this->config->item( 'system_title' ); ?>, bolão de chutes em resultados de jogos de futebol."/>
+	<meta name="google-site-verification" content=""/>
+	<meta name="author" content="Single Solutions."/>
+	<meta name="Copyright" content="Copyright Single Solutions 2013. All Rights Reserved."/>
+	<meta name="DC.title" content="<?php echo $this->config->item( 'system_title' ); ?>"/>
+	<meta name="DC.subject" content="Bolão de chutes em resultados de jogos de futebol."/>
+	<meta name="DC.creator" content="Single Solutions."/>
+	<!-- zanox.com --><meta name="verification" content="8707543e486ce03134f71ebc01ae2aaa" />
+        <!-- google adsense --><meta name="google-site-verification" content="11HIbAfxuKM_BITDv2oyA_kMLhSJMrzYIkb7WZHj_bg" />
+	<meta property="og:url" content="<?php echo $this->config->item( 'base_url' ); ?>" />
+	<meta property="og:type" content="website" />
+	<meta property="fb:app_id" content="<?php echo $this->config->item( 'facebook_appid' ); ?>" />
+	<meta property="og:title" content="<?php echo $this->config->item( 'system_title' ); ?>" />
+	<meta property="og:site_name" content="<?php echo $this->config->item( 'system_title' ); ?>" />
+	<meta property="og:image" content="http://www.kikbook.com/assets/img/start_image_logo.png" />
+	<meta property="og:description" content="Bolão de chutes em resultados de jogos de futebol." />
+	<meta property="og:updated_time" content="<?php echo now(); ?>" />
+	<link rel="shortcut icon" href="/assets/img/favicon.ico">
+	<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+	<link rel="stylesheet" href="/assets/css/reset.css?v=1.3">
+	<link rel="stylesheet" href="/assets/css/jquery-ui.css?v=1.2">
+	<link rel="stylesheet" href="/assets/css/bootstrap.min.css?v=1.4">
+	<link rel="stylesheet" href="/assets/<?=$theme;?>/css/styles_2.css?v=1.13.3">
+	<script src="/assets/js/modernizr.min.js"></script>
+</head>
+<?php if ( $this->config->item( 'image_background' ) ) : ?>
+	<body style='background: #FFF url("<?php echo $this->config->item( 'image_background' ); ?>") no-repeat; background-position: top center;'>
+<?php else : ?>
+	<body>
+<?php endif; ?>
+	<div id="fb-root"></div>
+	<?php if ( $facebook_login ) :?>
+	<script>
+		window.fbAsyncInit = function()	{
+							<?php if ( key_exists( "force_url", $_REQUEST ) ) : ?>
+								var force_redirect		=	'<?php echo $_REQUEST[ "force_url" ]; ?>';
+							<?php else :?>
+								var force_redirect		=	false;
+							<?php endif; ?>
+							FB.init(	{
+										 appId      : '<?php echo $facebook_app_id ?>'
+										,cookie     : true
+										,xfbml      : true
+										,channelUrl : '<?php echo $this->config->item( "base_url" ); ?>home/channel'
+										,status     : true
+									}
+							);
+							FB.getLoginStatus(function(response)	{
+													if (response.status === 'connected')
+													{
+														<?php	if ( !isset( $facebook_id ) /* Não temos um id do facebook no servidor. Forçamos o login via home.php. */
+															||   !$facebook_id
+															   )
+														: ?>
+															$( "section#conteudo" ).hide();
+															$( "div.whois" ).hide();
+															$( "div.working" ).show();
+
+															if ( !force_redirect )
+															{
+																top.location.href="<?php echo $this->config->item( 'base_url' ); ?>facebook_login?ust=l";
+															}
+															else
+															{
+																top.location.href="<?php echo $this->config->item( 'base_url' ); ?>facebook_login?force_url=" + force_redirect + "&ust=l&getg=";
+															}
+														<?php else /* temos um ID do facebook, mas o ID é diferente do que o facebook está enviando. Forçamos o login novamente. */ : ?>
+															FB.api('/me', function(response) {
+																if ( response.id != '<?php echo $facebook_id; ?>' )
+															        {
+																	if ( !force_redirect )
+																	{
+																		top.location.href="<?php echo $this->config->item( 'base_url' ); ?>facebook_login?ust=diff";
+																	}
+																	else
+																	{
+																		top.location.href="<?php echo $this->config->item( 'base_url' ); ?>facebook_login?force_url=" + force_redirect + "&ust=diff&getg=";
+																	}
+															        }
+															});
+														<?php endif; ?>
+													}
+													else if (response.status === 'not_authorized')
+													{
+														if ( !force_redirect )
+														{
+															top.location.href='<?php echo $this->config->item( "base_url" ); ?>facebook_login?ust=na';
+														}
+														else
+														{
+															top.location.href='<?php echo $this->config->item( "base_url" ); ?>facebook_login?force_url=' + force_redirect + "&ust=na&getg=";
+														}
+													}
+													else
+													{
+														<?php if ( isset( $user_info->nome_completo ) ) : ?>
+															top.location.href="<?php echo $this->config->item( "base_url" ); ?>logout";
+														<?php endif; ?>
+													}
+												}
+									);
+/*
+							FB.Event.subscribe('auth.login', function(response)	{
+														<?php if ( $this->config->item( 'first_controller_connected' ) ) : ?>
+															window.location.assign( "<?php echo $this->config->item( 'first_controller_connected' ); ?>" );
+														<?php else : ?>
+															window.location.reload();
+														<?php endif; ?>
+														}
+									);
+							FB.Event.subscribe	('auth.logout', function(response)	{
+																window.location.reload();
+															}
+										);
+*/
+						};
+/*		(function(d, s, id)		{
+							var js, fjs = d.getElementsByTagName(s)[0];
+							if (d.getElementById(id)) return;
+							js = d.createElement(s); js.id = id;
+							js.src = "//connect.facebook.net/<?php if ( isset( $user_cfg->idioma ) ) { echo $user_cfg->idioma; } else { echo "pt_BR"; } ?>/all.js#xfbml=1&appid=<?php echo $facebook_app_id ?>";
+							fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+*/		(function(d){
+		     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+		     if (d.getElementById(id)) {return;}
+		     js = d.createElement('script'); js.id = id; js.async = true;
+		     js.src = "//connect.facebook.net/<?php if ( isset( $user_cfg->idioma ) ) { echo $user_cfg->idioma; } else { echo 'pt_BR'; } ?>/all.js";
+		     ref.parentNode.insertBefore(js, ref);
+		   }(document));
+	</script>
+	<?php endif; ?>
+	<div class="main">
+	<?php if ( isset( $controller_atual->prg_controller ) ):?>
+		<?php if ( isset( $method_atual->prg_controller_method ) ):?>
+			<?php if ( !isset( $show_header ) || $show_header == 'TRUE' ): ?>
+				<?php echo form_open_multipart( '/'.$controller_atual->prg_controller.'/'.$method_atual->prg_controller_method ); ?>
+			<?php else: ?>
+				<?php echo form_open_multipart( '/'.$controller_atual->prg_controller.'/'.$method_atual->prg_controller_method.'/dialog' ); ?>
+			<?php endif; ?>
+		<?php else:?>
+			<?php echo form_open_multipart( '/'.$controller_atual->prg_controller ); ?>
+		<?php endif;?>
+	<?php else:?>
+		<?php echo form_open_multipart( '/home' ); ?>
+	<?php endif;?>
+		<input name="jx-order-selection" type="hidden" value="<?=$jx_order_selection;?>"/>
+		<input name="jx-order-direction" type="hidden" value="<?=$jx_order_direction;?>"/>
+		<input name="jx-filter-parent" type="hidden" value="<?=$jx_filter_parent;?>"/>
+		<input name="jx_pagina_atual" type="hidden" value="<?php if ( isset( $jx_pagina_atual ) ) { echo $jx_pagina_atual; }?>"/>
+	<?php if ( !isset( $show_header ) || $show_header == 'TRUE' ): ?>
+		<header>
+	<?php else :?>
+		<header style="display: none;">
+	<?php endif; ?>
+		<div class="header-main">
+			<div class="logo-cliente">
+				<a href="/"><?php echo $this->config->item( 'system_title' ); ?></a>
+			</div>
+			<nav class="topmenu">
+				<ul>
+					<?php $show_sistemas = 0; ?>
+					<?php foreach( $sistemas as $sist ):?>
+						<?php if ($sist->show_menu == 'S'): ?>
+							<?php $show_sistemas++; ?>
+
+							<?php if ($sist->id == 2):?>
+								<li class="dropdown sel-chute <?php if ($sist->id == $sistema_id_atual) { echo 'ativo'; } ?>">
+									<a href="#" class="dropdown-toggle top" data-toggle="dropdown" title="Chutes" hover-text="Chutes">
+										<?php if ( isset( $sist->nome_arquivo_imagem ) && $sist->nome_arquivo_imagem ) : ?>
+											<img src="<?php echo $sist->nome_arquivo_imagem;?>"/>
+										<?php endif; ?>
+										<?php echo $sist->nome; ?>
+									</a>
+									<ol class="dropdown-menu pull-right chute-menu">
+										<li class="chute-menu">
+											<a class="chute-menu" href="/chute/rodada">
+												<i class="icon-th-list"></i>
+												&nbsp;&nbsp;Por Rodada
+											</a>
+										</li>
+										<li class="chute-menu">
+											<a class="chute-menu" href="/chute/crono">
+												<i class="icon-th-list"></i>
+												&nbsp;&nbsp;Por Data
+											</a>
+										</li>
+									</ol>
+								</li>							
+							<?php else : ?>
+								<?php if ($sist->id == $sistema_id_atual):?>
+									<li class="ativo">
+								<?php else:?>
+									<li>
+								<?php endif;?>
+										<a href="/<?=$sist->prg_controller;?>" class="top" hover-text="<?php echo $sist->nome; ?>" title="<?=$sist->descr;?>">
+											<?php if ( isset( $sist->nome_arquivo_imagem ) && $sist->nome_arquivo_imagem ) : ?>
+												<img src="<?php echo $sist->nome_arquivo_imagem;?>"/>
+											<?php endif; ?>
+											<?php echo $sist->nome; ?>
+										</a>
+							<?php endif; ?>
+							</li>
+						<?php endif;?>
+					<?php endforeach;?>
+					<?php if ( isset( $rows_campeonato ) ) : ?>
+						<li>
+							<div class="sel-campeonato dropdown">
+								<div class="dropdown-toggle" data-toggle="dropdown" role="button" id="sel-camp">
+									<a href="" class="top" title="Lista de Campeonatos" hover-text="Campeonatos">
+										<img src="/assets/kik/img/icone_campeonato.png"/>
+										Campeonatos
+									</a>
+								</div>
+								<dl class="dropdown-menu <?php if ( $show_sistemas > 2 ) { echo 'pull-right'; } ?>" role="menu" aria-labelledby="sel-camp">
+									<?php if ( $this->singlepack->get_pessoa_id() ) : ?>
+										<h5>Meus Campeonatos</h5>
+										<div class="camp-list">
+											<?php foreach( $rows_campeonato as $campeonato ) :?>
+												<?php if ( $campeonato->cadastrado_para_jogar == 'S'
+										      &&   $campeonato->ativa == 'S'
+										         ) : ?>
+													<dd id="selecao_campeonato">
+														<a href="/<?php echo $controller_atual->prg_controller; ?>/campeonato/<?php echo $campeonato->id; ?>" title="<?php echo $campeonato->descr?>" data-content="<?php echo $campeonato->content?>">
+															<img class="sel-camp" id="campeonato_<?php echo $campeonato->id; ?>" src="<?php echo $campeonato->imagem_src; ?>">
+														</a>
+														<button class="btn btn-mini btn-danger checkout-camp" address="/campeonato/checkout/<?php echo $campeonato->id; ?>" title="<?php echo $this->lang->get_line( 'button_checkout_camp_title', $master_table ); ?>"><i class="icon-remove icon-white"></i> <?php echo $this->lang->get_line( 'button_checkout_camp', $master_table ); ?></button>
+													</dd>
+												<?php endif; ?>
+											<?php endforeach; ?>
+										</div>
+									<?php endif; ?>
+									<h5>Campeonatos Disponíveis</h5>
+									<div class="camp-list">
+										<?php foreach( $rows_campeonato as $campeonato ) :?>
+											<?php if ( $campeonato->cadastrado_para_jogar == 'N'
+										      &&   $campeonato->ativa == 'S'
+										         ) : ?>
+												<dd id="selecao_campeonato">
+													<a href="/<?php echo $controller_atual->prg_controller; ?>/campeonato/<?php echo $campeonato->id; ?>" title="<?php echo $campeonato->descr?>" data-content="<?php echo $campeonato->content?>">
+														<img class="sel-camp" id="campeonato_<?php echo $campeonato->id; ?>" src="<?php echo $campeonato->imagem_src; ?>">
+													</a>
+													<?php if ( $this->singlepack->get_pessoa_id() ) : ?>
+														<button class="btn btn-mini btn-success checkin-camp" address="/campeonato/checkin/<?php echo $campeonato->id; ?>" title="<?php echo $this->lang->get_line( 'button_checkin_camp_title', $master_table ); ?>"><i class="icon-plus icon-white"></i> <?php echo $this->lang->get_line( 'button_checkin_camp', $master_table ); ?></button>
+													<?php endif; ?>
+												</dd>
+											<?php endif; ?>
+										<?php endforeach; ?>
+									</div>
+									<h5>Campeonatos Antigos</h5>
+									<div class="camp-list">
+										<?php foreach( $rows_campeonato as $campeonato ) :?>
+											<?php if ( $campeonato->ativa == 'A'
+										         ) : ?>
+												<dd id="selecao_campeonato">
+													<a href="/<?php echo $controller_atual->prg_controller; ?>/campeonato/<?php echo $campeonato->id; ?>" title="<?php echo $campeonato->descr?>" data-content="<?php echo $campeonato->content?>">
+														<img class="olds-camp" id="campeonato_<?php echo $campeonato->id; ?>" src="<?php echo $campeonato->imagem_src; ?>">
+													</a>
+												</dd>
+											<?php endif; ?>
+										<?php endforeach; ?>
+									</div>
+								</dl>
+							</div>
+						</li>
+					<?php endif; ?>
+				</ul>
+			</nav>
+			<div class="whois">
+				<ul>
+					<?php if ( isset( $user_info->nome_completo ) ) : ?>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<?php echo $user_info->nome_completo; ?>
+								<?php if ( $facebook_login ) :?>
+										<img class="user-photo" src="<?php echo $user_info->imagem_facebook; ?>"/>
+								<?php else : ?>
+									<?php if ( isset( $user_info->image ) ) :?>
+										<img class="user-photo" src="data:<?= $user_info->mime_type; ?>;base64,<?php echo base64_encode( $user_info->image ); ?>"/>
+									<?php else : ?>
+										<i class="icon-user icon-white"></i>
+									<?php endif; ?>
+								<?php endif; ?>
+								<i class="icon-cog icon-white"></i>
+							</a>
+							<ul class="dropdown-menu pull-right">
+								<li>
+									<a href="/user_cfg/profile">
+										<?php if ( $facebook_login ) :?>
+												<img class="menu-photo" src="<?php echo $user_info->imagem_facebook; ?>"/>
+										<?php else : ?>
+											<?php if ( isset( $user_info->image ) ) :?>
+												<img class="menu-photo" src="data:<?= $user_info->mime_type; ?>;base64,<?php echo base64_encode( $user_info->image ); ?>"/>
+											<?php else : ?>
+												<i class="icon-wrench"></i>
+											<?php endif; ?>
+										<?php endif; ?>
+										&nbsp;&nbsp;Configurações
+									</a>
+								</li>
+								<li>
+									 <a href="#kikExtrato" data-toggle="modal" class="kik_extrato" title="Clique para ver o Extrato">
+										 <i class="icon-th-list"></i>
+										&nbsp;&nbsp;Extrato de Kiks
+									 </a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="/logout">
+										<i class="icon-off"></i>&nbsp;&nbsp;Sair
+									</a>
+								</li>
+							</ul>
+						</li>
+					<?php else : ?>
+						<li>
+							<?php if ( $facebook_login ) :?>
+								<div class="btn btn-face" onclick='top.location.href="/facebook_login";' title="Entrar via Facebook.">
+									<i class="logo_small_facebook"></i> Entrar
+								</div>
+							<?php else : ?>
+								<div class="btn-group">
+									<a class="btn btn-primary" href="/login"><i class="icon-user icon-white"></i> Entrar</a>
+									<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+										<span class="caret"></span>
+									</a>
+									<ul class="dropdown-menu pull-right">
+								            <li><a href="#"><i class="icon-user"></i> Criar um conta</a></li>
+								            <li class="divider"></li>
+								            <li><a href="/login"><i class="icon-book"></i> Entrar</a></li>
+								        </ul>
+								</div>
+							<?php endif; ?>
+						</li>
+					<?php endif; ?>
+				</ul>
+				<?php if ( isset( $kiker_info->saldo ) && isset( $kiker_info->saldo->saldo_kik ) ) : ?>
+					<ul>
+						<li class="saldo_kik"><i></i><a href="#kikExtrato" data-toggle="modal" class="kik_extrato" title="Clique para ver o Extrato"><?php echo $kiker_info->saldo->saldo_kik; ?> <?php if ( $kiker_info->saldo->saldo_kik > 1 ) { echo 'kiks'; } else { echo 'kik'; } ?></a></li>
+						<li class="saldo_quando"><?php echo $kiker_info->saldo->data_hora_atualizacao_fmt; ?></li>
+					</ul>
+				<?php endif; ?>
+			</div>
+		</div>
+	</header>
+	<div id="kikExtrato" class="kik-extrato modal hide fade" style="display: none;" tabindex="-1" role="dialog" aria-labelledby="<?php echo $this->lang->get_line( 'button_personalize_title', $master_table );?>" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="kikExtratoLabel"><?php echo $this->lang->get_line( 'title_kik_extrato_modal', $master_table );?></h3>
+		</div>
+		<div class="modal-body">
+	 		<img src="/assets/img/ajax_loader_3.gif" style="opacity: 0.3; width: 40px; heigth: 40px; text-align: center;" title="<?php echo $this->lang->get_line( 'working_message' ); ?>">
+		</div>
+		<div class="modal-footer">
+			<a class="btn" href="/regra/kiks" data-dismiss="modal" aria-hidden="true"><i class="icon-question-sign"></i>  <?php echo $this->lang->get_line( 'kik_extrato_modal_prog_kiks', $master_table );?></a>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><?php echo $this->lang->get_line( 'kik_extrato_modal_fechar', $master_table );?></button>
+		</div>
+	</div>
+	<div id="videoajuda" class="videoajuda modal hide fade" style="display: none;" tabindex="-1" role="dialog" aria-labelledby="Video Ajuda" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="videoajudaLabel">Video Ajuda</h3>
+		</div>
+		<div class="modal-body">
+			<iframe width="640" height="420" src="" frameborder="0" allowfullscreen></iframe>
+		</div>
+		<div class="modal-footer">
+			<button class="btn close" data-dismiss="modal" aria-hidden="true">Fechar</button>
+		</div>
+	</div>
+	<span style="display: none;" class="show_header" show_header="<?php if ( isset( $show_header ) ) { echo $show_header; } ?>" ></span>
+	<div class="message" style="display:none;"><span></span></div>
+	<div class="working">
+ 		<img src="/assets/img/ajax_loader_3.gif" style="opacity: 0.3; width: 100px; heigth: 100px;" title="<?php echo $this->lang->get_line( 'working_message' ); ?>">
+ 		<p><?php echo $this->lang->get_line( 'working_message' ); ?></p>
+ 	</div>
+	<div class="conteudo" style="display: none;">
+		<div id="confirm-checkout-camp"  style="display:none;" title="<?= $this->lang->get_line( 'confirm_save_title' );?>">
+			<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Seus dados permanecerão cadastrados e quando quiser entrar no campeonato novamente, basta entrar.</p>
+		</div>
+		<?php $this->load->view( 'jx/alert_show.html' ); ?>
+		<?php $this->load->view( 'portlet/common_toolbar.html' ); ?>

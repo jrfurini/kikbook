@@ -1,0 +1,32 @@
+<?php  $this->load->view( 'open.html' ); ?>
+<!--?php  $this->load->view('jx/index_button.html'); ?-->
+
+
+<section id="conteudo"> <!--  open section conteudo -->
+	<div class="left-content">
+		<?php if ( !$this->singlepack->user_connected() ) : ?>
+			<?php $this->load->view('kikbook_show.html'); ?>
+		<?php endif; ?>
+
+		<?php $this->load->view('seleciona_rodada.html'); ?>
+
+		<ol>
+			<li class="ad_left">
+				<div class="classif">
+					<?php $this->load->view('portlet/classificacao_detalhada.html'); ?>
+				</div>
+			</li>
+			<li class="ad_right_120">
+				<?php $this->ads->show_if_not_show( 'AREA_120x600', NULL, round( $total_rows_classif / 15, 0 ) ); ?>
+			</li>
+		</ol>
+		<?php $this->ads->show( 'AREA_728x90', array( 'colspan' => 14 ), 1 ); ?>
+	</div>
+</section> <!--  close section conteudo -->
+
+<?php $this->load->view( 'close.html' ); ?>
+
+<script src="/assets/js/d3.v3.min.js"></script>
+<script src="/assets/js/classificacao.js?v=1.7"></script>
+
+<?php  $this->load->view('footer.html');  ?>

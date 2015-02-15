@@ -1,0 +1,141 @@
+<!doctype html>
+
+<!--[if lt IE 7 ]> <html class="ie ie6 no-js" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7 no-js" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8 no-js" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9 no-js" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!-- the "no-js" class is for Modernizr. -->
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+		<title><?php echo $this->config->item( 'system_title' ); ?></title>
+		<meta name="title" content="<?php echo $this->config->item( 'system_title' ); ?>"/>
+		<meta name="description" content="<?php echo $this->config->item( 'system_title' ); ?>, bolão de palpites em resultados de jogos de futebol."/>
+		<meta name="google-site-verification" content=""/>
+		<meta name="author" content="Single Solutions."/>
+		<meta name="Copyright" content="Copyright Single Solutions 2013. All Rights Reserved."/>
+		<meta name="DC.title" content="<?php echo $this->config->item( 'system_title' ); ?>"/>
+		<meta name="DC.subject" content="Bolão de palpites em resultados de jogos de futebol."/>
+		<meta name="DC.creator" content="Single Solutions."/>
+		<meta property="og:url" content="http://www.kikbook.com" />
+		<meta property="og:type" content="website" />
+		<meta property="fb:app_id" content="<?php echo $this->config->item( 'facebook_appid' ); ?>" />
+		<meta property="og:title" content="<?php echo $this->config->item( 'system_title' ); ?>" />
+		<meta property="og:site_name" content="<?php echo $this->config->item( 'system_title' ); ?>" />
+		<meta property="og:image" content="http://www.kikbook.com/assets/img/apple-touch-icon.png" />
+		<meta property="og:description" content="Bolão de palpites em resultados de jogos de futebol." />
+		<meta property="og:updated_time" content="<?php echo now(); ?>" />
+		<link rel="shortcut icon" href="/assets/img/favicon.ico">
+		<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+		<link rel="stylesheet" href="/assets/css/reset.css?v1.3">
+		<link rel="stylesheet" href="/assets/css/jquery-ui.css?v=1.2">
+		<link rel="stylesheet" href="/assets/css/bootstrap.css?v=1.5">
+		<link rel="stylesheet" href="/assets/css/styles.css?v=1.7">
+		<script src="/assets/js/modernizr.min.js?v=1.2"></script>
+	</head>
+	<body style="background-color: #333333;">
+	<?php if ( $facebook_login ) :?>
+		<div id="fb-root"></div>
+		<script>
+			window.fbAsyncInit = function()	{
+				FB.init(	{
+							 appId: '<?php echo $facebook_app_id ?>'
+							,cookie: true
+							,xfbml: true
+							,oauth: true
+							,display: 'page'
+						}
+				);
+				FB.Event.subscribe('auth.login', function(response)
+						{
+						<?php if ( $this->config->item( 'first_controller_connected' ) ) : ?>
+							window.location.assign( "<?php echo $this->config->item( 'first_controller_connected' ); ?>" );
+						<?php else : ?>
+							window.location.reload();
+						<?php endif; ?>
+						}
+				);
+				FB.Event.subscribe('auth.logout', function(response)
+						{
+							window.location.reload();
+						}
+				);
+			};
+			(function(d, s, id)	{
+						var js, fjs = d.getElementsByTagName(s)[0];
+						if (d.getElementById(id)) return;
+						js = d.createElement(s);
+						js.id = id;
+						js.src = document.location.protocol + "//connect.facebook.net/<?php if ( isset( $user_cfg->idioma ) ) { echo $user_cfg->idioma; } else { echo "pt_BR"; } ?>/all.js#xfbml=1&appId=<?php echo $facebook_app_id ?>";
+						fjs.parentNode.insertBefore( js, fjs );
+						}( document, 'script', 'facebook-jssdk' ) );
+		</script>
+	<?php endif; ?>
+	<header>
+		<div class="main">
+				<a href="/"><img src="/assets/img/start_image_logo.png"  style="float: left; width: 160px; height: 55px;" class="image" /></a>
+				<!--a href="/"><img src="/assets/img/start_image_txt.png" style="margin-top: 37px; width: 10%;" /></a-->
+				<div class="button-new-account">
+				<?php if ( $facebook_login ) :?>
+					<div class="fb-login-button"></div>
+				<?php else : ?>
+					<a href="#" class="btn btn-large btn-danger button-new-account" title="Criar uma conta">
+						Criar uma conta
+					</a>
+				<?php endif; ?>
+				</div>
+		</div>
+		<div class="login">
+			<?php if ( !$facebook_login ) :?>
+				<?php echo form_open('/login'); ?>
+					<div class="signin-in">
+						<div class="signin-box">
+							<h2>Entrar</h2>
+							<div class="email-div">
+								<label for="login"><strong class="email-label">Nome de usuário</strong></label>
+								<input type="email" spellcheck="false" name="login" id="login" value="<?php if (isset( $userid )) { echo $userid; } ?>">
+								<div class="input_message">
+									<span class="error"><?php echo form_error('login'); ?></span>
+								</div>
+							</div>
+							<div class="passwd-div">
+								<label for="Passwd"><strong class="passwd-label">Senha</strong></label>
+								<input type="password" name="password" id="password">
+								<div class="input_message">
+									<span class="error"><?php echo form_error('password'); ?></span>
+									<span class="error"><?php if (isset($message_error)) { echo $message_error; } ?></span>
+								</div>
+							</div>
+							<button class="btn btn-large btn-primary button-login" name="signIn" id="signIn">Acessar</button>
+							<a href="/esqueci_senha" target="_top">
+								Não consegue acessar a sua conta?
+							</a>
+						</div>
+					</div>
+				</form>
+			<?php endif; ?>
+		</div>
+	</header>
+	<div id="confirm-working"  style="display:none; text-align: center; vertical-align: middle;" title="<?= $this->lang->get_line( 'uploading_title' );?>">
+		<img src="/assets/img/ajax_loader_3.gif" style="opacity: 0.3; width: 50px; heigth: 50px;" title="<?php echo $this->lang->get_line( 'uploading_message' ); ?>">
+		<p><?php echo $this->lang->get_line( 'uploading_message' ); ?></p>
+	</div>
+
+	<!-- Grab Google CDN's jQuery. fall back to local if necessary >
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<script>window.jQuery || document.write("<script src='/assets/js/jquery-1.5.1.min.js'>\x3C/script>")</script-->
+
+	<!-- JQuery -->
+	<script src="/assets/js/jquery.min.js?v=1.2"></script>
+	<script src="/assets/js/jquery-ui.min.js?v=1.3"></script>
+	<script src="/assets/js/language/<?php if ( isset( $user_cfg->idioma ) ) { echo $user_cfg->idioma; } else { echo 'pt_BR'; } ?>/jquery.ui.datepicker.js?v=1.1"></script>
+
+	<!--script src="/assets/js/webkitdragdrop.js"></script-->
+	<!-- Jarvix Plus -->
+	<script src="/assets/js/jx_bootstrap.js?v=1.2"></script>
+	<script src="/assets/js/jx_functions.js?v=1.29"></script>
+	<script src="/assets/js/resize.js?v=1.6"></script>
+
+<?php $this->load->view('jx/footer.html'); ?>

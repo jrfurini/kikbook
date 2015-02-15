@@ -1,0 +1,353 @@
+<?php  $this->load->view( 'open.html' ); ?>
+
+<section id="conteudo"> <!--  open section conteudo -->
+	<div class="left-content">
+		<?php if ( !$this->singlepack->user_connected() ) : ?>
+			<?php $this->load->view('kikbook_show.html'); ?>
+		<?php endif; ?>
+
+		<?php  $this->load->view( 'seleciona_rodada.html' ); ?>
+
+			<?php if ( isset( $total_rows ) && $total_rows > 0 ) :?>
+				<div>
+				<table class="ranking">
+					<thead>
+						<tr class="jx-table-header">
+							<th>
+							</th>
+
+							<?php if ( $jx_order_selection == "Nome" ):?>
+								<th id="Nome" class="text order" title="Clique para ordenar.">
+									Nome <?=$jx_order_direction?>
+								</th>
+							<?php else:?>
+								<th id="Nome" class="text" title="Clique para ordenar.">
+									Nome
+								</th>
+							<?php endif;?>
+
+							<?php if ( $tipo_calculo != 'campeonato' ) : ?>
+								<th>
+								</th>
+							<?php endif; ?>
+							
+							<?php if ( $jx_order_selection == "title" || $jx_order_selection == "P" ):?>
+								<th id="P" class="number order" title="<?php echo $this->lang->get_line( 'pontos_total', $master_table );?>">
+									K <?=$jx_order_direction?>
+								</th>
+							<?php else:?>
+								<th id="P" class="number" title="<?php echo $this->lang->get_line( 'pontos_total', $master_table );?>">
+									K
+								</th>
+							<?php endif;?>
+							
+							<th class="space">
+							</th>
+
+							<th>
+								<table>
+									<tr>
+										<th>
+										<?php if ( $jx_order_selection == "Vt" ):?>
+											<th id="Vt" class="number order" title="<?php echo $this->lang->get_line( 'qtde_acertou_vitoria_tudo', $master_table );?>">
+												Vt <?=$jx_order_direction?>
+											</th>
+										<?php else:?>
+											<th id="Vt" class="number" title="<?php echo $this->lang->get_line( 'qtde_acertou_vitoria_tudo', $master_table );?>">
+												Vt
+											</th>
+										<?php endif;?>
+					
+										<?php if ( $jx_order_selection == "V1" ):?>
+											<th id="V1" class="number order" title="<?php echo $this->lang->get_line( 'qtde_acertou_vitoria_gol_1_equipe', $master_table );?>">
+												V1 <?=$jx_order_direction?>
+											</th>
+										<?php else:?>
+											<th id="V1" class="number" title="<?php echo $this->lang->get_line( 'qtde_acertou_vitoria_gol_1_equipe', $master_table );?>">
+												V1
+											</th>
+										<?php endif;?>
+					
+										<?php if ( $jx_order_selection == "V" ):?>
+											<th id="V" class="number order" title="<?php echo $this->lang->get_line( 'qtde_acertou_vitoria', $master_table );?>">
+												V <?=$jx_order_direction?>
+											</th>
+										<?php else:?>
+											<th id="V" class="number" title="<?php echo $this->lang->get_line( 'qtde_acertou_vitoria', $master_table );?>">
+												V
+											</th>
+										<?php endif;?>
+					
+										<?php if ( $jx_order_selection == "Et" ):?>
+											<th id="Et" class="number order" title="<?php echo $this->lang->get_line( 'qtde_acertou_empate_tudo', $master_table );?>">
+												Et <?=$jx_order_direction?>
+											</th>
+										<?php else:?>
+											<th id="Et" class="number" title="<?php echo $this->lang->get_line( 'qtde_acertou_empate_tudo', $master_table );?>">
+												Et
+											</th>
+										<?php endif;?>
+					
+										<?php if ( $jx_order_selection == "E" ):?>
+											<th id="E" class="number order" title="<?php echo $this->lang->get_line( 'qtde_acertou_empate', $master_table );?>">
+												E <?=$jx_order_direction?>
+											</th>
+										<?php else:?>
+											<th id="E" class="number" title="<?php echo $this->lang->get_line( 'qtde_acertou_empate', $master_table );?>">
+												E
+											</th>
+										<?php endif;?>
+					
+										<?php if ( $jx_order_selection == "1g" ):?>
+											<th id="1g" class="number order" title="<?php echo $this->lang->get_line( 'qtde_acertou_apenas_gol_1_equipe', $master_table );?>">
+												1g <?=$jx_order_direction?>
+											</th>
+										<?php else:?>
+											<th id="1g" class="number" title="<?php echo $this->lang->get_line( 'qtde_acertou_apenas_gol_1_equipe', $master_table );?>">
+												1g
+											</th>
+										<?php endif;?>
+					
+										<?php if ( $jx_order_selection == "N" ):?>
+											<th id="N" class="number order" title="<?php echo $this->lang->get_line( 'qtde_errou_tudo', $master_table );?>">
+												N <?=$jx_order_direction?>
+											</th>
+										<?php else:?>
+											<th id="N" class="number" title="<?php echo $this->lang->get_line( 'qtde_errou_tudo', $master_table );?>">
+												N
+											</th>
+										<?php endif;?>
+					
+										<?php if ( $jx_order_selection == "QJ" ):?>
+											<th id="QJ" class="number order" title="<?php echo $this->lang->get_line( 'qtde_jogos', $master_table );?>">
+												QJ <?=$jx_order_direction?>
+											</th>
+										<?php else:?>
+											<th id="QJ" class="number" title="<?php echo $this->lang->get_line( 'qtde_jogos', $master_table );?>">
+												QJ
+											</th>
+										<?php endif;?>
+					
+										<?php if ( $jx_order_selection == "QR" ):?>
+											<th id="QR" class="number order" title="<?php echo $this->lang->get_line( 'qtde_rodada_jogada', $master_table );?>">
+												QR <?=$jx_order_direction?>
+											</th>
+										<?php else:?>
+											<th id="QR" class="number" title="<?php echo $this->lang->get_line( 'qtde_rodada_jogada', $master_table );?>">
+												QR
+											</th>
+										<?php endif;?>
+									</tr>
+								</table>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+					<?php $pos	=	$start_position; ?>
+					<?php foreach( $rows as $row ): ?>
+						<?php $pos=$pos+1; ?>
+						<tr id="<?php if ( isset( $row->id ) ) { echo $row->id; } ?>" class="ranking <?php if ( isset( $user_info->id_facebook ) && $row->id_facebook == $user_info->id_facebook ) { echo 'iam'; } ?>">
+							<td class="pes-img left">
+								<img src="<?php echo $row->imagem_facebook; ?>"/>
+							</td>
+							<td class="name text pos-<?php echo $pos; ?> ">
+								<a href="http://www.facebook.com/<?php echo $row->id_facebook; ?>" target="_blank">
+									<?php if ( $tipo_visual == 'amigos'
+									      ||       $tipo_calculo == 'melhor-rodada'
+									             ) : ?>
+										<?php echo $pos;?>. 
+									<?php else : ?>
+										<?php echo $row->posicao_geral;?>. 
+									<?php endif; ?>
+
+									<?php echo $row->nome; ?>
+								</a>
+								<?php if ( $tipo_calculo == 'melhor-rodada' ) : ?>
+									<p class="small" title="<?php echo $this->lang->get_line( 'melhor_rodada', $master_table );?>"><?php echo ( $row->rodada_fase_title ); ?></p>
+								<?php endif; ?>
+							</td>
+							<?php if ( $tipo_calculo != 'campeonato' ) : ?>
+								<td pessoa_id="<?php echo $row->pessoa_id; ?>" rodada_id="<?php echo $row->rodada_fase_id; ?>" class="chutes pos-<?php echo $pos; ?> <?php if (  isset( $user_info->id_facebook ) && $row->id_facebook == $user_info->id_facebook ) { echo 'iam'; } ?>" title="<?php echo $this->lang->get_line( 'chutes_button_title', $master_table );?>">
+									<a data-toggle="modal" href="#chute_modal" class="btn btn-<?php if (  isset( $user_info->id_facebook ) && $row->id_facebook == $user_info->id_facebook ) { echo 'warning'; } else { echo 'primary'; } ?>">
+										<img src="/assets/kik/img/chutes.png"> </img>
+									</a>
+								</td>
+							<?php endif; ?>
+							<td class="pontos right pos-<?php echo $pos; ?>">
+								<p class="large" title="<?php echo $this->lang->get_line( 'pontos_total', $master_table );?>"><?php echo ( $row->pontos_kick + $row->pontos_gols + $row->pontos_power ); ?></p>
+								<div>
+									<b class="small small-left" title="<?php echo $this->lang->get_line( 'pontos_kick', $master_table );?>"><?php echo ( $row->pontos_kick ); ?></b>
+									<b class="small" title="<?php echo $this->lang->get_line( 'pontos_gols', $master_table );?>"><?php echo ( $row->pontos_gols ); ?></b>
+									<b class="small" title="<?php echo $this->lang->get_line( 'pontos_power', $master_table );?>"><?php echo ( $row->pontos_power ); ?></b>
+								</div>
+							</td>
+							<td class="space">
+							</td>
+							<td class="noback left right">
+								<table>
+									<tr>
+										<td class="kiks-res number left" title="<?php echo $this->lang->get_line( 'qtde_acertou_vitoria_tudo', $master_table );?>">
+											<p class="pontos"><?php echo $row->qtde_acertou_vitoria_tudo; ?></p>
+										</td>
+										<td class="kiks-res number" title="<?php echo $this->lang->get_line( 'qtde_acertou_vitoria_gol_1_equipe', $master_table );?>">
+											<p class="pontos"><?php echo $row->qtde_acertou_vitoria_gol_1_equipe; ?></p>
+										</td>
+										<td class="kiks-res number" title="<?php echo $this->lang->get_line( 'qtde_acertou_vitoria', $master_table );?>">
+											<p class="pontos"><?php echo $row->qtde_acertou_vitoria; ?></p>
+										</td>
+										<td class="kiks-res number" title="<?php echo $this->lang->get_line( 'qtde_acertou_empate_tudo', $master_table );?>">
+											<p class="pontos"><?php echo $row->qtde_acertou_empate_tudo; ?></p>
+										</td>
+										<td class="kiks-res number" title="<?php echo $this->lang->get_line( 'qtde_acertou_empate', $master_table );?>">
+											<p class="pontos"><?php echo $row->qtde_acertou_empate; ?></p>
+										</td>
+										<td class="kiks-res number" title="<?php echo $this->lang->get_line( 'qtde_acertou_apenas_gol_1_equipe', $master_table );?>">
+											<p class="pontos"><?php echo $row->qtde_acertou_apenas_gol_1_equipe; ?></p>
+										</td>
+										<td class="kiks-res number" title="<?php echo $this->lang->get_line( 'qtde_errou_tudo', $master_table );?>">
+											<p class="pontos"><?php echo $row->qtde_errou_tudo; ?></p>
+										</td>
+										<td class="kiks-res number" title="<?php echo $this->lang->get_line( 'qtde_jogos', $master_table );?>">
+											<p class="pontos"><?php echo $row->qtde_jogos_com_chute; ?></p>
+										</td>
+										<td class="kiks-res number" title="<?php echo $this->lang->get_line( 'qtde_rodada_jogada', $master_table );?>">
+											<p class="pontos"><?php if ( isset( $row->qtde_rodada_jogada ) ) { echo $row->qtde_rodada_jogada; } else { echo 1; } ?></p>
+										</td>
+									</tr>
+									<?php if ( $row->pontos_gols > 0 ) : ?>
+										<tr>
+											<td colspan="9" class="images left right">
+												<?php
+													$qtde_gols = $row->pontos_gols;
+
+													$qtde_loop = intval( $qtde_gols / 100 );
+													$qtde_gols = $qtde_gols - ( $qtde_loop * 100 );
+													for ( $i = 1; $i <= $qtde_loop;  $i++ )
+													{
+														echo '<p class="golden" title="'.$this->lang->get_line( '100_gols', $master_table ).'"></p>';
+													}
+
+													$qtde_loop = intval( $qtde_gols / 50 );
+													$qtde_gols = $qtde_gols - ( $qtde_loop * 50 );
+													for ( $i = 1; $i <= $qtde_loop;  $i++ )
+													{
+														echo '<p class="silver" title="'.$this->lang->get_line( '50_gols', $master_table ).'"></p>';
+													}
+
+													$qtde_loop = intval( $qtde_gols / 10 );
+													$qtde_gols = $qtde_gols - ( $qtde_loop * 10 );
+													for ( $i = 1; $i <= $qtde_loop;  $i++ )
+													{
+														echo '<p class="bronze" title="'.$this->lang->get_line( '10_gols', $master_table ).'"></p>';
+													}
+
+													$qtde_loop = $qtde_gols;
+													for ( $i = 1; $i <= $qtde_loop;  $i++ )
+													{
+														echo '<p class="smallball" title="'.$this->lang->get_line( '1_gol', $master_table ).'"></p>';
+													}
+												?>
+											</td>
+										</tr>
+									<?php endif; ?>
+									<?php if ( isset( $row->powers ) && count( $row->powers ) > 0 ) : ?>
+										<tr>
+											<td colspan="9" class="powers left right">
+												<p class="power power-simbol" title="<?php echo $this->lang->get_line( 'powers_title', $master_table );?>"></p>
+												<?php foreach( $row->powers as $power ): ?>
+													<p class="power <?php echo $power->css_class; ?>" title="<?php echo $this->lang->get_line( $power->cod . '_TITLE_SIMBOL', $master_table ); ?>"  data-content="<?php if ( $power->pontos < 0 ) { echo $this->lang->get_line( $power->cod . '_EXPLANATION_AFTER_NEG', $master_table ); } else { echo $this->lang->get_line( $power->cod . '_EXPLANATION_AFTER', $master_table ); }?> ( <?php echo $power->pontos; ?> pontos em <?php echo $power->qtde; ?> vezes )"></p>
+												<?php endforeach; ?>
+											</td>
+										</tr>
+									<?php endif; ?>
+								</table>
+							</td>
+						</tr>
+						<tr class="space">
+							<?php if ( $tipo_calculo != 'campeonato' ) : ?>
+								<td colspan="6">
+							<?php else : ?>
+								<td colspan="5">
+							<?php endif; ?>
+							</td>
+						</tr>
+						<?php if ( $tipo_calculo != 'campeonato' ) : ?>
+							<?php $this->ads->show( 'AREA_468x60', array( 'colspan' => 6 ), 6, count( $rows ) ); ?>
+						<?php else : ?>
+							<?php $this->ads->show( 'AREA_468x60', array( 'colspan' => 5 ), 6, count( $rows ) ); ?>
+						<?php endif; ?>
+					<?php endforeach; ?>
+					<tr>
+						<?php if ( $tipo_calculo != 'campeonato' ) : ?>
+							<td colspan="6">
+						<?php else : ?>
+							<td colspan="5">
+						<?php endif; ?>
+							<div class="legenda-ranking">
+								<ul>
+									<li>
+										<span class="destaque">P</span> Pontos
+									</li>
+									<li>
+										<span class="destaque">Vt</span> Acertou Tudo
+									</li>
+									<li>
+										<span class="destaque">V1</span> Acertou Vitória e 1 Gol
+									</li>
+									<li>
+										<span class="destaque">V</span> Acertou Vitória
+									</li>
+								</ul>
+								<ul>
+									<li>
+										<span class="destaque">Et</span> Empate em cheio
+									</li>
+									<li>
+										<span class="destaque">E</span> Empate
+									</li>
+									<li>
+										<span class="destaque">1g</span> Acertou 1 Gol
+									</li>
+									<li>
+										<span class="destaque">N</span> Não acertou nada
+									</li>
+								</ul>
+							</div>
+						</td>
+					</tr>
+					<?php if ( $tipo_calculo != 'campeonato' ) : ?>
+						<?php $this->ads->show( 'AREA_468x60', array( 'colspan' => 6 ), 6, count( $rows ) ); ?>
+					<?php else : ?>
+						<?php $this->ads->show( 'AREA_468x60', array( 'colspan' => 5 ), 6, count( $rows ) ); ?>
+					<?php endif; ?>
+					</tbody>
+				</table>
+				</div>
+				<div id="chute_modal" class="modal hide fade modal-jx" style="display: block; ">
+					<div class="modal-header modal-header-jx">
+						<button type="button" class="close" data-dismiss="modal">×</button>
+						<h3><?php echo $this->lang->get_line( 'chutes_title', $master_table );?></h3>
+					</div>
+					<div class="modal-body modal-body-jx">
+						<iframe id="iframe_chute"></iframe>
+					</div>
+					<div class="modal-footer modal-footer-jx">
+						<a href="#" class="btn" data-dismiss="modal" >Fechar</a>
+					</div>
+				</div>
+				<?php $this->ads->show( 'AREA_728x90', array( 'colspan' => 14 ), 1 ); ?>
+			<?php else :?>
+				<div class="no-data-found">
+					<img src="/assets/<?=$theme;?>/img/warning.png">
+					<h4><?php echo $this->lang->get_line( 'no_data_found' );?></h4>
+				</div>
+			<?php endif; ?>
+	</div>
+</section> <!--  close section conteudo -->
+
+<?php $this->load->view('close.html'); ?>
+
+<script src="/assets/js/ranking.js"></script>
+<script src="/assets/js/selecao_rodada.js?v=1.7"></script>
+
+<?php  $this->load->view('footer.html');  ?>

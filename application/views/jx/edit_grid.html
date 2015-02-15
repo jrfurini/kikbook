@@ -1,0 +1,26 @@
+<?php  $this->load->view('jx/open.html');  ?>
+<?php  $this->load->view('jx/edit_button.html');  ?>
+
+<section id="edicao"> <!--  open section edicao -->
+	<input type="hidden" name="jx_action" value="<?php if ( isset( $jx_action ) ) { echo $jx_action; } else { echo 'update'; } ?>"/>
+	<ol>
+		<?php $table_ant = "*&#%$#"; ?>
+		<?php foreach( $table_fields as $table_name => $table_info ): ?>
+			<?php
+				$row = $rows->$table_name;
+				if ( $table_info->style == 'form' )
+				{
+					$this->load->view( 'jx/edit_form_style.html', array( 'table_info' => $table_info, 'row' => $row, 'table_ant' => $table_ant ) );
+				}
+				else
+				{
+					$this->load->view( 'jx/edit_grid_style.html', array( 'table_info' => $table_info, 'row' => $row, 'table_ant' => $table_ant ) );
+				}
+			?>
+			<?php $table_ant = $table_name; ?>
+		<?php endforeach; ?>
+	</ol>
+</section> <!--  close section edicao -->
+
+<?php $this->load->view('jx/close.html'); ?> 
+<?php $this->load->view('jx/footer.html'); ?> 

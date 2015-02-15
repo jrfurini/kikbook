@@ -1,0 +1,70 @@
+<div class="chute">
+	<?php if ( isset( $total_rows_chutes ) && $total_rows_chutes > 0 ) :?>
+		<i class="icon-scrool-up"></i>
+				<?php $primeiro = TRUE;
+				      $grupo_id_ant = -1; ?>
+				<?php foreach( $rows_chutes as $row ): ?>
+					<?php if ( $row->grupo_id != $grupo_id_ant ) : ?>
+	
+						<?php if ( $grupo_id_ant != -1 ) : ?>
+									</tbody>
+								</table>
+							</div>
+							</div>
+						<?php endif; ?>
+	
+						<?php $grupo_id_ant = $row->grupo_id; ?>
+	
+						<div class="pre_grupo_equipe">
+						<div class="grupo_equipe">
+	
+						<?php if ( $row->nome_grupo ) : ?>
+								<h4><?php echo $row->nome_grupo; ?></h4>
+						<?php endif; ?>
+						
+						<table class="chute">
+							<tbody>
+					<?php endif; ?>
+
+					<?php if ( $primeiro ): ?>
+						<?php $primeiro = FALSE; ?>
+						<?php if ( isset( $dialog ) && $dialog == 'TRUE' ): ?>
+							<tr class="chute-pessoa">
+								<td class="name text left" colspan="9" title="<?php echo $this->lang->get_line( 'pessoa_id', $master_table );?>">
+									<img src="<?php echo $row->imagem_facebook; ?>"/>
+									<?php echo $row->nome_pessoa; ?>
+								</td>
+								<td class="space">
+								</td>
+								<td class="rodada text" colspan="4" title="<?php echo $this->lang->get_line( 'rodada_fase_id', $master_table );?>">
+									<?php echo ( $row->rodada_fase_title ); ?>
+								</td>
+							</tr>
+							<tr class="chute-space">
+								<td colspan="9">
+								</td>
+								<td class="space">
+								</td>
+								<td colspan="4">
+								</td>
+							</tr>
+						<?php endif; ?>
+					<?php endif; ?>
+
+					<?php $this->load->view( 'portlet/chute_row.html', array( "row" => $row, "sigla_nome" => 'nome', 'jogo_aberto' => $row->open, 'power_rows' => $rows_rodada_jogo[ $row->rodada_fase_id ]->powers ) ) ); ?>
+				<?php endforeach; ?>
+						</tbody>
+					</table>
+				</div>
+				</div>
+		<!--div class="powers">
+			<img src="/assets/kik/img/power.png">
+		</div-->
+		<i class="icon-scrool-down"></i>
+	<?php else :?>
+		<div class="no-data-found">
+			<img src="/assets/<?=$theme;?>/img/warning.png">
+			<h4><?php echo $this->lang->get_line( 'no_data_found' );?></h4>
+		</div>
+	<?php endif; ?>
+</div>

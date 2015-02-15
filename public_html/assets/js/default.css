@@ -1,0 +1,222 @@
+body		{
+		font-family: arial, sans-sarif;
+		font-size: 13px;
+		}
+
+div#main	{
+		width: 100%; /*1024px*/
+		height: 100%;
+		margin-top: -8px;
+		margin-left: auto;
+		margin-right: auto;
+		display: block;
+		align: center;
+		border: 1px solid #000000;
+		}
+/*
+	Header
+*/
+div#header	{
+		width: 100%;
+		height: 117px;
+		}
+
+/*
+	Header - Top menu
+*/
+div#tm		{
+		background-color: #333333;
+		border: 0px;
+		width: 55%; /* 642px */
+		height: 30px;
+		font: 13px/27px Arial,sans-serif;
+		position: absolute;
+		white-space: nowrap;
+		top: 0px;
+		left: 0px;
+		z-index: 1000;
+		}
+
+/*
+	Header - Top menu - little logo
+*/
+.tm_ll		{
+		width: 68px;
+		}
+
+/*
+	Header - Top menu - Item
+*/
+ol#tm_it	{
+		display: block;
+		list-style: none;
+		margin: 0px 0px 0px 0px;
+		padding: 0px 0px 0px 0px;
+		}
+
+li#tm_it:hover	{
+		background-color: #454545;
+		}
+
+li#tm_it	{
+		display: inline-block;
+		line-height: 28px;
+		position: relative;
+		vertical-align: top;
+		z-index: 1000;
+		color: #c4c4c4;
+		border-top: 0px solid transparent;
+		border-left: 0px solid transparent;
+		border-right: 0px solid transparent;
+		border-bottom: 0px solid transparent;
+		padding: 0px;
+		}
+
+.tm_it_a	{
+		cursor: pointer;
+		display: block;
+		text-decoration: none !important;
+		line-height: 28px;
+		}
+
+.tm_it_tx_sel	{
+		border-top-color: #cc3333!important;
+		color: #ffffff!important;
+		font-weight:bold;
+		}
+
+.tm_it_tx	{
+		color: #c4c4c4;
+		border-top: 2px solid transparent;
+		border-left: 1px solid transparent;
+		border-right: 1px solid transparent;
+		display: inline-block;
+		padding: 0px 5px;
+		}
+
+/*
+	Header - Who is
+*/
+div#tm_who	{
+		background-color: #333333;
+		border: 0px;
+		width: 46%;
+		height: 30px;
+		font: 13px/27px Arial,sans-serif;
+		position: absolute;
+		white-space: nowrap;
+		top: 0px;
+		right: 0px;
+		padding-right: 5px;
+		z-index: 1000;
+		}
+
+span#wi_it_last	{
+		color: #c4c4c4;
+		right: 0px;
+		line-height: 30px;
+		border-right: 1px solid transparent;
+		padding: 5px !important;
+		}
+
+span#wi_it	{
+		color: #c4c4c4;
+		right: 0px;
+		line-height: 30px;
+		vertical-align: center;
+		border-right: 1px solid #c4c4c4!important;
+		padding: 0 5px;
+		}
+
+span#wi_cfg	{
+		background: url(/assets/img/h_bedf916a.png);
+		background-position: 0 0;
+		display: block;
+		line-height: 30px;
+		font-size: 0;
+		height: 17px;
+		width: 16px;
+		}
+
+img#who_is_user_photo
+img#who_is_separator
+div#who_is_profile_button
+img#who_is_profile_button_image
+
+/*
+	Header - Logo
+*/
+	logo
+		div
+		image
+	search
+		div 
+			{
+			background-color: whiteSmoke;
+			}
+		field
+		button
+			div
+			image
+	subsystem
+		div
+		title
+		more_options
+	toolbar
+		div
+		button
+			div
+			image
+		page_control
+			text
+			button_before
+				div
+				image
+			button_next
+				div
+				image
+sidebar
+	div
+	option
+		div
+		text
+		line
+			div
+	selected option
+		div
+		text
+		line
+			div
+	action_button
+		div
+		text
+	action_menu
+		div
+		action_menu_item
+			div
+			image
+			text
+		div model
+			text
+footer
+	div
+jx_content
+	div
+	header
+		div
+		title_text
+		select_all
+			div
+			checked_image
+	line
+		div
+			over
+		div selected
+		select
+			div
+			checked_image
+		text
+help
+	div
+	top_image
+	text

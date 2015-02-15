@@ -1,0 +1,18 @@
+<?php  $this->load->view( 'open.html' ); ?>
+
+<section id="conteudo">
+	<div class="left-content">
+		<?php if ( !isset( $dialog ) || $dialog == 'FALSE' ): ?>
+			<?php  $this->load->view( 'seleciona_rodada.html' ); ?>
+			<?php $this->load->view( 'portlet/chute_toolbar.html' ); ?>
+		<?php endif; ?>
+
+		<?php  $this->load->view( 'portlet/chute_col.html' ); ?>
+	</div>
+</section>
+
+<?php $this->load->view( 'close.html' ); ?>
+
+<script src="/assets/js/chute.js?v=1.14.1"></script>
+
+<?php  $this->load->view('footer.html');  ?>

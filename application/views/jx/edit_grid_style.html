@@ -1,0 +1,39 @@
+<li class="jx-edit-f">
+	<table>
+		<thead>
+			<tr class="">
+				<th>
+				</th>
+				<?php foreach( $table_info->fields as $field ): ?>
+					<?php echo $field->edit->th_label(); ?>
+				<?php endforeach; ?>
+			</tr>
+		</thead>
+		<tbody>
+			<?php if ( isset( $rows ) && $rows ): ?>
+				<?php $first = true; ?>
+				<?php foreach( $rows as $row ): ?>
+					<?php if ( $first ) : ?>
+						<?php $first = false; ?>
+						<tr class="jx-edit-g" record_group="<?php echo $table_info->table_name; ?>" row_id="new_sample" style="display:none;">
+							<td class="jx-select">
+								<input type="checkbox" class="jx-select" name="checkbox_id[]" record_group="<?php echo $table_info->table_name; ?>" value="">
+							</td>
+							<?php foreach( $table_info->fields as $field ): ?>
+								<?php echo $field->edit->td( $class_css = NULL, NULL, $print_as_array = TRUE, $string_for_tabs = "", $string_for_id = "" ); ?>
+							<?php endforeach; ?>
+						</tr>
+					<?php endif; ?>
+					<tr class="jx-edit-g" record_group="<?php echo $table_info->table_name; ?>" row_id="<?php if ( isset( $row->id ) ) { echo $row->row_id; } ?>">
+						<td class="jx-select">
+							<input type="checkbox" class="jx-select" name="checkbox_id[]" record_group="<?php echo $table_info->table_name; ?>" value="<?php if ( isset( $row->id ) ) { echo $row->row_id; } ?>">
+						</td>
+						<?php foreach( $table_info->fields as $field ): ?>
+							<?php echo $field->edit->td( $class_css = NULL, $row, $print_as_array = TRUE, $string_for_tabs = "", $string_for_id = "" ); ?>
+						<?php endforeach; ?>
+					</tr>
+				<?php endforeach; ?>
+			<?php endif; ?>
+		</tbody>
+	</table>
+</li>

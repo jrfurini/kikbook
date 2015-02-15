@@ -1,0 +1,47 @@
+<?php  $this->load->view('jx/open.html');  ?>
+<?php  $this->load->view('jx/aside.html'); ?>
+<?php  $this->load->view('jx/edit_button.html' );  ?>
+
+<section id="edicao"> <!--  open section edicao -->
+	<input type="hidden" name="jx_action" value="<?php if ( isset( $jx_action ) ) { echo $jx_action; } else { echo 'update'; } ?>"/>
+	<?php foreach( $table_fields as $table_name => $table_info ): ?>
+		<ol table_name="<?php echo $table_name; ?>">
+			<?php if ( $this->lang->get_line( $table_name.'.controller_title' ) != " " ) : ?>
+				<li class="jx-table-break">
+					<dl>
+						<?php if ( $table_info->style == 'form' ) : ?>
+							<dt>
+								<?php echo $this->lang->get_line( $table_name.'.controller_title' );?>
+							</dt>
+							<dd>
+								<?php echo $this->lang->get_line( $table_name.'.controller_subtitle' );?>
+							</dd>
+						<?php else : ?>
+							<dt>
+								<?php echo $this->lang->get_line( $table_name.'.controller_title' );?>
+							</dt>
+							<dd>
+								<?php echo $this->lang->get_line( $table_name.'.controller_subtitle' );?>
+							</dd>
+						<?php endif; ?>
+					</dl>
+				</li>
+			<?php endif; ?>
+			<?php
+				$row = $rows->$table_name;
+				if ( $table_info->style == 'form' )
+				{
+					$this->load->view( $edit_form_style, array( 'table_info' => $table_info, 'rows' => $row ) );
+				}
+				else
+				{
+					$this->load->view( $edit_grid_button, array( 'table_info' => $table_info ) );
+					$this->load->view( $edit_grid_style, array( 'table_info' => $table_info, 'rows' => $row ) );
+				}
+			?>
+		</ol>
+	<?php endforeach; ?>
+</section> <!--  close section edicao -->
+
+<?php $this->load->view( 'jx/close.html', array( 'table_fields' => $table_fields ) ); ?> 
+<?php $this->load->view( 'jx/footer.html' ); ?> 
