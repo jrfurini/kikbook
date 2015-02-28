@@ -18,8 +18,8 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-//	define('ENVIRONMENT', 'development'); // Local
-	define('ENVIRONMENT', 'testing'); // AMAZON
+	define('ENVIRONMENT', 'development'); // Local
+//	define('ENVIRONMENT', 'testing'); // AMAZON
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING

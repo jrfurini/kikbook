@@ -380,10 +380,11 @@ $config['input_pagination_name'] = "jx_pagina_atual";
 |
 */
 $config['registry_nav'] = FALSE;
-$config['system_title'] = 'Kik Book';
+$config['system_title'] = 'Bolão Book';
 
-$config['image_fisical_path'] = '/var/www/kikbook/public_html/assets/images/';
-// MAC $config['image_fisical_path'] = '/Work/Projeto/Bolao/trunk/site/public_html/assets/images/';// local MAC Mini 
+//AWS $config['image_fisical_path'] = '/var/www/kikbook/public_html/assets/images/';
+//MACMini antes git $config['image_fisical_path'] = '/Work/Projeto/Bolao/trunk/site/public_html/assets/images/';// local MAC Mini 
+$config['image_fisical_path'] = '/Work/Projeto/Bolao/git/kikbook/public_html/assets/images/';// local MAC Mini 
 $config['image_virtual_path'] = '/assets/images/';
 $config['image_background'] = '/assets/kik/img/imagem_fundo.png';
 
@@ -393,7 +394,7 @@ $config['start_page'] = 'jx/start.html'; // Chamada quando o usuário não está
 $config['first_controller'] = '/painel'; // Controller que será chamado inicialmente quando o usuário não estiver logado mas existem dados públicos.
 $config['first_controller_connected'] = '/painel'; // Controller que será chamado assim que o usuário se conectar.
 
-$config['facebook_login'] = TRUE;
+$config['facebook_login'] = FALSE;
 $config['facebook_appid'] = '1538414013100101';
 $config['facebook_appsecret'] = '5fe94ec6bfee702d113ac348715c0a90';
 $config['facebook_theme'] = 'kik';
@@ -426,7 +427,7 @@ $config['process_password'] = 'jrfurini';
 |
 |
 */
-$config[ 'from_email' ]     = 'noreply@kikbook.com';	// Conta de E-mail que enviará os e-mails.
+$config[ 'from_email' ]     = 'noreply@kikbook.com';		// Conta de E-mail que enviará os e-mails.
 $config[ 'from_email_name' ]= 'Kikbook';			// Nome da conta de E-mail que enviará os e-mails.
 
 $config[ 'useragent' ]      = 'CodeIgniter';			// The "user agent".
