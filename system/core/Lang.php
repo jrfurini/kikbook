@@ -5,8 +5,9 @@
  * An open source application development framework for PHP 5.1.6 or newer
  *
  * @package		CodeIgniter
- * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
+ * @author		EllisLab Dev Team
+ * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
+ * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -21,7 +22,7 @@
  * @package		CodeIgniter
  * @subpackage	Libraries
  * @category	Language
- * @author		ExpressionEngine Dev Team
+ * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/libraries/language.html
  */
 class CI_Lang {
@@ -82,10 +83,10 @@ class CI_Lang {
 
 		if ($idiom == '')
 		{
-			$idiom = ( !isset( $config[ 'language' ] ) ) ? 'en_US' : $config['language'];
+			$deft_lang = ( ! isset($config['language'])) ? 'english' : $config['language'];
+			$idiom = ($deft_lang == '') ? 'english' : $deft_lang;
 		}
-		$deft_lang = ( !isset( $config[ 'default_language' ] ) ) ? 'en_US' : $config['default_language'];
-		
+
 		// Determine where the language file is and load it
 		if ($alt_path != '' && file_exists($alt_path.'language/'.$idiom.'/'.$langfile))
 		{
@@ -121,7 +122,7 @@ class CI_Lang {
 			
 			if ($found !== TRUE)
 			{
-				log_message( 'error', 'Unable to load the requested language file: language/'.$idiom.'/'.$langfile);
+				show_error('Unable to load the requested language file: language/'.$idiom.'/'.$langfile);
 			}
 		}
 
