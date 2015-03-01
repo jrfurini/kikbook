@@ -40,8 +40,8 @@ class Rodada_fase extends JX_Page
 							,'jogo'				=>	array	(
 													 'read_write'		=>	'write'
 													,'r_table_name'		=>	''
-													,'hide_columns'		=>	'cod,arena_id,rodada_fase_id,titulo_casa,titulo_visitante,penaltis_casa,penaltis_visitante,resultado_casa_prorrogacao,resultado_visitante_prorrogacao,id_externo,publico_total,publico_pagante,renda_moeda,renda_total,tipo'
-													,'seq_columns'		=>	'grupo_id,equipe_id_casa,resultado_casa,resultado_visitante,equipe_id_visitante,data_hora'
+													,'hide_columns'		=>	'rodada_fase_id,titulo_casa,titulo_visitante,penaltis_casa,penaltis_visitante,resultado_casa_prorrogacao,resultado_visitante_prorrogacao,id_externo,publico_total,publico_pagante,renda_moeda,renda_total'
+													,'seq_columns'		=>	'cod,grupo_id,equipe_id_casa,resultado_casa,resultado_visitante,equipe_id_visitante,data_hora,arena_id,tipo'
 													,'readonly_columns'	=>	''
 													,'show'			=>	TRUE
 													,'show_style'		=>	'grid'

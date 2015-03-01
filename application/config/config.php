@@ -417,7 +417,7 @@ $config['robot_pass'] = "jrfurini";
 |
 */
 $config['process_user']     = 'jrfurini@gmail.com';
-$config['process_password'] = 'jrfurini';
+$config['process_password'] = 'junior1';
 
 
 /*
